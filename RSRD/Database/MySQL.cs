@@ -66,12 +66,12 @@ namespace RSRD.Database
         }
         #endregion
 
+        #region Database Manipulators
         public void Insert(string table, List<string> fieldnames, List<string> fieldvalues)
         {
             //Insert values into the database.
 
             //Example: INSERT INTO names (name, age) VALUES('John Smith', '33')
-            //Code: MySQL.Insert("animals", "name, type, etc", "John Smith, bird");
             string query = "INSERT INTO " + table + " (";
             foreach (string field in fieldnames)
             {
@@ -102,13 +102,30 @@ namespace RSRD.Database
             return;
         }
 
-        public void Update(string table, string SET, string WHERE)
+        /* 
+         * logicOption can be AND, OR, NOT, etc...
+         * Currently only handling one at a time  and using it across the whole query string 
+         * aka name='john' AND age='22', etc, or leave null for no option aka updating based on 1 field value
+         */
+
+        public void Update(string table, List<string> SET, List<string> WHERE, string logicOption)    
         {
             //Update existing values in the database.
 
             //Example: UPDATE names SET name='Joe', age='22' WHERE name='John Smith'
-            //Code: MySQLClient.Update("names", "name='Joe', age='22'", "name='John Smith'");
-            string query = "UPDATE " + table + " SET " + SET + " WHERE " + WHERE + "";
+            string query = "UPDATE " + table + " SET ";
+             
+            foreach(string s in SET)
+            {
+                query = query + s + ", ";//loop through the values we're editing and append them to the query string
+            }
+
+            query = query.Remove(query.Length - 2) + " WHERE ";
+
+            foreach (string s in WHERE)
+            {
+                query = query + s + " " + logicOption; //trailing whitespace shouldn't effect sql queries, right...?
+            }
 
             if (this.Open())
             {
@@ -125,13 +142,19 @@ namespace RSRD.Database
             return;
         }
 
-        public void Delete(string table, string WHERE)
+        //logicOption param functions same as update fuction
+        public void Delete(string table, List<string> WHERE, string logicOption)
         {
             //Removes an entry from the database.
 
             //Example: DELETE FROM names WHERE name='John Smith'
-            //Code: MySQLClient.Delete("names", "name='John Smith'");
-            string query = "DELETE FROM " + table + " WHERE " + WHERE + "";
+            string query = "DELETE FROM " + table + " WHERE ";
+
+            foreach (string s in WHERE)
+            {
+                query = query + s + " " + logicOption; //trailing whitespace shouldn't effect sql queries, right...?
+            }
+
 
             if (this.Open())
             {
@@ -147,7 +170,8 @@ namespace RSRD.Database
             }
             return;
         }
-
+        #endregion
+        #region Database Accessors
         public Dictionary<string, string> Select(string table, string WHERE)
         {
             //This methods selects from the database, it retrieves data from it.
@@ -218,5 +242,6 @@ namespace RSRD.Database
                 return Count;
             }
         }
+        #endregion
     }
 }

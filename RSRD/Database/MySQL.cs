@@ -66,7 +66,81 @@ namespace RSRD.Database
         }
         #endregion
 
-        #region Database Manipulators
+        #region Database Single field/Quick Editing Manipulators
+        //USE FOR QUICK QUERIES WHEN YOU WONT NEED TO EDIT MORE THAN 1 COLUMN/1 VALUE AT A TIME
+        public void Insert(string table, string column, string value)
+        {
+            //Insert values into the database.
+
+            //Example: INSERT INTO names (name, age) VALUES('John Smith', '33')
+            //Code: MySQLClient.Insert("names", "name, age", "'John Smith, '33'");
+            string query = "INSERT INTO " + table + " (" + column + ") VALUES (" + value + ")";
+
+            try
+            {
+                if (this.Open())
+                {
+                    //Opens a connection, if succefull; run the query and then close the connection.
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                    cmd.ExecuteNonQuery();
+                    this.Close();
+                }
+            }
+            catch { }
+            return;
+        }
+
+        public void Update(string table, string SET, string WHERE)
+        {
+            //Update existing values in the database.
+
+            //Example: UPDATE names SET name='Joe', age='22' WHERE name='John Smith'
+            //Code: MySQLClient.Update("names", "name='Joe', age='22'", "name='John Smith'");
+            string query = "UPDATE " + table + " SET " + SET + " WHERE " + WHERE + "";
+
+            if (this.Open())
+            {
+                try
+                {
+                    //Opens a connection, if succefull; run the query and then close the connection.
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.ExecuteNonQuery();
+                    this.Close();
+                }
+                catch { this.Close(); }
+            }
+            return;
+        }
+
+        public void Delete(string table, string WHERE)
+        {
+            //Removes an entry from the database.
+
+            //Example: DELETE FROM names WHERE name='John Smith'
+            //Code: MySQLClient.Delete("names", "name='John Smith'");
+            string query = "DELETE FROM " + table + " WHERE " + WHERE + "";
+
+            if (this.Open())
+            {
+                try
+                {
+                    //Opens a connection, if succefull; run the query and then close the connection.
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.ExecuteNonQuery();
+                    this.Close();
+                }
+                catch { this.Close(); }
+            }
+            return;
+        }
+        #endregion
+
+        #region Database Multi-field Manipulators
+        //TYPICALLY USE THESE!
         public void Insert(string table, List<string> fieldnames, List<string> fieldvalues)
         {
             //Insert values into the database.
@@ -171,6 +245,7 @@ namespace RSRD.Database
             return;
         }
         #endregion
+
         #region Database Accessors
         public Dictionary<string, string> Select(string table, string WHERE)
         {

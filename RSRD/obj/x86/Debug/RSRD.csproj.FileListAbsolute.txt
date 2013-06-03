@@ -1,9 +1,0 @@
-c:\users\sebastian\documents\visual studio 2010\Projects\RSRD\RSRD\bin\Debug\RSRD.exe
-c:\users\sebastian\documents\visual studio 2010\Projects\RSRD\RSRD\bin\Debug\RSRD.pdb
-c:\users\sebastian\documents\visual studio 2010\Projects\RSRD\RSRD\obj\x86\Debug\ResolveAssemblyReference.cache
-c:\users\sebastian\documents\visual studio 2010\Projects\RSRD\RSRD\obj\x86\Debug\RSRD.Form1.resources
-c:\users\sebastian\documents\visual studio 2010\Projects\RSRD\RSRD\obj\x86\Debug\RSRD.Properties.Resources.resources
-c:\users\sebastian\documents\visual studio 2010\Projects\RSRD\RSRD\obj\x86\Debug\GenerateResource.read.1.tlog
-c:\users\sebastian\documents\visual studio 2010\Projects\RSRD\RSRD\obj\x86\Debug\GenerateResource.write.1.tlog
-c:\users\sebastian\documents\visual studio 2010\Projects\RSRD\RSRD\obj\x86\Debug\RSRD.exe
-c:\users\sebastian\documents\visual studio 2010\Projects\RSRD\RSRD\obj\x86\Debug\RSRD.pdb

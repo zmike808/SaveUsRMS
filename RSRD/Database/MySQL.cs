@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MySql.Data.MySqlClient;
+using System.Diagnostics;
 
-namespace RSRD.Database
+
+namespace RSRD
 {
     //BASIC TEMPLATE COPIED FROM http://social.msdn.microsoft.com/Forums/en-US/csharpgeneral/thread/ef37eb19-3c77-4dc5-aa6c-917a6da7fdf2/
 
@@ -13,23 +15,23 @@ namespace RSRD.Database
     //Link to the .NET Connector (.dll file) http://dev.mysql.com/downloads/connector/net/
 
 
-    public class MySQL
+    public class MySQLHandler
     {
         MySqlConnection conn = null;
 
 
         #region Constructors
-        public MySQL(string hostname, string database, string username, string password)
+        public MySQLHandler(string hostname, string database, string username, string password)
         {
             conn = new MySqlConnection("host=" + hostname + ";database=" + database + ";username=" + username + ";password=" + password + ";");
         }
 
-        public MySQL(string hostname, string database, string username, string password, int portNumber)
+        public MySQLHandler(string hostname, string database, string username, string password, int portNumber)
         {
             conn = new MySqlConnection("host=" + hostname + ";database=" + database + ";username=" + username + ";password=" + password + ";port=" + portNumber.ToString() + ";");
         }
 
-        public MySQL(string hostname, string database, string username, string password, int portNumber, int connectionTimeout)
+        public MySQLHandler(string hostname, string database, string username, string password, int portNumber, int connectionTimeout)
         {
             conn = new MySqlConnection("host=" + hostname + ";database=" + database + ";username=" + username + ";password=" + password + ";port=" + portNumber.ToString() + ";Connection Timeout=" + connectionTimeout.ToString() + ";");
         }
@@ -149,16 +151,19 @@ namespace RSRD.Database
             string query = "INSERT INTO " + table + " (";
             foreach (string field in fieldnames)
             {
-                query = query + "'" + field + "'" + ", "; //handle the single quotations needed for sql queries in here (assumes that not handled prior, in GUI code)
+                query = query + field + ",";
             }
-            query = query.Remove(query.Length - 2) + ") VALUES ("; //ghetto hack to take off that extra ", " on the end of the query string, 
-                                                                    //i mean, i could just use a counter but fuck it
+            query = query.Remove(query.Length - 1) + ") VALUES ("; //ghetto hack to take off that extra ", " on the end of the query string, 
+            Debug.WriteLine(query);
+
+           //i mean, i could just use a counter but fuck it
             foreach (string field in fieldvalues)
             {
-                query = query + "'" + field + "'" + ", ";
+                query = query + "'" + field + "'" + ",";
             }
 
-            query = query.Remove(query.Length - 2) + ")";
+            query = query.Remove(query.Length - 1) + ")";
+            Debug.WriteLine(query);
 
             try
             {

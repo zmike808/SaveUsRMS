@@ -1,0 +1,6 @@
+TestRecord
+image
+fieldBox, int, 200, 200, Age, 20, 20
+fieldBox, string, 200, 250, Name, 20, 20
+fieldBox, int , 200, 300, ID, 20, 20
+fieldBox, bool, 200, 350, Vaccinations, 20, 20

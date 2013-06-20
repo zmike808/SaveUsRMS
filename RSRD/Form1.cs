@@ -70,5 +70,13 @@ namespace RSRD
         {
 
         }
+
+        //bring up the record viewer, using the animal id constructor
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            RecordViewer r = new RecordViewer();
+            r.Show();
+        }
     }
 }

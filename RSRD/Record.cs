@@ -16,6 +16,9 @@ namespace RSRD
         //the image to show up behind the field boxes
         Bitmap image;
 
+        //the form name, and table name should always be the same, so this variable can be referenced for either
+        string formName;
+
         //the associated fieldboxes
         //should be created like this
         // values[0] = new FieldBox<object>("alabama", 124, 124, (int)32);
@@ -28,13 +31,22 @@ namespace RSRD
         //the actual file name of the format file
         public string FormatFile;
 
-        //default constructor
-        public Record() 
+        //used to load record into viewer and query data from the appropriate table
+        public Record(string name, int id) 
         {
            
         }
 
+        //used when creating a new record type in the editor
+        public Record(string name, List<FieldBox<object>> fieldboxes) 
+        {
 
+        }
+
+        //used when loading a blank, previously created record
+        public Record(string name)
+        {
+        }
 
         //parses the format file, creating fieldBoxes and filling in data
         void ParseFormatFile() { }
@@ -48,6 +60,12 @@ namespace RSRD
 
         //when a record is created, save the format file, and create the table
         void FinalizeNewRecord() { }
+
+        //loads data from database
+        void loadData(int id)
+        {
+
+        }
 
         
     }

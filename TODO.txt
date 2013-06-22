@@ -1,0 +1,18 @@
+TODO
+
+
+
+Sebastian:
+-dynamically creating record tabs as they are pulled up
+-pulling up records onto gui
+
+
+
+Michael:
+-generating new tables from record class
+-saving data from filled in records into tables
+
+
+Ming:
+-parsing record format files
+-writing record format files from newly generated records

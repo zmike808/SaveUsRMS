@@ -11,14 +11,14 @@ namespace RSRD
 
         public string label;
 
-        int x_pos;      //x position on the record  
-        int y_pos;      //y position on the record
+        public int x_pos;      //x position on the record  
+        public int y_pos;      //y position on the record
 
-        int length;
+        public int length;
 
-        int height;
+        public int height;
 
-        T boxValue;     //value of the field
+        public T boxValue;     //value of the field
         
         public FieldBox(string _label, int _x, int _y, int _length, int _height, object value) 
         {

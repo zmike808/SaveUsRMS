@@ -11,19 +11,24 @@ namespace RSRD
 
     //class used to interface between the record creator,
     //the record text files, and the record viewer/creator
-    class Record
+    public class Record
     {
         //the image to show up behind the field boxes
         Bitmap image;
 
         //the form name, and table name should always be the same, so this variable can be referenced for either
-        string formName;
+        public string formName;
+
+        //if the record is empty
+        bool filled;
+
+        public DateTime timeStamp { get; set; }
 
         //the associated fieldboxes
         //should be created like this
         // values[0] = new FieldBox<object>("alabama", 124, 124, (int)32);
         //should be accessed by typecasting
-        List<FieldBox<object>> values;
+        public List<FieldBox<object>> values;
 
         //the directory of the formatting file to pRSE
         public string fileDirectory;
@@ -40,7 +45,8 @@ namespace RSRD
         //used when creating a new record type in the editor
         public Record(string name, List<FieldBox<object>> fieldboxes) 
         {
-
+            values = fieldboxes;
+            formName = name;
         }
 
         //used when loading a blank, previously created record

@@ -14,6 +14,7 @@ namespace RSRD
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void tabPage2_Click(object sender, EventArgs e)
@@ -77,6 +78,18 @@ namespace RSRD
         {
             RecordViewer r = new RecordViewer();
             r.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            RecordAdd r = new RecordAdd();
+            r.Show();
+        }
+
+        //call when animal tab is loaded and when search constraints are altered
+        private void populateAnimalList() 
+        {
+
         }
     }
 }

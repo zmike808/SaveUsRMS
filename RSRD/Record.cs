@@ -26,9 +26,9 @@ namespace RSRD
 
         //the associated fieldboxes
         //should be created like this
-        // values[0] = new FieldBox<object>("alabama", 124, 124, (int)32);
-        //should be accessed by typecasting
-        public List<FieldBox<object>> values;
+        // values[0] = new intBox("alabama", 124, 124, 20, 20, int);
+        //get value by using var and getValue();
+        public List<FieldBox> values;
 
         //the directory of the formatting file to pRSE
         public string fileDirectory;
@@ -43,7 +43,7 @@ namespace RSRD
         }
 
         //used when creating a new record type in the editor
-        public Record(string name, List<FieldBox<object>> fieldboxes) 
+        public Record(string name, List<FieldBox> fieldboxes) 
         {
             values = fieldboxes;
             formName = name;

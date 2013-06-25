@@ -13,9 +13,9 @@ namespace RSRD
     {
 
         Record selected;
-        FieldBox<object>  i = new FieldBox<object>("alabama", 100, 100, 20, 10, 21);
-        FieldBox<object> j = new FieldBox<object>("tennesee", 100, 200, 20, 10, 22);
-        List<FieldBox<object>> list = new List<FieldBox<object>>();
+        stringBox  i = new stringBox("alabama", 100, 100, 20, 10, "test");
+        intBox j = new intBox("tennesee", 100, 200, 20, 10, 22);
+        List<FieldBox> list = new List<FieldBox>();
 
         public RecordViewer()
         {
@@ -56,12 +56,13 @@ namespace RSRD
             //creates a tab and adds all of the record information to it
             TabPage t = new TabPage(r.formName + " " + r.timeStamp.ToShortDateString());
 
-            foreach (FieldBox<object> f in r.values) 
+            foreach (FieldBox f in r.values) 
             {
                 TextBox textbox = new TextBox();
                 textbox.Top = f.y_pos;
                 textbox.Left = f.x_pos;
-
+                textbox.TextChanged+= new EventHandler(TextBox_Changed);
+                textbox.Text = Convert.ToString(f.value);
                 Label l = new Label();
                 l.Text = f.label;
                 l.Top = f.y_pos;
@@ -72,6 +73,18 @@ namespace RSRD
             }
             tabControl1.TabPages.Add(t);
             tabControl1.TabPages[0].Show();
+            
+        }
+
+        /// <summary>
+        /// takes new information from text boxes and changes values within the record
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBox_Changed(object sender, System.EventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            
         }
 
     }

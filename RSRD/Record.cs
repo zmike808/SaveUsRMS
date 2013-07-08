@@ -65,7 +65,17 @@ namespace RSRD
 
 
         //when a record is created, save the format file, and create the table
-        void FinalizeNewRecord() { }
+        void FinalizeNewRecord() {
+         MySQLHandler msql = new MySQLHandler("localhost", "ASRD", "root", "root"); //needs to be changed later to be dynamic settings, 
+                                                                                       //or at least have a standardized setting for when the software is installed
+            List<string> fieldTypes = new List<string>();
+
+            foreach (FieldBox x in values)
+            {
+                fieldTypes.Add(x.typeToString());
+            }
+            msql.createTable(formName, fieldTypes);
+        }
 
         //loads data from database
         void loadData(int id)

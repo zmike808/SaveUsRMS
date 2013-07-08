@@ -49,9 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animal.cs" />
-    <Compile Include="RecordTab.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="FieldBox.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -67,9 +64,6 @@
       <DependentUpon>RecordAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Record.cs" />
-    <Compile Include="RecordTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="RecordViewer.cs">
       <SubType>Form</SubType>
     </Compile>

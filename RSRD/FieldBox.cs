@@ -9,16 +9,12 @@ namespace RSRD
     public abstract class FieldBox 
     {
         public string label;
-
-        public abstract string typeToString();
-
         public dynamic value { get; set; }
 
         public int x_pos { get; set; }    //x position on the record  
         public int y_pos { get; set; }      //y position on the record
 
         public int length { get; set; }
-
         public int height { get; set; }
 
         protected FieldBox(string _label, int _x, int _y, int _length, int _height) 
@@ -32,38 +28,26 @@ namespace RSRD
             label = _label;
         }
 
-       
+        public abstract string typeToString();
+
 
     }
 
     public class intBox : FieldBox
     {
-
-        public intBox(string _label, int _x, int _y, int _length, int _height, int i) :base(_label, _x, _y, _length, _height)
-        {
-            value = i;
-        }
-
+        public intBox(string _label, int _x, int _y, int _length, int _height, int i) :base(_label, _x, _y, _length, _height){value = i;}
         public override string typeToString() { return "int"; }
     }
 
     public class stringBox : FieldBox
     {
-
-        public stringBox(string _label, int _x, int _y, int _length, int _height, string i) :base(_label, _x, _y, _length, _height)
-        {
-            value = i;
-        }
+        public stringBox(string _label, int _x, int _y, int _length, int _height, string i) :base(_label, _x, _y, _length, _height){value = i;}
         public override string typeToString() { return "string"; }
     }
 
     public class doubBox : FieldBox
     {
-
-        public doubBox(string _label, int _x, int _y, int _length, int _height, double i) :base(_label, _x, _y, _length, _height)
-        {
-            value = i;
-        }
+        public doubBox(string _label, int _x, int _y, int _length, int _height, double i) :base(_label, _x, _y, _length, _height){value = i;}
         public override string typeToString() { return "double"; }
     }
 

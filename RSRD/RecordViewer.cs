@@ -50,14 +50,20 @@ namespace RSRD
             showRecord(selected);
         }
 
+
+        /// <summary>
+        /// creates a tab and adds all of the record information to it
+        /// </summary>
+        /// <param name="r"></param>
         private void showRecord(Record r) 
         {
             
-            //creates a tab and adds all of the record information to it
+            
             TabPage t = new TabPage(r.formName + " " + r.timeStamp.ToShortDateString());
 
             foreach (FieldBox f in r.values) 
             {
+
                 TextBox textbox = new TextBox();
                 textbox.Top = f.y_pos;
                 textbox.Left = f.x_pos;

@@ -58,7 +58,14 @@ namespace RSRD
         void ParseFormatFile() { }
 
         //save the data to the correct table
-        public void saveData(string index) { }
+       
+        public void saveData(string index) { 
+        /*
+         * wat? ??? how can you know where to save data to if there's only an index which is a very ambiguous variable name...
+         * seabass wat r u doin
+         * seabassplz stahp
+         * */
+        }
 
         //make sure all fields are filled in and contain valid data
         public void checkDataValidity() { }

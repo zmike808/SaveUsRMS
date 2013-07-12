@@ -9,15 +9,10 @@ Sebastian:
 
 
 Michael:
--generating new tables from record class
 -saving data from filled in records into tables
--animal list table
-[int ID][string name][DateTime DateofBirth][jpeg image][bool estimate][DateTime vaccination][bool sterilized][bool female][string color][string size][string breed][string crossbreed]
-[string location][string owner][string notes]
-
-
 
 
 Ming:
 -parsing record format files
 -writing record format files from newly generated records
+

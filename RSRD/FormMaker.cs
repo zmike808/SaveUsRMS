@@ -53,6 +53,7 @@ namespace RSRD
                 pictureBox1.Controls.Add(textbox);
                 pictureBox1.Controls.Add(l);
             }
+            templateLoaded = true;
         }
 
         /// <summary>

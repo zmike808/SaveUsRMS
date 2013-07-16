@@ -8,6 +8,14 @@ namespace RSRD
 
     public abstract class FieldBox 
     {
+
+        public enum boxtypes 
+        {
+            intBox,
+            stringBox,
+            doubBox
+        }
+
         public string label;
         public dynamic value { get; set; }
 

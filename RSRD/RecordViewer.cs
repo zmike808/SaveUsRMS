@@ -60,6 +60,7 @@ namespace RSRD
             
             
             TabPage t = new TabPage(r.formName + " " + r.timeStamp.ToShortDateString());
+            t.BackColor = Color.White;
 
             foreach (FieldBox f in r.values) 
             {

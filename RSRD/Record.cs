@@ -58,31 +58,14 @@ namespace RSRD
         void ParseFormatFile() { }
 
         //save the data to the correct table
-       
-        public void saveData(string index) { 
-        /*
-         * wat? ??? how can you know where to save data to if there's only an index which is a very ambiguous variable name...
-         * seabass wat r u doin
-         * seabassplz stahp
-         * */
-        }
+        public void saveData(string index) { }
 
         //make sure all fields are filled in and contain valid data
         public void checkDataValidity() { }
 
 
         //when a record is created, save the format file, and create the table
-        void FinalizeNewRecord() {
-         MySQLHandler msql = new MySQLHandler("localhost", "ASRD", "root", "root"); //needs to be changed later to be dynamic settings, 
-                                                                                       //or at least have a standardized setting for when the software is installed
-            List<string> fieldTypes = new List<string>();
-
-            foreach (FieldBox x in values)
-            {
-                fieldTypes.Add(x.typeToString());
-            }
-            msql.createTable(formName, fieldTypes);
-        }
+        void FinalizeNewRecord() { }
 
         //loads data from database
         void loadData(int id)

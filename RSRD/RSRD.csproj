@@ -57,6 +57,10 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Database\MySQL.cs" />
+    <Compile Include="FormMaker.cs" />
+    <Compile Include="FormMaker.Designer.cs">
+      <DependentUpon>FormMaker.cs</DependentUpon>
+    </Compile>
     <Compile Include="RecordAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +68,8 @@
       <DependentUpon>RecordAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Record.cs" />
+    <Compile Include="RecordTab.cs" />
+    <Compile Include="RecordTextBox.cs" />
     <Compile Include="RecordViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,11 +78,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControl1.cs" />
+    <Compile Include="UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormMaker.resx">
+      <DependentUpon>FormMaker.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RecordAdd.resx">
       <DependentUpon>RecordAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecordTextBox.resx">
+      <DependentUpon>RecordTextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RecordViewer.resx">
       <DependentUpon>RecordViewer.cs</DependentUpon>
@@ -90,6 +106,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

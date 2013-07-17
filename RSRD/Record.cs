@@ -55,7 +55,33 @@ namespace RSRD
         }
 
         //parses the format file, creating fieldBoxes and filling in data
-        void ParseFormatFile() { }
+        void ParseFormatFile() {
+            string location = fileDirectory + FormatFile;
+            StreamReader reader = new FileInfo(location).OpenText();
+            formName = reader.ReadLine();
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                string words[] = line.Split(',');
+                if (words[0] == "fieldBox")
+                    switch (words[1])
+                    {
+                        case "int":
+                            values.Add(new intBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), Convert.ToInt32(words[7])));
+                            break;
+                        case "string":
+                            values.Add(new stringBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), words[7]));
+                            break;
+                        case "double":
+                            values.Add(new doubBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), Convert.ToDouble(words[7])));
+                            break;
+                        default:
+                            break;
+                    }
+            }
+
+            filled = true;
+        }
 
         //save the data to the correct table
         public void saveData(string index) { }

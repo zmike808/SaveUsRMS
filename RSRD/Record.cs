@@ -36,8 +36,16 @@ namespace RSRD
         //the actual file name of the format file
         public string FormatFile;
 
-        //used to load record into viewer and query data from the appropriate table
-        public Record(string name, int id) 
+        /// <summary>
+        /// used to load record into viewer and query data from the appropriate table
+        /// </summary>
+        /// <param name="name">
+        /// tells you what table to look at, and what .recf file to load from
+        /// </param>
+        /// <param name="id">
+        /// what row to query data from to fill fieldboxes
+        /// </param>
+        public Record(string name, string id) 
         {
            
         }
@@ -55,7 +63,10 @@ namespace RSRD
         }
 
         //parses the format file, creating fieldBoxes and filling in data
-        void ParseFormatFile() { }
+        void ParseFormatFile() 
+        {
+        
+        }
 
         /// <summary>
         /// check if all the field boxes are filled with valid data,
@@ -66,8 +77,14 @@ namespace RSRD
         /// id of animal, and number of record instance
         /// </param>
         public void saveData(string index) 
-        { 
-            
+        {
+            if (!empty) 
+            {
+            }
+            else
+            {
+                //no fieldboxes have been filled in
+            }
         /*
          * wat? ??? how can you know where to save data to if there's only an index which is a very ambiguous variable name...
          * seabass wat r u doin

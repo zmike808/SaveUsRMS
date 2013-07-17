@@ -35,7 +35,10 @@ namespace RSRD
 
 
 
-
+        /// <summary>
+        /// loads a blank record and allows user to manipulate fieldbox text, as well as size and placement.
+        /// </summary>
+        /// <param name="r"></param>
         public void loadTemplate(Record r)
         {
 

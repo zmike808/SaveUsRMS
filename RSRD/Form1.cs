@@ -18,6 +18,8 @@ namespace RSRD
         stringBox i = new stringBox("alabama", 100, 100, 20, 10, "test");
         intBox j = new intBox("tennesee", 100, 200, 20, 10, 0);
         List<FieldBox> list = new List<FieldBox>();
+        List<KeyValuePair<string, Point>> labels = new List<KeyValuePair<string, Point>>();
+
 
         BindingList<Animal> constrained;
 
@@ -31,16 +33,18 @@ namespace RSRD
             animals[0].vacc = true;
             animals.Add(new Animal(Animal.Species.Feline, Animal.Size.Small, Animal.Status.Found, "Milo", false));
             constrained = new BindingList<Animal>(animals);
+            labels.Add(new KeyValuePair<string, Point>("testin'", new Point(50, 50)));
+            labels.Add(new KeyValuePair<string, Point>("testin' two", new Point(50, 100)));
 
             list.Add(i);
             list.Add(j);
-            blankRecords.Add(new Record("florida", list));
+            blankRecords.Add(new Record("florida", list, labels));
             List<FieldBox> f = new List<FieldBox>(list);
             f.Remove(i);
-            blankRecords.Add(new Record("west virginia", f));
+            blankRecords.Add(new Record("west virginia", f, labels));
             List<FieldBox> l = new List<FieldBox>(list);
             l.Remove(j);
-            blankRecords.Add(new Record("louisiana", l));
+            blankRecords.Add(new Record("louisiana", l, labels));
 
             DataGridViewTextBoxColumn nameColumn = new DataGridViewTextBoxColumn();
             nameColumn.DataPropertyName = "Name";

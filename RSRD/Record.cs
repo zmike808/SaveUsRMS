@@ -28,7 +28,13 @@ namespace RSRD
         //should be created like this
         // values[0] = new intBox("alabama", 124, 124, 20, 20, int);
         //get value by using var and getValue();
-        public List<FieldBox> values;
+        public List<FieldBox> values = new List<FieldBox>();
+
+
+        //the labels that are on the form
+        //the string is the text it shows, 
+        //the point is it's location
+        public List<KeyValuePair<string, Point>> labels = new List<KeyValuePair<string,Point>>();
 
         //the directory of the formatting file to pRSE
         public string fileDirectory;
@@ -51,10 +57,11 @@ namespace RSRD
         }
 
         //used when creating a new record type in the editor
-        public Record(string name, List<FieldBox> fieldboxes) 
+        public Record(string name, List<FieldBox> fieldboxes, List<KeyValuePair<string, Point>> _labels) 
         {
             values = fieldboxes;
             formName = name;
+            labels = _labels;
         }
 
         //used when loading a blank, previously created record
@@ -97,7 +104,7 @@ namespace RSRD
  
  
          //when a record is created, save the format file, and create the table
-       void FinalizeNewRecord() {
+       public void FinalizeNewRecord() {
          MySQLHandler msql = new MySQLHandler("localhost", "ASRD", "root", "root"); //needs to be changed later to be dynamic settings, 
                                                                                        //or at least have a standardized setting for when the software is installed
             List<string> fieldTypes = new List<string>();
@@ -107,6 +114,8 @@ namespace RSRD
                 fieldTypes.Add(x.typeToString());
             }
             msql.createTable(formName, fieldTypes);
+
+           //ming will add the .recf file creation here later
         }
  
          //loads data from database

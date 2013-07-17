@@ -37,6 +37,7 @@
             this.templateListBox = new System.Windows.Forms.ListBox();
             this.fieldboxListBox = new System.Windows.Forms.ListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.createFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -58,7 +59,8 @@
             // fileMenuItem
             // 
             this.fileMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadImageToolStripMenuItem});
+            this.loadImageToolStripMenuItem,
+            this.createFormToolStripMenuItem});
             this.fileMenuItem.Name = "fileMenuItem";
             this.fileMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileMenuItem.Text = "File";
@@ -84,9 +86,10 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.AllowDrop = true;
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
             this.splitContainer1.Size = new System.Drawing.Size(632, 698);
-            this.splitContainer1.SplitterDistance = 120;
+            this.splitContainer1.SplitterDistance = 83;
             this.splitContainer1.TabIndex = 1;
             // 
             // label1
@@ -112,7 +115,7 @@
             this.templateListBox.FormattingEnabled = true;
             this.templateListBox.Location = new System.Drawing.Point(0, 312);
             this.templateListBox.Name = "templateListBox";
-            this.templateListBox.Size = new System.Drawing.Size(119, 199);
+            this.templateListBox.Size = new System.Drawing.Size(82, 199);
             this.templateListBox.TabIndex = 1;
             this.templateListBox.SelectedIndexChanged += new System.EventHandler(this.templateListBox_SelectedIndexChanged);
             // 
@@ -121,18 +124,25 @@
             this.fieldboxListBox.FormattingEnabled = true;
             this.fieldboxListBox.Location = new System.Drawing.Point(0, 29);
             this.fieldboxListBox.Name = "fieldboxListBox";
-            this.fieldboxListBox.Size = new System.Drawing.Size(119, 251);
+            this.fieldboxListBox.Size = new System.Drawing.Size(71, 160);
             this.fieldboxListBox.TabIndex = 0;
-            this.fieldboxListBox.DragLeave += new System.EventHandler(this.fieldboxListBox_DragLeave);
+            this.fieldboxListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.fieldboxListBox_MouseDoubleClick);
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(27, 13);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(500, 744);
+            this.pictureBox1.Size = new System.Drawing.Size(497, 683);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // createFormToolStripMenuItem
+            // 
+            this.createFormToolStripMenuItem.Name = "createFormToolStripMenuItem";
+            this.createFormToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.createFormToolStripMenuItem.Text = "Create Form";
+            this.createFormToolStripMenuItem.Click += new System.EventHandler(this.createFormToolStripMenuItem_Click);
             // 
             // FormMaker
             // 
@@ -168,6 +178,7 @@
         private System.Windows.Forms.ListBox fieldboxListBox;
         private System.Windows.Forms.ToolStripMenuItem loadImageToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem createFormToolStripMenuItem;
 
     }
 }

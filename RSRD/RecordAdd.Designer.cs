@@ -33,6 +33,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,7 +44,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(684, 520);
+            this.tabControl1.Size = new System.Drawing.Size(684, 830);
             this.tabControl1.TabIndex = 1;
             // 
             // menuStrip1
@@ -58,7 +60,9 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripComboBox1});
+            this.toolStripComboBox1,
+            this.saveAsToolStripMenuItem,
+            this.loadToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(35, 20);
             this.toolStripMenuItem1.Text = "File";
@@ -68,10 +72,11 @@
             this.toolStripComboBox1.Name = "toolStripComboBox1";
             this.toolStripComboBox1.Size = new System.Drawing.Size(121, 21);
             this.toolStripComboBox1.Text = "New Record";
+            this.toolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(593, 552);
+            this.button1.Location = new System.Drawing.Point(593, 862);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -79,11 +84,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.saveAsToolStripMenuItem.Text = "Save as";
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.loadToolStripMenuItem.Text = "Load";
+            // 
             // RecordAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 581);
+            this.ClientSize = new System.Drawing.Size(680, 885);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
@@ -104,6 +121,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
 
     }
 }

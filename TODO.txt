@@ -1,10 +1,7 @@
 TODO
 
-
-
 Sebastian:
--dynamically creating record tabs as they are pulled up
--pulling up records onto gui
+-add dynamically moveable fieldboxes to form creator interface
 
 
 
@@ -21,3 +18,8 @@ Michael:
 Ming:
 -parsing record format files
 -writing record format files from newly generated records
+
+
+General:
+-make a ton of fake data to test on
+-write a few .recf files to test on, or generate when .recf creator is done

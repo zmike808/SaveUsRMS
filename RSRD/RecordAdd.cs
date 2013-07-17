@@ -11,12 +11,22 @@ namespace RSRD
 {
     public partial class RecordAdd : Form
     {
-        public RecordAdd()
+
+        List<Record> blanks;
+
+        public RecordAdd(Form1 f)
         {
             InitializeComponent();
+            blanks = f.blankRecords;
+            foreach (Record r in f.blankRecords)
+            {
+                toolStripComboBox1.Items.Add(r.formName);
+            }
+            /*
             toolStripComboBox1.Items.Add("Euthenization");
             toolStripComboBox1.Items.Add("Sterilization");
             toolStripComboBox1.Items.Add("Adoption");
+             */
         }
 
         
@@ -26,7 +36,7 @@ namespace RSRD
         /// increases ease for user
         /// </summary>
         /// <param name="defaults"></param>
-        public RecordAdd(Record[] defaults) 
+        public RecordAdd(Form1 f, Record[] defaults) 
         {
             InitializeComponent();
 
@@ -34,6 +44,7 @@ namespace RSRD
             {
                 newRecordTab(r);
             }
+
         }
 
 
@@ -43,7 +54,26 @@ namespace RSRD
         /// <param name="r"></param>
         public void newRecordTab(Record r)
         {
+            TabPage t = new TabPage(r.formName + " " + r.timeStamp.ToShortDateString());
+            t.BackColor = Color.White;
 
+            foreach (FieldBox f in r.values) 
+            {
+
+                TextBox textbox = new TextBox();
+                textbox.Top = f.y_pos;
+                textbox.Left = f.x_pos;
+                textbox.TextChanged+= new EventHandler(TextBox_Changed);
+                Label l = new Label();
+                l.Text = f.label;
+                l.Top = f.y_pos;
+                l.Left = f.x_pos - 50;
+
+                t.Controls.Add(textbox);
+                t.Controls.Add(l);
+            }
+            tabControl1.TabPages.Add(t);
+            tabControl1.TabPages[0].Show();
         }
 
 
@@ -56,6 +86,20 @@ namespace RSRD
         {
 
         }
+
+        private void TextBox_Changed(object sender, System.EventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+
+        }
+
+        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Record r = blanks[toolStripComboBox1.SelectedIndex];
+            r.timeStamp = DateTime.Now;
+            newRecordTab(r);
+        }
+
 
 
 

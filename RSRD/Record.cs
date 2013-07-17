@@ -19,8 +19,8 @@ namespace RSRD
         //the form name, and table name should always be the same, so this variable can be referenced for either
         public string formName;
 
-        //if the record is empty
-        bool filled;
+        //if the record is empty, used to tell if it is just a blank form or not
+        bool empty;
 
         public DateTime timeStamp { get; set; }
 
@@ -83,21 +83,43 @@ namespace RSRD
             filled = true;
         }
 
-        //save the data to the correct table
-        public void saveData(string index) { }
+        /// <summary>
+        /// check if all the field boxes are filled with valid data,
+        /// if so, save the data into a new row of the table with the same name as the form, 
+        /// the index will be the id of the animal the data is tied to, and the record instance number
+        /// </summary>
+        /// <param name="index">
+        /// id of animal, and number of record instance
+        /// </param>
+        public void saveData(string index) 
+        { 
+            
+        /*
+         * wat? ??? how can you know where to save data to if there's only an index which is a very ambiguous variable name...
+         * seabass wat r u doin
+         * seabassplz stahp
+         * */
+       }
+ 
+         //make sure all fields are filled in and contain valid data
+         public void checkDataValidity() { }
+ 
+ 
+         //when a record is created, save the format file, and create the table
+       void FinalizeNewRecord() {
+         MySQLHandler msql = new MySQLHandler("localhost", "ASRD", "root", "root"); //needs to be changed later to be dynamic settings, 
+                                                                                       //or at least have a standardized setting for when the software is installed
+            List<string> fieldTypes = new List<string>();
 
-        //make sure all fields are filled in and contain valid data
-        public void checkDataValidity() { }
-
-
-        //when a record is created, save the format file, and create the table
-        void FinalizeNewRecord() { }
-
-        //loads data from database
-        void loadData(int id)
-        {
-
+            foreach (FieldBox x in values)
+            {
+                fieldTypes.Add(x.typeToString());
+            }
+            msql.createTable(formName, fieldTypes);
         }
+ 
+         //loads data from database
+        void loadData(int id) { }
 
         
     }

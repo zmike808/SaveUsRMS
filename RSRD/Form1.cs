@@ -14,10 +14,14 @@ namespace RSRD
         //starts out as all animals, changes as search constraints are altered
         List<Animal> animals = new List<Animal>();
 
-
+        //more hardcoded bullshit
+        stringBox i = new stringBox("alabama", 100, 100, 20, 10, "test");
+        intBox j = new intBox("tennesee", 100, 200, 20, 10, 0);
+        List<FieldBox> list = new List<FieldBox>();
 
         BindingList<Animal> constrained;
 
+        public List<Record> blankRecords = new List<Record>();
 
         #region hardcodedbullshit
 
@@ -28,7 +32,15 @@ namespace RSRD
             animals.Add(new Animal(Animal.Species.Feline, Animal.Size.Small, Animal.Status.Found, "Milo", false));
             constrained = new BindingList<Animal>(animals);
 
-
+            list.Add(i);
+            list.Add(j);
+            blankRecords.Add(new Record("florida", list));
+            List<FieldBox> f = new List<FieldBox>(list);
+            f.Remove(i);
+            blankRecords.Add(new Record("west virginia", f));
+            List<FieldBox> l = new List<FieldBox>(list);
+            l.Remove(j);
+            blankRecords.Add(new Record("louisiana", l));
 
             DataGridViewTextBoxColumn nameColumn = new DataGridViewTextBoxColumn();
             nameColumn.DataPropertyName = "Name";
@@ -54,6 +66,7 @@ namespace RSRD
             vaccCheckBox.Checked = a.vacc;
             vaccCheckBox.CheckState = a.vacc ? CheckState.Checked : CheckState.Unchecked;
             vaccCheckBox.Enabled = false;
+            
         }
 
         //checks all constraints and eliminates the non-valid animals
@@ -130,7 +143,7 @@ namespace RSRD
 
         private void addRecordButton_Click(object sender, EventArgs e)
         {
-            RecordAdd r = new RecordAdd();
+            RecordAdd r = new RecordAdd(this);
             r.Show();
         }
 
@@ -143,6 +156,12 @@ namespace RSRD
         {
             //initializeHardcode();
             populateAnimalList();
+        }
+
+        private void newFormToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormMaker f = new FormMaker(this);
+            f.Show();
         }
 
     }

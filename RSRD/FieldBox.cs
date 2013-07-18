@@ -13,7 +13,8 @@ namespace RSRD
         {
             intBox,
             stringBox,
-            doubBox
+            doubBox,
+            dateTimeBox
         }
 
         public string label;
@@ -70,5 +71,16 @@ namespace RSRD
             type = boxtypes.doubBox;
         }
         public override string typeToString() { return "double"; }
+    }
+
+    public class dateTimeBox : FieldBox
+    {
+        public dateTimeBox(string _label, int _x, int _y, int _length, int _height, DateTime i)
+            : base(_label, _x, _y, _length, _height)
+        {
+            value = i;
+            type = boxtypes.dateTimeBox;
+        }
+        public override string typeToString() { return "DateTime"; }
     }
 }

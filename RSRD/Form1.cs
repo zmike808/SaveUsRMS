@@ -100,6 +100,7 @@ namespace RSRD
                 System.Console.WriteLine(test.values[i].typeToString());
             }
             System.Console.WriteLine("empty's value is: " + test.empty);
+            blankRecords.Add(test);
         }
 
         private void label2_Click(object sender, EventArgs e)

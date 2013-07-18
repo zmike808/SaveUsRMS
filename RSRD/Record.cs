@@ -82,6 +82,7 @@ namespace RSRD
             {
                 string[] words = line.Split(',');
                 if (words[0] == "fieldBox")
+                {
                     switch (words[1])
                     {
                         case "int":
@@ -93,9 +94,13 @@ namespace RSRD
                         case "double":
                             values.Add(new doubBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), 0.0));
                             break;
+                        case "DateTime":
+                            values.Add(new dateTimeBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), DateTime.Now));
+                            break;
                         default:
                             break;
                     }
+                }
             }
         }
 
@@ -116,11 +121,6 @@ namespace RSRD
             {
                 //no fieldboxes have been filled in
             }
-        /*
-         * wat? ??? how can you know where to save data to if there's only an index which is a very ambiguous variable name...
-         * seabass wat r u doin
-         * seabassplz stahp
-         * */
        }
  
          //make sure all fields are filled in and contain valid data

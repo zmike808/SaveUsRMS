@@ -120,6 +120,9 @@ namespace RSRD
                 case 2:
                     controltypes.Add(FieldBox.boxtypes.doubBox);
                     break;
+                case 3:
+                    controltypes.Add(FieldBox.boxtypes.dateTimeBox);
+                    break;
                 default:
                     controltypes.Add(FieldBox.boxtypes.intBox);
                     choseLabel = true;
@@ -229,6 +232,10 @@ namespace RSRD
                         case FieldBox.boxtypes.stringBox:
                             stringBox s = new stringBox("null", l.Location.X, l.Location.Y, l.Width, l.Height, "null");
                             rec.values.Add(s);
+                            break;
+                        case FieldBox.boxtypes.dateTimeBox:
+                            dateTimeBox dt = new dateTimeBox("null", l.Location.X, l.Location.Y, l.Width, l.Height, DateTime.Now);
+                            rec.values.Add(dt);
                             break;
                     }     
                 }

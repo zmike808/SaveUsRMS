@@ -90,9 +90,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
+<<<<<<< HEAD
     <EmbeddedResource Include="FieldboxCreationForm.resx">
       <DependentUpon>FieldboxCreationForm.cs</DependentUpon>
     </EmbeddedResource>
+=======
+>>>>>>> a1a77376d13a0e62d0952e67b449804aabb12c8e
+=======
+    <EmbeddedResource Include="FieldboxCreationForm.resx">
+      <DependentUpon>FieldboxCreationForm.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> c805b59... -drag n drop fieldboxes and labels, seperated fieldbox and label items
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

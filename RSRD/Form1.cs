@@ -90,6 +90,16 @@ namespace RSRD
 
         private void adoptButton_Click(object sender, EventArgs e)
         {
+            Record test = new Record("TestRecord");
+            test.fileDirectory = "C:\\Users\\Ming\\Documents\\College\\Rcos\\RSRD\\";
+            test.FormatFile = "testRecord.recf";
+            test.ParseFormatFile();
+            System.Console.WriteLine("values size is: " + test.values.Count);
+            for (int i = 0; i < test.values.Count; i++)
+            {
+                System.Console.WriteLine(test.values[i].typeToString());
+            }
+            System.Console.WriteLine("empty's value is: " + test.empty);
         }
 
         private void label2_Click(object sender, EventArgs e)

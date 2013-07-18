@@ -2,6 +2,7 @@ TODO
 
 Sebastian:
 -add dynamically moveable fieldboxes to form creator interface
+-seperate labels from the fieldbox structure, giving the user more flexibility
 
 
 

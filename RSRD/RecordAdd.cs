@@ -22,11 +22,6 @@ namespace RSRD
             {
                 toolStripComboBox1.Items.Add(r.formName);
             }
-            /*
-            toolStripComboBox1.Items.Add("Euthenization");
-            toolStripComboBox1.Items.Add("Sterilization");
-            toolStripComboBox1.Items.Add("Adoption");
-             */
         }
 
         
@@ -59,17 +54,17 @@ namespace RSRD
 
             foreach (FieldBox f in r.values) 
             {
-
                 TextBox textbox = new TextBox();
                 textbox.Top = f.y_pos;
                 textbox.Left = f.x_pos;
                 textbox.TextChanged+= new EventHandler(TextBox_Changed);
-                Label l = new Label();
-                l.Text = f.label;
-                l.Top = f.y_pos;
-                l.Left = f.x_pos - 50;
-
                 t.Controls.Add(textbox);
+            }
+            foreach (KeyValuePair<string, Point> k in r.labels)
+            {
+                Label l = new Label();
+                l.Text = k.Key;
+                l.Location = k.Value;
                 t.Controls.Add(l);
             }
             tabControl1.TabPages.Add(t);

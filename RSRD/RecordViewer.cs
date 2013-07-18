@@ -43,9 +43,11 @@ namespace RSRD
 
         private void button1_Click(object sender, EventArgs e)
         {
+            List<KeyValuePair<string, Point>> l = new List<KeyValuePair<string, Point>>();
+            l.Add(new KeyValuePair<string, Point>("tenessee", new Point(50, 50)));
             list.Add(i);
             list.Add(j);
-            selected = new Record("georgia", list);
+            selected = new Record("georgia", list, l);
             selected.timeStamp = new DateTime(2013, 2, 15);
             showRecord(selected);
         }
@@ -70,12 +72,13 @@ namespace RSRD
                 textbox.Left = f.x_pos;
                 textbox.TextChanged+= new EventHandler(TextBox_Changed);
                 textbox.Text = Convert.ToString(f.value);
-                Label l = new Label();
-                l.Text = f.label;
-                l.Top = f.y_pos;
-                l.Left = f.x_pos - 50;
-
                 t.Controls.Add(textbox);
+            }
+            foreach (KeyValuePair<string, Point> k in r.labels)
+            {
+                Label l = new Label();
+                l.Text = k.Key;
+                l.Location = k.Value;
                 t.Controls.Add(l);
             }
             tabControl1.TabPages.Add(t);

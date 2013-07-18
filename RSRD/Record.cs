@@ -20,7 +20,7 @@ namespace RSRD
         public string formName;
 
         //if the record is empty, used to tell if it is just a blank form or not
-        bool empty;
+        public bool empty;
 
         public DateTime timeStamp { get; set; }
 
@@ -28,7 +28,13 @@ namespace RSRD
         //should be created like this
         // values[0] = new intBox("alabama", 124, 124, 20, 20, int);
         //get value by using var and getValue();
-        public List<FieldBox> values;
+        public List<FieldBox> values = new List<FieldBox>();
+
+
+        //the labels that are on the form
+        //the string is the text it shows, 
+        //the point is it's location
+        public List<KeyValuePair<string, Point>> labels = new List<KeyValuePair<string,Point>>();
 
         //the directory of the formatting file to pRSE
         public string fileDirectory;
@@ -51,21 +57,48 @@ namespace RSRD
         }
 
         //used when creating a new record type in the editor
-        public Record(string name, List<FieldBox> fieldboxes) 
+        public Record(string name, List<FieldBox> fieldboxes, List<KeyValuePair<string, Point>> _labels) 
         {
             values = fieldboxes;
             formName = name;
+            labels = _labels;
         }
 
         //used when loading a blank, previously created record
         public Record(string name)
         {
+            formName = name;
         }
 
         //parses the format file, creating fieldBoxes and filling in data
-        void ParseFormatFile() 
-        {
-        
+        public void ParseFormatFile() {
+            values = new List<FieldBox>();
+            string location = fileDirectory + FormatFile;
+            StreamReader reader = new FileInfo(location).OpenText();
+            formName = reader.ReadLine();
+            reader.ReadLine();
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                string[] words = line.Split(',');
+                if (words[0] == "fieldBox")
+                    switch (words[1])
+                    {
+                        case "int":
+                            values.Add(new intBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), 0));
+                            break;
+                        case "string":
+                            values.Add(new stringBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), null));
+                            break;
+                        case "double":
+                            values.Add(new doubBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), 0.0));
+                            break;
+                        default:
+                            break;
+                    }
+            }
+
+            empty = false;
         }
 
         /// <summary>
@@ -97,7 +130,7 @@ namespace RSRD
  
  
          //when a record is created, save the format file, and create the table
-       void FinalizeNewRecord() {
+       public void FinalizeNewRecord() {
          MySQLHandler msql = new MySQLHandler("localhost", "ASRD", "root", "root"); //needs to be changed later to be dynamic settings, 
                                                                                        //or at least have a standardized setting for when the software is installed
             List<string> fieldTypes = new List<string>();
@@ -107,6 +140,8 @@ namespace RSRD
                 fieldTypes.Add(x.typeToString());
             }
             msql.createTable(formName, fieldTypes);
+
+           //ming will add the .recf file creation here later
         }
  
          //loads data from database

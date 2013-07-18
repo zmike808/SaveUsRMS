@@ -12,9 +12,20 @@ namespace RSRD
     public partial class FormMaker : Form
     {
 
+        //the control that is currently being moved
+        private Control activeControl;
+        //the point that the control was at previously
+        private Point previousLocation;
+
 
         Form1 caller;
         bool templateLoaded = false;
+
+        //types of the fieldboxes.
+        //if the control isn't a fieldbox, i will just say its an intbox
+        List<FieldBox.boxtypes> controltypes = new List<FieldBox.boxtypes>();
+
+        Record rec;
 
         public FormMaker(Form1 f)
         {
@@ -29,6 +40,7 @@ namespace RSRD
             {
                 fieldboxListBox.Items.Add(type);
             }
+            fieldboxListBox.Items.Add("Label");
         }
 
 
@@ -41,23 +53,35 @@ namespace RSRD
         /// <param name="r"></param>
         public void loadTemplate(Record r)
         {
-
+            rec = new Record(r.formName);
             foreach (FieldBox f in r.values)
             {
 
                 TextBox textbox = new TextBox();
                 textbox.Top = f.y_pos;
                 textbox.Left = f.x_pos;
-                Label l = new Label();
-                l.Text = f.label;
-                l.Top = f.y_pos;
-                l.Left = f.x_pos - 50;
 
+                textbox.MouseDown += new MouseEventHandler(textbox_MouseDown);
+                textbox.MouseMove += new MouseEventHandler(textbox_MouseMove);
+                textbox.MouseUp += new MouseEventHandler(textbox_MouseUp);
+                textbox.ReadOnly = true;
+                controltypes.Add(f.type);
                 pictureBox1.Controls.Add(textbox);
+            }
+            foreach (KeyValuePair<string, Point> k in r.labels)
+            {
+                Label l = new Label();
+                l.Text = k.Key;
+                l.Location = k.Value;
+                l.MouseDown += new MouseEventHandler(textbox_MouseDown);
+                l.MouseMove += new MouseEventHandler(textbox_MouseMove);
+                l.MouseUp += new MouseEventHandler(textbox_MouseUp);
+                controltypes.Add(FieldBox.boxtypes.intBox);
                 pictureBox1.Controls.Add(l);
             }
             templateLoaded = true;
         }
+
 
         /// <summary>
         /// loads a template form to be used
@@ -69,26 +93,150 @@ namespace RSRD
             if (!templateLoaded)
             {
                 loadTemplate(caller.blankRecords[templateListBox.SelectedIndex]);
-                RecordTextBox r = new RecordTextBox();
-                r.Left = 100;
-                r.Top = 20;
-                r.Text = "100";
-                pictureBox1.Controls.Add(r);
             }
-            else 
+            else
             {
                 MessageBox.Show("Template already chosen");
             }
         }
 
         /// <summary>
-        /// creates boxes from the list and adds them to the form
+        /// takes chosen components from the list and adds them to the form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void fieldboxListBox_DragLeave(object sender, EventArgs e)
+        private void fieldboxListBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-
+            bool choseLabel = false;
+    
+            switch(fieldboxListBox.SelectedIndex)
+            {
+                case 0:
+                    controltypes.Add(FieldBox.boxtypes.intBox);
+                    break;
+                case 1:
+                    controltypes.Add(FieldBox.boxtypes.stringBox);
+                    break;
+                case 2:
+                    controltypes.Add(FieldBox.boxtypes.doubBox);
+                    break;
+                default:
+                    controltypes.Add(FieldBox.boxtypes.intBox);
+                    choseLabel = true;
+                    break;
+            }
+            if (choseLabel)
+            {
+                Label l = new Label();
+                FieldboxCreationForm f = new FieldboxCreationForm();
+                f.ShowDialog();
+                f.Dispose();
+                l.Text = f.text;
+                l.Location = new Point(50, 100);
+                Graphics g = this.CreateGraphics();
+                SizeF size = g.MeasureString(l.Text, l.Font);
+                l.Size = new Size((int)size.Width+1, (int)size.Height+1);
+                l.MouseDown += new MouseEventHandler(textbox_MouseDown);
+                l.MouseMove += new MouseEventHandler(textbox_MouseMove);
+                l.MouseUp += new MouseEventHandler(textbox_MouseUp);
+                controltypes.Add(FieldBox.boxtypes.intBox);
+                pictureBox1.Controls.Add(l);
+            }
+            else 
+            {
+                TextBox textbox = new TextBox();
+                textbox.Location = new Point(100, 100);
+                textbox.ReadOnly = true;
+                textbox.MouseDown += new MouseEventHandler(textbox_MouseDown);
+                textbox.MouseMove += new MouseEventHandler(textbox_MouseMove);
+                textbox.MouseUp += new MouseEventHandler(textbox_MouseUp);
+                pictureBox1.Controls.Add(textbox); 
+            }
+           
         }
+
+
+
+
+        #region Drag Components
+
+        public void textbox_MouseDown(object sender, MouseEventArgs e)
+        {
+            activeControl = sender as Control;
+            previousLocation = e.Location;
+            Cursor = Cursors.Hand;
+        }
+
+        public void textbox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (activeControl == null || activeControl != sender)
+                return;
+            var location = activeControl.Location;
+
+            //trying to implement panel bounding, need a little bit more work
+            Point click = pictureBox1.PointToClient(Cursor.Position);
+            int x = (click.X < 0) ? 0 : (click.X > pictureBox1.Width) ? 0 : e.Location.X - previousLocation.X;
+            int y = (click.Y < 0) ? 0 : (click.Y > pictureBox1.Height) ? 0 : e.Location.Y - previousLocation.Y;
+
+            location.Offset(x, y);
+
+            activeControl.Location = location;
+        }
+
+        public void textbox_MouseUp(object sender, MouseEventArgs e)
+        {
+            activeControl = null;
+            Cursor = Cursors.Default;
+        }
+
+        #endregion
+
+
+
+
+        /// <summary>
+        /// collects all of the created data and saves the form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void createFormToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (rec == null) 
+            {
+                rec = new Record("Untitled");
+            }
+            int count = 0;
+            foreach (Control l in pictureBox1.Controls)
+            {
+                if (l is Label) 
+                {
+                    KeyValuePair<string, Point> k = new KeyValuePair<string, Point>(l.Text, l.Location);
+                    rec.labels.Add(k);
+                    
+                }
+                else if (l is TextBox) 
+                {
+                    switch(controltypes[count])
+                    {
+                        case FieldBox.boxtypes.intBox:
+                            intBox i = new intBox("null", l.Location.X, l.Location.Y, l.Width, l.Height, 0);
+                            rec.values.Add(i);
+                            break;
+                        case FieldBox.boxtypes.doubBox:
+                            doubBox d = new doubBox("null", l.Location.X, l.Location.Y, l.Width, l.Height, 0);
+                            rec.values.Add(d);
+                            break;
+                        case FieldBox.boxtypes.stringBox:
+                            stringBox s = new stringBox("null", l.Location.X, l.Location.Y, l.Width, l.Height, "null");
+                            rec.values.Add(s);
+                            break;
+                    }     
+                }
+                count++;
+                
+            }
+            //rec.FinalizeNewRecord();
+        }
+
     }
 }

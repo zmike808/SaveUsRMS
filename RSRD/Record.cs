@@ -20,7 +20,7 @@ namespace RSRD
         public string formName;
 
         //if the record is empty, used to tell if it is just a blank form or not
-        public bool empty;
+        public bool empty = true;
 
         public DateTime timeStamp { get; set; }
 
@@ -97,8 +97,6 @@ namespace RSRD
                             break;
                     }
             }
-
-            empty = false;
         }
 
         /// <summary>

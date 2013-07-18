@@ -91,7 +91,7 @@ namespace RSRD
         private void adoptButton_Click(object sender, EventArgs e)
         {
             Record test = new Record("TestRecord");
-            test.fileDirectory = "C:\\Users\\Ming\\Documents\\College\\Rcos\\RSRD\\";
+            test.fileDirectory = "C:\\Users\\Sebastian\\Documents\\Visual Studio 2010\\Projects\\RSRD\\";
             test.FormatFile = "testRecord.recf";
             test.ParseFormatFile();
             System.Console.WriteLine("values size is: " + test.values.Count);

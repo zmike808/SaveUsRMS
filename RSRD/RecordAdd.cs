@@ -43,6 +43,8 @@ namespace RSRD
         }
 
 
+
+
         /// <summary>
         /// allows for multiple records to be filled in at the same time by creating a new tab
         /// </summary>
@@ -51,14 +53,15 @@ namespace RSRD
         {
             TabPage t = new TabPage(r.formName + " " + r.timeStamp.ToShortDateString());
             t.BackColor = Color.White;
-
+            int count = 0;
             foreach (FieldBox f in r.values) 
             {
-                TextBox textbox = new TextBox();
+                RecordTextBox textbox = new RecordTextBox(r, count);
                 textbox.Top = f.y_pos;
                 textbox.Left = f.x_pos;
                 textbox.TextChanged+= new EventHandler(TextBox_Changed);
                 t.Controls.Add(textbox);
+                count++;
             }
             foreach (KeyValuePair<string, Point> k in r.labels)
             {
@@ -71,6 +74,25 @@ namespace RSRD
             tabControl1.TabPages[0].Show();
         }
 
+        /// <summary>
+        /// makes sure each textbox is filled with valid data
+        /// </summary>
+        /// <returns></returns>
+        public bool checkDataValidity()
+        {
+            foreach (Control c in tabControl1.SelectedTab.Controls) 
+            {
+                if (c is RecordTextBox) 
+                {
+                    RecordTextBox rf = c as RecordTextBox;
+                    if (rf.Text == "") { return false; }
+                    if (!rf.attachedFieldBox.isDataValid(rf.Text)) { return false; }
+                }
+            }
+            return true;
+        }
+ 
+ 
 
         /// <summary>
         /// takes the selected tab and checks if the information in it is valid, and then saves it to the database
@@ -79,13 +101,19 @@ namespace RSRD
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-
+            if (checkDataValidity())
+            {
+                MessageBox.Show("VALID DATA");
+            }
+            else 
+            {
+                MessageBox.Show("INVALID DATA");
+            }
         }
 
         private void TextBox_Changed(object sender, System.EventArgs e)
         {
-            TextBox t = (TextBox)sender;
-
+            RecordTextBox t = sender as RecordTextBox;
         }
 
         private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)

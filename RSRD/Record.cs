@@ -107,26 +107,27 @@ namespace RSRD
         /// <summary>
         /// check if all the field boxes are filled with valid data,
         /// if so, save the data into a new row of the table with the same name as the form, 
-        /// the index will be the id of the animal the data is tied to, and the record instance number
+        /// the index will be the id of the animal the data is tied to, and the record instance number, 
+        /// returns whether or not the data was able to save
         /// </summary>
         /// <param name="index">
         /// id of animal, and number of record instance
         /// </param>
-        public void saveData(string index) 
+        public bool saveData(string index) 
         {
             if (!empty) 
             {
+                //fill in savey stuff
+                return true;
             }
             else
             {
                 //no fieldboxes have been filled in
+                return false;
             }
        }
  
-         //make sure all fields are filled in and contain valid data
-         public void checkDataValidity() { }
- 
- 
+
          //when a record is created, save the format file, and create the table
        public void FinalizeNewRecord() {
          MySQLHandler msql = new MySQLHandler("localhost", "ASRD", "root", "root"); //needs to be changed later to be dynamic settings, 
@@ -142,8 +143,19 @@ namespace RSRD
            //ming will add the .recf file creation here later
         }
  
-         //loads data from database
-        void loadData(int id) { }
+        /// <summary>
+        /// loads data from the database
+        /// </summary>
+        /// <param name="id">
+        /// the id of the data row
+        /// </param>
+        void loadData(int id) 
+        {
+
+
+            //definitely not blank after this
+            empty = false;
+        }
 
         
     }

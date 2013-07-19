@@ -92,6 +92,7 @@ namespace RSRD
         {
             Record test = new Record("TestRecord");
             test.fileDirectory = "C:\\Users\\Sebastian\\Documents\\Visual Studio 2010\\Projects\\RSRD\\";
+
             test.FormatFile = "testRecord.recf";
             test.ParseFormatFile();
             System.Console.WriteLine("values size is: " + test.values.Count);

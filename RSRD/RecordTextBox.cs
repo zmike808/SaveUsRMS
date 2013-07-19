@@ -8,21 +8,23 @@ namespace RSRD
     public class RecordTextBox : System.Windows.Forms.TextBox
     {
 
-        Record attachedRecord;
-        FieldBox attachedFieldBox;
+        public Record attachedRecord;
+        public FieldBox attachedFieldBox;
 
 
 
         //the record that it is attached to, and the index it is placed in the records values list
         public RecordTextBox(Record r, int index)
         {
-            
+            attachedRecord = r;
+            attachedFieldBox = r.values[index];
         }
 
         public RecordTextBox()
         {
             
         }
+        
 
         private void InitializeComponent()
         {

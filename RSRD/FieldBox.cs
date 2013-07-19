@@ -40,6 +40,9 @@ namespace RSRD
 
         public abstract string typeToString();
 
+        //try to parse the value to the value type, return false if it cant
+        public abstract bool isDataValid(string s);
+
 
     }
 
@@ -47,10 +50,22 @@ namespace RSRD
     {
         public intBox(string _label, int _x, int _y, int _length, int _height, int i) :base(_label, _x, _y, _length, _height)
         {
+            value = new int();
             value = i;
             type = FieldBox.boxtypes.intBox;
         }
         public override string typeToString() { return "int"; }
+        public override bool isDataValid(string s)
+        {
+            int place;
+            if (int.TryParse(s, out place)) 
+            {
+                value = place;
+                return true;
+            }
+                
+            return false;
+        }
     }
 
     public class stringBox : FieldBox
@@ -61,26 +76,51 @@ namespace RSRD
             type = FieldBox.boxtypes.stringBox;
         }
         public override string typeToString() { return "string"; }
+        public override bool isDataValid(string s){return true;}
     }
 
     public class doubBox : FieldBox
     {
         public doubBox(string _label, int _x, int _y, int _length, int _height, double i) :base(_label, _x, _y, _length, _height)
         {
+            value = new double();
             value = i;
             type = boxtypes.doubBox;
         }
         public override string typeToString() { return "double"; }
+
+        public override bool isDataValid(string s)
+        {
+            double place;
+            if (double.TryParse(s, out place)) 
+            {
+                value = place;
+                return true;
+            }
+                
+            return false;
+        }
     }
 
     public class dateTimeBox : FieldBox
     {
-        public dateTimeBox(string _label, int _x, int _y, int _length, int _height, DateTime i)
-            : base(_label, _x, _y, _length, _height)
+        public dateTimeBox(string _label, int _x, int _y, int _length, int _height, DateTime i): base(_label, _x, _y, _length, _height)
         {
+            value = new DateTime();
             value = i;
             type = boxtypes.dateTimeBox;
         }
         public override string typeToString() { return "DateTime"; }
+        public override bool isDataValid(string s)
+        {
+            DateTime place;
+            if (DateTime.TryParse(s, out place))
+            {
+                value = place;
+                return true;
+            }
+
+            return false;
+        }
     }
 }

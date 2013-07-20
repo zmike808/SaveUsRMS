@@ -16,6 +16,11 @@ namespace RSRD
         //the image to show up behind the field boxes
         Bitmap image;
 
+        //id of the animal or person or whatever
+        public string entityID;
+        //the number of this type of recordt that have been made for the associated entity
+        public int iteration;
+
         //the form name, and table name should always be the same, so this variable can be referenced for either
         public string formName;
 
@@ -126,7 +131,17 @@ namespace RSRD
                 return false;
             }
        }
- 
+
+        /// <summary>
+        /// mike should fill this out
+        /// search through the table associated with this record,
+        /// count up all of the rows that have identifiers that start with the entityID
+        /// </summary>
+        public void getIteration() 
+        {
+
+        }
+
 
          //when a record is created, save the format file, and create the table
        public void FinalizeNewRecord() {

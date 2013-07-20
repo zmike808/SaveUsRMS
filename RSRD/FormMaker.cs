@@ -138,7 +138,7 @@ namespace RSRD
                 l.Location = new Point(50, 100);
                 Graphics g = this.CreateGraphics();
                 SizeF size = g.MeasureString(l.Text, l.Font);
-                l.Size = new Size((int)size.Width+1, (int)size.Height+1);
+                l.Size = new Size((int)size.Width+5, (int)size.Height+1);
                 l.MouseDown += new MouseEventHandler(textbox_MouseDown);
                 l.MouseMove += new MouseEventHandler(textbox_MouseMove);
                 l.MouseUp += new MouseEventHandler(textbox_MouseUp);
@@ -176,12 +176,21 @@ namespace RSRD
                 return;
             var location = activeControl.Location;
 
-            //trying to implement panel bounding, need a little bit more work
-            Point click = pictureBox1.PointToClient(Cursor.Position);
-            int x = (click.X < 0) ? 0 : (click.X > pictureBox1.Width) ? 0 : e.Location.X - previousLocation.X;
-            int y = (click.Y < 0) ? 0 : (click.Y > pictureBox1.Height) ? 0 : e.Location.Y - previousLocation.Y;
+            //bounds the components to the picturebox
+            int x = (location.X <= 1 && (e.Location.X - previousLocation.X) < 0) ? 0 : (location.X + activeControl.Width + 1 > pictureBox1.Width -1 && (e.Location.X - previousLocation.X) > 0) ? 0 : e.Location.X - previousLocation.X;
+            int y = (location.Y <= 1 && (e.Location.Y - previousLocation.Y) < 0) ? 0 : (location.Y + activeControl.Height + 1 > pictureBox1.Height -1 && (e.Location.Y - previousLocation.Y) > 0) ? 0 : e.Location.Y - previousLocation.Y;
 
             location.Offset(x, y);
+            if (location.X < 0) { location.X = 1; }
+            else if (location.X + activeControl.Width + 1 > pictureBox1.Width) 
+            {
+                location.X = pictureBox1.Width - activeControl.Width - 1;
+            }
+            if (location.Y < 0) { location.Y = 1; }
+            else if (location.Y + activeControl.Height + 1 > pictureBox1.Height)
+            {
+                location.Y = pictureBox1.Height - activeControl.Height - 1;
+            }
 
             activeControl.Location = location;
         }

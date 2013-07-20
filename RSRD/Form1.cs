@@ -25,6 +25,8 @@ namespace RSRD
 
         public List<Record> blankRecords = new List<Record>();
 
+        public Animal SelectedAnimal;
+
         #region hardcodedbullshit
 
         public void initializeHardcode() 
@@ -61,6 +63,7 @@ namespace RSRD
         {
             DataGridView box = (DataGridView)sender;
             Animal a =  (Animal)box.Rows[e.RowIndex].DataBoundItem;
+            SelectedAnimal = a;
             nameTextBox.Text = a.Name;
 
             sterilizedCheckBox.Checked = a.sterilized;

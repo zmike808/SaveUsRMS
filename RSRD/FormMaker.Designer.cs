@@ -31,13 +31,13 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
             this.fieldboxListBoxLabel = new System.Windows.Forms.Label();
             this.templateListBox = new System.Windows.Forms.ListBox();
             this.fieldboxListBox = new System.Windows.Forms.ListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.createFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -68,8 +68,15 @@
             // loadImageToolStripMenuItem
             // 
             this.loadImageToolStripMenuItem.Name = "loadImageToolStripMenuItem";
-            this.loadImageToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.loadImageToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.loadImageToolStripMenuItem.Text = "Load Image";
+            // 
+            // createFormToolStripMenuItem
+            // 
+            this.createFormToolStripMenuItem.Name = "createFormToolStripMenuItem";
+            this.createFormToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.createFormToolStripMenuItem.Text = "Create Form";
+            this.createFormToolStripMenuItem.Click += new System.EventHandler(this.createFormToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -88,7 +95,7 @@
             // 
             this.splitContainer1.Panel2.AllowDrop = true;
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(632, 698);
+            this.splitContainer1.Size = new System.Drawing.Size(632, 599);
             this.splitContainer1.SplitterDistance = 83;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -137,18 +144,11 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // createFormToolStripMenuItem
-            // 
-            this.createFormToolStripMenuItem.Name = "createFormToolStripMenuItem";
-            this.createFormToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.createFormToolStripMenuItem.Text = "Create Form";
-            this.createFormToolStripMenuItem.Click += new System.EventHandler(this.createFormToolStripMenuItem_Click);
-            // 
             // FormMaker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 722);
+            this.ClientSize = new System.Drawing.Size(632, 623);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

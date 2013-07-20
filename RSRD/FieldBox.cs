@@ -5,7 +5,9 @@ using System.Text;
 
 namespace RSRD
 {
-
+    /// <summary>
+    /// When implementing a subclass, be sure to add the type to the boxtypes enumeration
+    /// </summary>
     public abstract class FieldBox 
     {
 
@@ -17,7 +19,6 @@ namespace RSRD
             dateTimeBox
         }
 
-        public string label;
         public dynamic value { get; set; }
         public boxtypes type;
 
@@ -34,8 +35,6 @@ namespace RSRD
 
             length = _length;
             height = _height;
-
-            label = _label;
         }
 
         public abstract string typeToString();

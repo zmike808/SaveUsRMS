@@ -13,11 +13,12 @@ namespace RSRD
     {
 
         List<Record> blanks;
-
+        Form1 caller;
         public RecordAdd(Form1 f)
         {
             InitializeComponent();
             blanks = f.blankRecords;
+            caller = f;
             foreach (Record r in f.blankRecords)
             {
                 toolStripComboBox1.Items.Add(r.formName);
@@ -76,23 +77,32 @@ namespace RSRD
 
         /// <summary>
         /// makes sure each textbox is filled with valid data
+        /// if not, changes textbox color to red
         /// </summary>
         /// <returns></returns>
         public bool checkDataValidity()
         {
+            bool b = true;
             foreach (Control c in tabControl1.SelectedTab.Controls) 
             {
                 if (c is RecordTextBox) 
                 {
                     RecordTextBox rf = c as RecordTextBox;
-                    if (rf.Text == "") { return false; }
-                    if (!rf.attachedFieldBox.isDataValid(rf.Text)) { return false; }
+                    if (rf.Text == "") 
+                    {
+                        rf.BackColor = Color.Red;
+                        b = false; 
+                    }
+                    else if (!rf.attachedFieldBox.isDataValid(rf.Text))
+                    {
+                        rf.BackColor = Color.Red;
+                        b = false;
+                    }
+                    else{rf.BackColor = Color.White;} 
                 }
             }
-            return true;
+            return b;
         }
- 
- 
 
         /// <summary>
         /// takes the selected tab and checks if the information in it is valid, and then saves it to the database
@@ -104,6 +114,10 @@ namespace RSRD
             if (checkDataValidity())
             {
                 MessageBox.Show("VALID DATA");
+                RecordTab save = tabControl1.SelectedTab as RecordTab;
+              /*find the iteration of this record for the animal, put it after the + sign
+               *save.rec.saveData(caller.SelectedAnimal.ID + );
+               */
             }
             else 
             {

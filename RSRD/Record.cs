@@ -78,11 +78,37 @@ namespace RSRD
 
         //parses the format file, creating fieldBoxes and filling in data
         public void ParseFormatFile() {
-            //opens a StreamReader for the file to be parsed
+            values = new List<FieldBox>();
             string location = fileDirectory + FormatFile;
             StreamReader reader = new FileInfo(location).OpenText();
             formName = reader.ReadLine();
-            reader.ReadLine(); //for now, can't read "image"
+            reader.ReadLine();
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                string[] words = line.Split(',');
+                if (words[0] == "fieldBox")
+                {
+                    switch (words[1])
+                    {
+                        case "int":
+                            values.Add(new intBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), 0));
+                            break;
+                        case "string":
+                            values.Add(new stringBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), null));
+                            break;
+                        case "double":
+                            values.Add(new doubBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), 0.0));
+                            break;
+                        case "DateTime":
+                            values.Add(new dateTimeBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), DateTime.Now));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
 
             string line;
             while ((line = reader.ReadLine()) != null)

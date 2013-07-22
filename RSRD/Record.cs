@@ -92,33 +92,6 @@ namespace RSRD
                     switch (words[1])
                     {
                         case "int":
-                            values.Add(new intBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), 0));
-                            break;
-                        case "string":
-                            values.Add(new stringBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), null));
-                            break;
-                        case "double":
-                            values.Add(new doubBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), 0.0));
-                            break;
-                        case "DateTime":
-                            values.Add(new dateTimeBox(words[4], Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[5]), Convert.ToInt32(words[6]), DateTime.Now));
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        }
-
-            string line;
-            while ((line = reader.ReadLine()) != null)
-            {
-                string[] words = line.Split(',');
-                if (words[0] == "fieldBox")
-                { // We know it's a fieldbox
-                    switch (words[1])
-                    { // But what type?
-                        case "int":
                             values.Add(new intBox(Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[4]), Convert.ToInt32(words[5]), 0));
                             break;
                         case "string":

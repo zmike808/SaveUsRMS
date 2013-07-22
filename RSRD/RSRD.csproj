@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -47,6 +48,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animal.cs" />
+    <Compile Include="FieldboxCreationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FieldboxCreationForm.Designer.cs">
+      <DependentUpon>FieldboxCreationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMaker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMaker.Designer.cs">
+      <DependentUpon>FormMaker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecordTab.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FieldBox.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -55,7 +72,16 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Database\MySQL.cs" />
+    <Compile Include="RecordAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecordAdd.Designer.cs">
+      <DependentUpon>RecordAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Record.cs" />
+    <Compile Include="RecordTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RecordViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,8 +90,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FieldboxCreationForm.resx">
+      <DependentUpon>FieldboxCreationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMaker.resx">
+      <DependentUpon>FormMaker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecordAdd.resx">
+      <DependentUpon>RecordAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecordTextBox.resx">
+      <DependentUpon>RecordTextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RecordViewer.resx">
       <DependentUpon>RecordViewer.cs</DependentUpon>
@@ -90,6 +128,10 @@
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

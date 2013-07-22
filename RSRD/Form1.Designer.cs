@@ -31,67 +31,76 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ownerSearchTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.statusChecklistbox = new System.Windows.Forms.CheckedListBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.breedComboBox = new System.Windows.Forms.ComboBox();
+            this.speciesComboBox = new System.Windows.Forms.ComboBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.textBox5 = new System.Windows.Forms.TextBox();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.vaccCheckBox = new System.Windows.Forms.CheckBox();
+            this.sterilizedCheckBox = new System.Windows.Forms.CheckBox();
+            this.dobEstimateCheckBox = new System.Windows.Forms.CheckBox();
+            this.crossbreedCheckBox = new System.Windows.Forms.CheckBox();
+            this.sizeLabel = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.colorLabel = new System.Windows.Forms.Label();
+            this.sexLabel = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.locationLabel = new System.Windows.Forms.Label();
+            this.dobTextBox = new System.Windows.Forms.TextBox();
+            this.dobLabel = new System.Windows.Forms.Label();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.idLabel = new System.Windows.Forms.Label();
+            this.idTextBox = new System.Windows.Forms.TextBox();
+            this.moveAnimalButton = new System.Windows.Forms.Button();
+            this.adoptButton = new System.Windows.Forms.Button();
+            this.addRecordButton = new System.Windows.Forms.Button();
+            this.viewRecordButton = new System.Windows.Forms.Button();
+            this.animalMainPictureBox = new System.Windows.Forms.PictureBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sexTestBox = new System.Windows.Forms.TextBox();
+            this.ColorTextBox = new System.Windows.Forms.TextBox();
+            this.sizeTextBox = new System.Windows.Forms.TextBox();
+            this.locationTextBox = new System.Windows.Forms.TextBox();
+            this.breedTextBox = new System.Windows.Forms.TextBox();
+            this.crossBreedTextBox = new System.Windows.Forms.TextBox();
+            this.ownerTextBox = new System.Windows.Forms.TextBox();
+            this.coatTextBox = new System.Windows.Forms.TextBox();
+            this.litterTextBox = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl2.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.animalMainPictureBox)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(0, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -108,7 +117,7 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Animal";
             this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            this.tabPage2.Enter += new System.EventHandler(this.tabPage2_Enter);
             // 
             // splitContainer1
             // 
@@ -118,54 +127,76 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.dataGridView1);
+            this.splitContainer1.Panel1.Controls.Add(this.ownerSearchTextBox);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.checkedListBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.listBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.statusChecklistbox);
             this.splitContainer1.Panel1.Controls.Add(this.radioButton2);
             this.splitContainer1.Panel1.Controls.Add(this.radioButton1);
-            this.splitContainer1.Panel1.Controls.Add(this.comboBox2);
-            this.splitContainer1.Panel1.Controls.Add(this.comboBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.breedComboBox);
+            this.splitContainer1.Panel1.Controls.Add(this.speciesComboBox);
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.litterTextBox);
+            this.splitContainer1.Panel2.Controls.Add(this.coatTextBox);
+            this.splitContainer1.Panel2.Controls.Add(this.ownerTextBox);
+            this.splitContainer1.Panel2.Controls.Add(this.crossBreedTextBox);
+            this.splitContainer1.Panel2.Controls.Add(this.breedTextBox);
+            this.splitContainer1.Panel2.Controls.Add(this.locationTextBox);
+            this.splitContainer1.Panel2.Controls.Add(this.sizeTextBox);
+            this.splitContainer1.Panel2.Controls.Add(this.ColorTextBox);
+            this.splitContainer1.Panel2.Controls.Add(this.sexTestBox);
             this.splitContainer1.Panel2.Controls.Add(this.tabControl2);
-            this.splitContainer1.Panel2.Controls.Add(this.checkBox4);
-            this.splitContainer1.Panel2.Controls.Add(this.checkBox3);
-            this.splitContainer1.Panel2.Controls.Add(this.checkBox2);
-            this.splitContainer1.Panel2.Controls.Add(this.checkBox1);
-            this.splitContainer1.Panel2.Controls.Add(this.label14);
+            this.splitContainer1.Panel2.Controls.Add(this.vaccCheckBox);
+            this.splitContainer1.Panel2.Controls.Add(this.sterilizedCheckBox);
+            this.splitContainer1.Panel2.Controls.Add(this.dobEstimateCheckBox);
+            this.splitContainer1.Panel2.Controls.Add(this.crossbreedCheckBox);
+            this.splitContainer1.Panel2.Controls.Add(this.sizeLabel);
             this.splitContainer1.Panel2.Controls.Add(this.label13);
-            this.splitContainer1.Panel2.Controls.Add(this.label12);
-            this.splitContainer1.Panel2.Controls.Add(this.label11);
+            this.splitContainer1.Panel2.Controls.Add(this.colorLabel);
+            this.splitContainer1.Panel2.Controls.Add(this.sexLabel);
             this.splitContainer1.Panel2.Controls.Add(this.label9);
             this.splitContainer1.Panel2.Controls.Add(this.label8);
             this.splitContainer1.Panel2.Controls.Add(this.label7);
-            this.splitContainer1.Panel2.Controls.Add(this.label5);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox4);
-            this.splitContainer1.Panel2.Controls.Add(this.label4);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox3);
-            this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Panel2.Controls.Add(this.label2);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox2);
-            this.splitContainer1.Panel2.Controls.Add(this.button4);
-            this.splitContainer1.Panel2.Controls.Add(this.button3);
-            this.splitContainer1.Panel2.Controls.Add(this.button2);
-            this.splitContainer1.Panel2.Controls.Add(this.button1);
-            this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
+            this.splitContainer1.Panel2.Controls.Add(this.locationLabel);
+            this.splitContainer1.Panel2.Controls.Add(this.dobTextBox);
+            this.splitContainer1.Panel2.Controls.Add(this.dobLabel);
+            this.splitContainer1.Panel2.Controls.Add(this.nameTextBox);
+            this.splitContainer1.Panel2.Controls.Add(this.nameLabel);
+            this.splitContainer1.Panel2.Controls.Add(this.idLabel);
+            this.splitContainer1.Panel2.Controls.Add(this.idTextBox);
+            this.splitContainer1.Panel2.Controls.Add(this.moveAnimalButton);
+            this.splitContainer1.Panel2.Controls.Add(this.adoptButton);
+            this.splitContainer1.Panel2.Controls.Add(this.addRecordButton);
+            this.splitContainer1.Panel2.Controls.Add(this.viewRecordButton);
+            this.splitContainer1.Panel2.Controls.Add(this.animalMainPictureBox);
             this.splitContainer1.Panel2.ForeColor = System.Drawing.Color.Black;
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(973, 431);
             this.splitContainer1.SplitterDistance = 239;
             this.splitContainer1.TabIndex = 0;
             // 
-            // textBox1
+            // dataGridView1
             // 
-            this.textBox1.Location = new System.Drawing.Point(136, 52);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 7;
-            this.textBox1.Text = "Owner";
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(5, 156);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(231, 267);
+            this.dataGridView1.TabIndex = 29;
+            this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.loadSelected);
+            // 
+            // ownerSearchTextBox
+            // 
+            this.ownerSearchTextBox.Location = new System.Drawing.Point(136, 52);
+            this.ownerSearchTextBox.Name = "ownerSearchTextBox";
+            this.ownerSearchTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ownerSearchTextBox.TabIndex = 7;
+            this.ownerSearchTextBox.Text = "Owner";
             // 
             // label1
             // 
@@ -176,27 +207,19 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Status";
             // 
-            // checkedListBox1
+            // statusChecklistbox
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
+            this.statusChecklistbox.FormattingEnabled = true;
+            this.statusChecklistbox.Items.AddRange(new object[] {
             "Lost",
             "Found",
             "Surrendered",
             "Adopted",
             "Fostered"});
-            this.checkedListBox1.Location = new System.Drawing.Point(9, 71);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(120, 79);
-            this.checkedListBox1.TabIndex = 5;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(5, 151);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(231, 277);
-            this.listBox1.TabIndex = 4;
+            this.statusChecklistbox.Location = new System.Drawing.Point(9, 71);
+            this.statusChecklistbox.Name = "statusChecklistbox";
+            this.statusChecklistbox.Size = new System.Drawing.Size(120, 79);
+            this.statusChecklistbox.TabIndex = 5;
             // 
             // radioButton2
             // 
@@ -220,23 +243,23 @@
             this.radioButton1.Text = "Male";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // breedComboBox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(5, 31);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 1;
-            this.comboBox2.Text = "Breed";
+            this.breedComboBox.FormattingEnabled = true;
+            this.breedComboBox.Location = new System.Drawing.Point(5, 31);
+            this.breedComboBox.Name = "breedComboBox";
+            this.breedComboBox.Size = new System.Drawing.Size(121, 21);
+            this.breedComboBox.TabIndex = 1;
+            this.breedComboBox.Text = "Breed";
             // 
-            // comboBox1
+            // speciesComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(5, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 0;
-            this.comboBox1.Text = "Species";
+            this.speciesComboBox.FormattingEnabled = true;
+            this.speciesComboBox.Location = new System.Drawing.Point(5, 3);
+            this.speciesComboBox.Name = "speciesComboBox";
+            this.speciesComboBox.Size = new System.Drawing.Size(121, 21);
+            this.speciesComboBox.TabIndex = 0;
+            this.speciesComboBox.Text = "Species";
             // 
             // tabControl2
             // 
@@ -268,6 +291,15 @@
             this.textBox5.Size = new System.Drawing.Size(320, 82);
             this.textBox5.TabIndex = 26;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 18);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(92, 13);
+            this.label6.TabIndex = 27;
+            this.label6.Text = "Notes/ Comments";
+            // 
             // tabPage6
             // 
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
@@ -278,100 +310,89 @@
             this.tabPage6.Text = "Health";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // vaccCheckBox
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 18);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(92, 13);
-            this.label6.TabIndex = 27;
-            this.label6.Text = "Notes/ Comments";
+            this.vaccCheckBox.AutoSize = true;
+            this.vaccCheckBox.Location = new System.Drawing.Point(144, 28);
+            this.vaccCheckBox.Name = "vaccCheckBox";
+            this.vaccCheckBox.Size = new System.Drawing.Size(80, 17);
+            this.vaccCheckBox.TabIndex = 25;
+            this.vaccCheckBox.Text = "Vaccinated";
+            this.vaccCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // sterilizedCheckBox
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Enabled = false;
-            this.checkBox4.Location = new System.Drawing.Point(144, 28);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(80, 17);
-            this.checkBox4.TabIndex = 25;
-            this.checkBox4.Text = "Vaccinated";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.sterilizedCheckBox.AutoSize = true;
+            this.sterilizedCheckBox.Location = new System.Drawing.Point(144, 7);
+            this.sterilizedCheckBox.Name = "sterilizedCheckBox";
+            this.sterilizedCheckBox.Size = new System.Drawing.Size(68, 17);
+            this.sterilizedCheckBox.TabIndex = 24;
+            this.sterilizedCheckBox.Text = "Sterilized";
+            this.sterilizedCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // dobEstimateCheckBox
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Enabled = false;
-            this.checkBox3.Location = new System.Drawing.Point(144, 7);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(68, 17);
-            this.checkBox3.TabIndex = 24;
-            this.checkBox3.Text = "Sterilized";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.dobEstimateCheckBox.AutoSize = true;
+            this.dobEstimateCheckBox.Enabled = false;
+            this.dobEstimateCheckBox.Location = new System.Drawing.Point(144, 190);
+            this.dobEstimateCheckBox.Name = "dobEstimateCheckBox";
+            this.dobEstimateCheckBox.Size = new System.Drawing.Size(66, 17);
+            this.dobEstimateCheckBox.TabIndex = 23;
+            this.dobEstimateCheckBox.Text = "Estimate";
+            this.dobEstimateCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // crossbreedCheckBox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Enabled = false;
-            this.checkBox2.Location = new System.Drawing.Point(121, 189);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(66, 17);
-            this.checkBox2.TabIndex = 23;
-            this.checkBox2.Text = "Estimate";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.crossbreedCheckBox.AutoSize = true;
+            this.crossbreedCheckBox.Enabled = false;
+            this.crossbreedCheckBox.Location = new System.Drawing.Point(189, 268);
+            this.crossbreedCheckBox.Name = "crossbreedCheckBox";
+            this.crossbreedCheckBox.Size = new System.Drawing.Size(52, 17);
+            this.crossbreedCheckBox.TabIndex = 22;
+            this.crossbreedCheckBox.Text = "Cross";
+            this.crossbreedCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // sizeLabel
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Enabled = false;
-            this.checkBox1.Location = new System.Drawing.Point(273, 162);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(79, 17);
-            this.checkBox1.TabIndex = 22;
-            this.checkBox1.Text = "Crossbreed";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(140, 113);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(27, 13);
-            this.label14.TabIndex = 20;
-            this.label14.Text = "Size";
+            this.sizeLabel.AutoSize = true;
+            this.sizeLabel.Location = new System.Drawing.Point(144, 101);
+            this.sizeLabel.Name = "sizeLabel";
+            this.sizeLabel.Size = new System.Drawing.Size(27, 13);
+            this.sizeLabel.TabIndex = 20;
+            this.sizeLabel.Text = "Size";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(140, 84);
+            this.label13.Location = new System.Drawing.Point(17, 295);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(56, 13);
             this.label13.TabIndex = 19;
             this.label13.Text = "Coat Type";
             // 
-            // label12
+            // colorLabel
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(140, 65);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(31, 13);
-            this.label12.TabIndex = 18;
-            this.label12.Text = "Color";
+            this.colorLabel.AutoSize = true;
+            this.colorLabel.Location = new System.Drawing.Point(141, 74);
+            this.colorLabel.Name = "colorLabel";
+            this.colorLabel.Size = new System.Drawing.Size(31, 13);
+            this.colorLabel.TabIndex = 18;
+            this.colorLabel.Text = "Color";
             // 
-            // label11
+            // sexLabel
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(141, 48);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(25, 13);
-            this.label11.TabIndex = 17;
-            this.label11.Text = "Sex";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
+            this.sexLabel.AutoSize = true;
+            this.sexLabel.Location = new System.Drawing.Point(141, 51);
+            this.sexLabel.Name = "sexLabel";
+            this.sexLabel.Size = new System.Drawing.Size(25, 13);
+            this.sexLabel.TabIndex = 17;
+            this.sexLabel.Text = "Sex";
+            this.sexLabel.Click += new System.EventHandler(this.label11_Click);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(17, 243);
+            this.label9.Location = new System.Drawing.Point(17, 242);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(38, 13);
             this.label9.TabIndex = 15;
@@ -380,7 +401,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(291, 144);
+            this.label8.Location = new System.Drawing.Point(20, 269);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(35, 13);
             this.label8.TabIndex = 14;
@@ -390,123 +411,125 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(296, 189);
+            this.label7.Location = new System.Drawing.Point(17, 321);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(30, 13);
             this.label7.TabIndex = 13;
             this.label7.Text = "Litter";
             // 
-            // label5
+            // locationLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 219);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Location";
+            this.locationLabel.AutoSize = true;
+            this.locationLabel.Location = new System.Drawing.Point(17, 216);
+            this.locationLabel.Name = "locationLabel";
+            this.locationLabel.Size = new System.Drawing.Size(48, 13);
+            this.locationLabel.TabIndex = 11;
+            this.locationLabel.Text = "Location";
             // 
-            // textBox4
+            // dobTextBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(62, 186);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(52, 20);
-            this.textBox4.TabIndex = 10;
+            this.dobTextBox.Location = new System.Drawing.Point(83, 188);
+            this.dobTextBox.Name = "dobTextBox";
+            this.dobTextBox.ReadOnly = true;
+            this.dobTextBox.Size = new System.Drawing.Size(52, 20);
+            this.dobTextBox.TabIndex = 10;
             // 
-            // label4
+            // dobLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 189);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(30, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "DOB";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.dobLabel.AutoSize = true;
+            this.dobLabel.Location = new System.Drawing.Point(17, 191);
+            this.dobLabel.Name = "dobLabel";
+            this.dobLabel.Size = new System.Drawing.Size(30, 13);
+            this.dobLabel.TabIndex = 9;
+            this.dobLabel.Text = "DOB";
+            this.dobLabel.Click += new System.EventHandler(this.label4_Click);
             // 
-            // textBox3
+            // nameTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(62, 137);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(185, 20);
-            this.textBox3.TabIndex = 8;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.nameTextBox.Location = new System.Drawing.Point(83, 137);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.ReadOnly = true;
+            this.nameTextBox.Size = new System.Drawing.Size(185, 20);
+            this.nameTextBox.TabIndex = 8;
+            this.nameTextBox.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
-            // label3
+            // nameLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 137);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Name";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(17, 140);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(35, 13);
+            this.nameLabel.TabIndex = 7;
+            this.nameLabel.Text = "Name";
+            this.nameLabel.Click += new System.EventHandler(this.label3_Click);
             // 
-            // label2
+            // idLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 166);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(18, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "ID";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.idLabel.AutoSize = true;
+            this.idLabel.Location = new System.Drawing.Point(17, 166);
+            this.idLabel.Name = "idLabel";
+            this.idLabel.Size = new System.Drawing.Size(18, 13);
+            this.idLabel.TabIndex = 6;
+            this.idLabel.Text = "ID";
+            this.idLabel.Click += new System.EventHandler(this.label2_Click);
             // 
-            // textBox2
+            // idTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(62, 163);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(185, 20);
-            this.textBox2.TabIndex = 5;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.idTextBox.Location = new System.Drawing.Point(83, 163);
+            this.idTextBox.Name = "idTextBox";
+            this.idTextBox.ReadOnly = true;
+            this.idTextBox.Size = new System.Drawing.Size(185, 20);
+            this.idTextBox.TabIndex = 5;
+            this.idTextBox.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // button4
+            // moveAnimalButton
             // 
-            this.button4.Location = new System.Drawing.Point(299, 404);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Move";
-            this.button4.UseVisualStyleBackColor = true;
+            this.moveAnimalButton.Location = new System.Drawing.Point(277, 404);
+            this.moveAnimalButton.Name = "moveAnimalButton";
+            this.moveAnimalButton.Size = new System.Drawing.Size(75, 23);
+            this.moveAnimalButton.TabIndex = 4;
+            this.moveAnimalButton.Text = "Move";
+            this.moveAnimalButton.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // adoptButton
             // 
-            this.button3.Location = new System.Drawing.Point(203, 404);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Adopt";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.adoptButton.Location = new System.Drawing.Point(193, 405);
+            this.adoptButton.Name = "adoptButton";
+            this.adoptButton.Size = new System.Drawing.Size(75, 23);
+            this.adoptButton.TabIndex = 3;
+            this.adoptButton.Text = "Adopt";
+            this.adoptButton.UseVisualStyleBackColor = true;
+            this.adoptButton.Click += new System.EventHandler(this.adoptButton_Click);
             // 
-            // button2
+            // addRecordButton
             // 
-            this.button2.Location = new System.Drawing.Point(112, 404);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Add Record";
-            this.button2.UseVisualStyleBackColor = true;
+            this.addRecordButton.Location = new System.Drawing.Point(112, 404);
+            this.addRecordButton.Name = "addRecordButton";
+            this.addRecordButton.Size = new System.Drawing.Size(75, 23);
+            this.addRecordButton.TabIndex = 2;
+            this.addRecordButton.Text = "Add Record";
+            this.addRecordButton.UseVisualStyleBackColor = true;
+            this.addRecordButton.Click += new System.EventHandler(this.addRecordButton_Click);
             // 
-            // button1
+            // viewRecordButton
             // 
-            this.button1.Location = new System.Drawing.Point(20, 404);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "View Records";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.viewRecordButton.Location = new System.Drawing.Point(20, 404);
+            this.viewRecordButton.Name = "viewRecordButton";
+            this.viewRecordButton.Size = new System.Drawing.Size(86, 23);
+            this.viewRecordButton.TabIndex = 1;
+            this.viewRecordButton.Text = "View Records";
+            this.viewRecordButton.UseVisualStyleBackColor = true;
+            this.viewRecordButton.Click += new System.EventHandler(this.viewRecordButton_Click);
             // 
-            // pictureBox1
+            // animalMainPictureBox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(135, 123);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.animalMainPictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.animalMainPictureBox.Location = new System.Drawing.Point(3, 3);
+            this.animalMainPictureBox.Name = "animalMainPictureBox";
+            this.animalMainPictureBox.Size = new System.Drawing.Size(135, 123);
+            this.animalMainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.animalMainPictureBox.TabIndex = 0;
+            this.animalMainPictureBox.TabStop = false;
             // 
             // tabPage1
             // 
@@ -517,34 +540,6 @@
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Services";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(979, 437);
-            this.tabPage3.TabIndex = 3;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(979, 437);
-            this.tabPage4.TabIndex = 4;
-            this.tabPage4.Text = "tabPage4";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(999, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // statusStrip1
             // 
@@ -568,16 +563,114 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(109, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(999, 24);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newFormToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // newFormToolStripMenuItem
+            // 
+            this.newFormToolStripMenuItem.Name = "newFormToolStripMenuItem";
+            this.newFormToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.newFormToolStripMenuItem.Text = "New Form";
+            this.newFormToolStripMenuItem.Click += new System.EventHandler(this.newFormToolStripMenuItem_Click);
+            // 
+            // sexTestBox
+            // 
+            this.sexTestBox.Location = new System.Drawing.Point(226, 48);
+            this.sexTestBox.Name = "sexTestBox";
+            this.sexTestBox.ReadOnly = true;
+            this.sexTestBox.Size = new System.Drawing.Size(100, 20);
+            this.sexTestBox.TabIndex = 29;
+            // 
+            // ColorTextBox
+            // 
+            this.ColorTextBox.Location = new System.Drawing.Point(226, 71);
+            this.ColorTextBox.Name = "ColorTextBox";
+            this.ColorTextBox.ReadOnly = true;
+            this.ColorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ColorTextBox.TabIndex = 30;
+            // 
+            // sizeTextBox
+            // 
+            this.sizeTextBox.Location = new System.Drawing.Point(226, 98);
+            this.sizeTextBox.Name = "sizeTextBox";
+            this.sizeTextBox.ReadOnly = true;
+            this.sizeTextBox.Size = new System.Drawing.Size(100, 20);
+            this.sizeTextBox.TabIndex = 31;
+            // 
+            // locationTextBox
+            // 
+            this.locationTextBox.Location = new System.Drawing.Point(83, 213);
+            this.locationTextBox.Name = "locationTextBox";
+            this.locationTextBox.ReadOnly = true;
+            this.locationTextBox.Size = new System.Drawing.Size(100, 20);
+            this.locationTextBox.TabIndex = 32;
+            // 
+            // breedTextBox
+            // 
+            this.breedTextBox.Location = new System.Drawing.Point(83, 265);
+            this.breedTextBox.Name = "breedTextBox";
+            this.breedTextBox.ReadOnly = true;
+            this.breedTextBox.Size = new System.Drawing.Size(100, 20);
+            this.breedTextBox.TabIndex = 33;
+            // 
+            // crossBreedTextBox
+            // 
+            this.crossBreedTextBox.Location = new System.Drawing.Point(247, 268);
+            this.crossBreedTextBox.Name = "crossBreedTextBox";
+            this.crossBreedTextBox.ReadOnly = true;
+            this.crossBreedTextBox.Size = new System.Drawing.Size(100, 20);
+            this.crossBreedTextBox.TabIndex = 34;
+            // 
+            // ownerTextBox
+            // 
+            this.ownerTextBox.Location = new System.Drawing.Point(83, 239);
+            this.ownerTextBox.Name = "ownerTextBox";
+            this.ownerTextBox.ReadOnly = true;
+            this.ownerTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ownerTextBox.TabIndex = 35;
+            // 
+            // coatTextBox
+            // 
+            this.coatTextBox.Location = new System.Drawing.Point(83, 292);
+            this.coatTextBox.Name = "coatTextBox";
+            this.coatTextBox.ReadOnly = true;
+            this.coatTextBox.Size = new System.Drawing.Size(100, 20);
+            this.coatTextBox.TabIndex = 36;
+            // 
+            // litterTextBox
+            // 
+            this.litterTextBox.Location = new System.Drawing.Point(83, 318);
+            this.litterTextBox.Name = "litterTextBox";
+            this.litterTextBox.ReadOnly = true;
+            this.litterTextBox.Size = new System.Drawing.Size(100, 20);
+            this.litterTextBox.TabIndex = 37;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(999, 516);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabControl1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "ASRS";
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -586,12 +679,15 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabControl2.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.animalMainPictureBox)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -602,49 +698,58 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox ownerSearchTextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.CheckedListBox statusChecklistbox;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox breedComboBox;
+        private System.Windows.Forms.ComboBox speciesComboBox;
+        private System.Windows.Forms.PictureBox animalMainPictureBox;
+        private System.Windows.Forms.Button adoptButton;
+        private System.Windows.Forms.Button addRecordButton;
+        private System.Windows.Forms.Button viewRecordButton;
+        private System.Windows.Forms.Button moveAnimalButton;
+        private System.Windows.Forms.Label idLabel;
+        private System.Windows.Forms.TextBox idTextBox;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.TextBox nameTextBox;
+        private System.Windows.Forms.Label locationLabel;
+        private System.Windows.Forms.TextBox dobTextBox;
+        private System.Windows.Forms.Label dobLabel;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox crossbreedCheckBox;
+        private System.Windows.Forms.Label sizeLabel;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Label colorLabel;
+        private System.Windows.Forms.Label sexLabel;
+        private System.Windows.Forms.CheckBox vaccCheckBox;
+        private System.Windows.Forms.CheckBox sterilizedCheckBox;
+        private System.Windows.Forms.CheckBox dobEstimateCheckBox;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newFormToolStripMenuItem;
+        private System.Windows.Forms.TextBox locationTextBox;
+        private System.Windows.Forms.TextBox sizeTextBox;
+        private System.Windows.Forms.TextBox ColorTextBox;
+        private System.Windows.Forms.TextBox sexTestBox;
+        private System.Windows.Forms.TextBox litterTextBox;
+        private System.Windows.Forms.TextBox coatTextBox;
+        private System.Windows.Forms.TextBox ownerTextBox;
+        private System.Windows.Forms.TextBox crossBreedTextBox;
+        private System.Windows.Forms.TextBox breedTextBox;
     }
 }
 

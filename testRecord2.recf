@@ -1,0 +1,10 @@
+testRecord2
+Image
+fieldBox,int,200,200,20,20
+fieldBox,string,200,250,20,20
+fieldBox,DateTime,200,300,20,20
+fieldBox,double,200,350,20,20
+label,age,175,200
+label,name,175,250
+label,DOB,175,300
+label,weight,175,350

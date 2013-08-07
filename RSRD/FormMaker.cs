@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -169,7 +169,6 @@ namespace RSRD
             previousLocation = e.Location;
             Cursor = Cursors.Hand;
         }
-
         public void textbox_MouseMove(object sender, MouseEventArgs e)
         {
             if (activeControl == null || activeControl != sender)
@@ -177,9 +176,14 @@ namespace RSRD
             var location = activeControl.Location;
 
             //bounds the components to the picturebox
-            int x = (location.X <= 1 && (e.Location.X - previousLocation.X) < 0) ? 0 : (location.X + activeControl.Width + 1 > pictureBox1.Width -1 && (e.Location.X - previousLocation.X) > 0) ? 0 : e.Location.X - previousLocation.X;
-            int y = (location.Y <= 1 && (e.Location.Y - previousLocation.Y) < 0) ? 0 : (location.Y + activeControl.Height + 1 > pictureBox1.Height -1 && (e.Location.Y - previousLocation.Y) > 0) ? 0 : e.Location.Y - previousLocation.Y;
+            int x = (location.X <= 1 && (e.Location.X - previousLocation.X) < 0)
+                ? 0 : (location.X + activeControl.Width + 1 > pictureBox1.Width -1
+                && (e.Location.X - previousLocation.X) > 0) ? 0 : e.Location.X - previousLocation.X;
+            int y = (location.Y <= 1 && (e.Location.Y - previousLocation.Y) < 0)
+                ? 0 : (location.Y + activeControl.Height + 1 > pictureBox1.Height -1
+                && (e.Location.Y - previousLocation.Y) > 0) ? 0 : e.Location.Y - previousLocation.Y;
 
+            //checks if move is out of boundaries
             location.Offset(x, y);
             if (location.X < 0) { location.X = 1; }
             else if (location.X + activeControl.Width + 1 > pictureBox1.Width) 
@@ -190,6 +194,60 @@ namespace RSRD
             else if (location.Y + activeControl.Height + 1 > pictureBox1.Height)
             {
                 location.Y = pictureBox1.Height - activeControl.Height - 1;
+            }
+
+            int dy = e.Location.Y - previousLocation.Y;
+            int dx = e.Location.X - previousLocation.X;
+            
+            //checks for box collisions
+            foreach (Control c in pictureBox1.Controls)
+            {
+                if (c == activeControl)
+                    continue;
+
+
+
+                if (activeControl.Bounds.IntersectsWith(c.Bounds))
+                {
+                    #region mings code
+
+                    //bool rc = location.X + activeControl.Width + 1 >= c.Location.X;
+                    //bool lc = location.X <= c.Location.X + c.Width + 1;
+                    //bool bc = location.Y + activeControl.Height + 1 >= c.Location.Y;
+                    //bool tc = location.Y <= c.Location.Y + c.Height + 1;
+
+                    //bool up = (Math.Abs(dx) < Math.Abs(dy));
+
+                    //bool vc = (location.Y + activeControl.Height + 1 >= c.Location.Y &&
+                    //    location.Y + activeControl.Height <= c.Location.Y + c.Height + 1)
+                    //    || (location.Y >= c.Location.Y && location.Y <= c.Location.Y + c.Height);
+                    //bool hc = (location.X + activeControl.Width + 1 >= c.Location.X &&
+                    //    location.X + activeControl.Width + 1 <= c.Location.X + c.Width + 1)
+                    //    || (location.X <= c.Location.X + c.Width + 1 && location.X <= c.Location.X);
+
+                    //if (dx > 0 && rc && (vc))
+                    //{
+                    //    location.X = c.Location.X - activeControl.Width - 1;
+                    //    continue;
+                    //}
+                    //else if (dx < 0 && lc && (vc))
+                    //{
+                    //    location.X = c.Location.X + activeControl.Width + 1;
+                    //    continue;
+                    //}
+                    //if (dy > 0 && bc && (hc))
+                    //{
+                    //    location.Y = c.Location.Y - activeControl.Height - 1;
+                    //    continue;
+                    //}
+                    //else if (dy < 0 && tc && (hc))
+                    //{
+                    //    location.Y = c.Location.Y + activeControl.Height + 1;
+                    //    continue;
+                    //}
+
+                    #endregion
+                }
             }
 
             activeControl.Location = location;
@@ -267,6 +325,7 @@ namespace RSRD
                 Console.WriteLine(f.typeToString());
             }
             rec.FinalizeNewRecord();
+            caller.initializeRecords();
         }
 
     }

@@ -7,6 +7,7 @@ namespace RSRD
 {
     public class Animal
     {
+        //variables that are public properties will automagically be picked up by the datagridview
 
         public enum Species 
         {
@@ -42,6 +43,8 @@ namespace RSRD
 
         private string _name;
 
+        public int ID{get; set;}
+
         public string Name
         {
             get { return _name; }
@@ -50,21 +53,27 @@ namespace RSRD
 
         private Species _species;
 
+        [System.ComponentModel.DisplayName("Species")]
         public Species species
         {
             get { return _species; }
             set { _species = value; }
         }
 
-        public int ID;
-
         public string color;
 
         public Size size;
 
-        public DateTime dob;
+        [System.ComponentModel.DisplayName("DOB")]
+        public DateTime dob { get; set; }
 
         public bool dobEstimate;
+
+        public string Address;
+
+        public string breed;
+
+        public string crossbreed;
 
 
 

@@ -95,7 +95,7 @@
             // 
             this.splitContainer1.Panel2.AllowDrop = true;
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(632, 599);
+            this.splitContainer1.Size = new System.Drawing.Size(632, 714);
             this.splitContainer1.SplitterDistance = 83;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -148,7 +148,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 623);
+            this.ClientSize = new System.Drawing.Size(632, 738);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

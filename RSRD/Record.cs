@@ -74,6 +74,7 @@ namespace RSRD
         public Record(string name)
         {
             formName = name;
+            FormatFile = name + ".recf";
         }
 
         //parses the format file, creating fieldBoxes and filling in data

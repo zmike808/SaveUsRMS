@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,25 +34,45 @@ namespace RSRD
         {
             animals.Add(new Animal(Animal.Species.Canine, Animal.Size.Medium, Animal.Status.Adopted, "Casper", true));
             animals[0].vacc = true;
+            animals[0].Address = "RPI";
+            animals[0].breed = "German Shepard";
+            animals[0].dobEstimate = true;
+            animals[0].dob = new DateTime(1994, 2, 15);
             animals.Add(new Animal(Animal.Species.Feline, Animal.Size.Small, Animal.Status.Found, "Milo", false));
+            animals[1].Address = "4th ST.";
+            animals[1].breed = "Tabby";
+            animals[1].dobEstimate = true;
+            animals[1].dob = new DateTime(2004,6,15);
+            animals.Add(new Animal(Animal.Species.Canine, Animal.Size.Medium, Animal.Status.Adopted, "Jingles", true));
+            animals[2].Address = "Canada";
+            animals[2].breed = "Poodle";
+            animals[2].dobEstimate = false;
+            animals[2].dob = new DateTime(2012, 2, 21);
+            animals.Add(new Animal(Animal.Species.Horse, Animal.Size.Small, Animal.Status.Found, "Black Stallion", false));
+            animals[2].Address = "Governor's Mansion";
+            animals[2].breed = "Arabian";
+            animals[2].dobEstimate = true;
+            animals[2].dob = new DateTime(1914, 2, 18);
+            animals.Add(new Animal(Animal.Species.Canine, Animal.Size.Medium, Animal.Status.Adopted, "Odie", true));
+            animals[3].Address = "Blitman";
+            animals[3].breed = "Doberman";
+            animals[3].dobEstimate = false;
+            animals[3].dob = new DateTime(2024, 6, 24);
+            animals.Add(new Animal(Animal.Species.Feline, Animal.Size.Small, Animal.Status.Found, "Garfield", false));
+            animals[4].Address = "Delaware Ave";
+            animals[4].breed = "Sphinx";
+            animals[4].dobEstimate = true;
+            animals[4].dob = new DateTime(2008, 8, 5);
+            animals.Add(new Animal(Animal.Species.Canine, Animal.Size.Medium, Animal.Status.Adopted, "Otis", true));
+
+            int count = 1;
+            foreach (Animal a in animals) 
+            {
+                a.ID = count;
+                count++;
+            }
+
             constrained = new BindingList<Animal>(animals);
-            labels.Add(new KeyValuePair<string, Point>("testin'", new Point(50, 50)));
-            labels.Add(new KeyValuePair<string, Point>("testin' two", new Point(50, 100)));
-
-            list.Add(i);
-            list.Add(j);
-            blankRecords.Add(new Record("florida", list, labels));
-            List<FieldBox> f = new List<FieldBox>(list);
-            f.Remove(i);
-            blankRecords.Add(new Record("west virginia", f, labels));
-            List<FieldBox> l = new List<FieldBox>(list);
-            l.Remove(j);
-            blankRecords.Add(new Record("louisiana", l, labels));
-
-            DataGridViewTextBoxColumn nameColumn = new DataGridViewTextBoxColumn();
-            nameColumn.DataPropertyName = "Name";
-            nameColumn.HeaderText = "Name";
-            dataGridView1.Columns.Add(nameColumn);
 
             dataGridView1.DataSource = constrained;
         }
@@ -73,6 +94,39 @@ namespace RSRD
             vaccCheckBox.Checked = a.vacc;
             vaccCheckBox.CheckState = a.vacc ? CheckState.Checked : CheckState.Unchecked;
             vaccCheckBox.Enabled = false;
+
+            idTextBox.Text = a.ID.ToString();
+
+            dobTextBox.Text = a.dob.ToShortDateString();
+            
+            dobEstimateCheckBox.Checked = a.dobEstimate;
+            dobEstimateCheckBox.CheckState = a.dobEstimate ? CheckState.Checked : CheckState.Unchecked;
+            dobEstimateCheckBox.Enabled = false;
+
+            locationTextBox.Text = a.Address;
+
+            breedTextBox.Text = a.breed;
+
+            if (a.crossbreed != null && a.crossbreed != "")
+            {
+                crossbreedCheckBox.Checked = true;
+                crossbreedCheckBox.CheckState = CheckState.Checked;
+                crossbreedCheckBox.Enabled = false;
+                crossBreedTextBox.Text = a.crossbreed;
+            }
+            else 
+            {
+                crossbreedCheckBox.Checked = false;
+                crossbreedCheckBox.CheckState = CheckState.Unchecked;
+                crossbreedCheckBox.Enabled = false;
+                crossBreedTextBox.Text = "None";
+            }
+
+            if (a.female)
+            { sexTestBox.Text = "MALE"; }
+            else { sexTestBox.Text = "FEMALE"; }
+
+            
             
         }
 
@@ -83,16 +137,20 @@ namespace RSRD
             return culled;
         }
 
-
         public Form1()
         {
             InitializeComponent();
             initializeHardcode();
+            initializeRecords();
+            this.Location = new Point(0, 0);
+            this.WindowState = FormWindowState.Maximized;
+            this.AutoSizeMode = AutoSizeMode.GrowOnly;
 
         }
 
         private void adoptButton_Click(object sender, EventArgs e)
         {
+            /*
             Record test = new Record("TestRecord");
             test.fileDirectory = "C:\\Users\\Sebastian\\Documents\\Visual Studio 2010\\Projects\\RSRD\\";
             
@@ -110,54 +168,15 @@ namespace RSRD
             }
             System.Console.WriteLine("empty's value is: " + test.empty);
             blankRecords.Add(test);
+           */
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
+        /// <summary>
+        /// bring up the record viewer, using the animal id constructor
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //bring up the record viewer, using the animal id constructor
 
         private void viewRecordButton_Click(object sender, EventArgs e)
         {
@@ -188,5 +207,40 @@ namespace RSRD
             f.Show();
         }
 
+        public void initializeRecords()
+        {
+            string path = "C:\\Users\\Sebastian\\Documents\\Visual Studio 2010\\Projects\\RSRD\\";
+            string[] filePaths = Directory.GetFiles(@path, "*.recf");
+            foreach (string filePath in filePaths)
+            {
+                Record rect = new Record(filePath.Substring(path.Count(), filePath.Count()-path.Count() - 5));
+                rect.fileDirectory = path;
+                rect.ParseFormatFile();
+                blankRecords.Add(rect);
+            }
+
+        }
+
+        /// <summary>
+        /// should bring up a a form for animal creation,
+        /// when creation is done, bring up all of the other records in addRecord that would be necessary
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CreateAnimalButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        /// <summary>
+        /// generates new list from search constraints, attaches to datagridview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

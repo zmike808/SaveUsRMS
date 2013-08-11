@@ -53,7 +53,17 @@ namespace RSRD
         public void newRecordTab(Record r)
         {
             TabPage t = new TabPage(r.formName + " " + r.timeStamp.ToShortDateString());
+            t.AutoScroll = true;
             t.BackColor = Color.White;
+
+
+            //attempting to make size of tab standardized to letter size, ir something similar
+            //Graphics g = this.CreateGraphics();
+            //int width = (int)Math.Round(210 / 25.4 * g.DpiX);
+            //int height = (int)Math.Round(297 / 25.4 * g.DpiY);
+
+            //t.Size = new Size(width, height);
+
             int count = 0;
             foreach (FieldBox f in r.values) 
             {

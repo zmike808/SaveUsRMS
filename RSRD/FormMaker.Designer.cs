@@ -94,6 +94,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.AllowDrop = true;
+            this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
             this.splitContainer1.Size = new System.Drawing.Size(632, 714);
             this.splitContainer1.SplitterDistance = 83;
@@ -138,7 +139,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox1.Location = new System.Drawing.Point(27, 13);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(497, 683);
             this.pictureBox1.TabIndex = 0;

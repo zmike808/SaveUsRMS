@@ -14,6 +14,12 @@ namespace RSRD
 
         List<Record> blanks;
         Form1 caller;
+
+        #region constructors
+        /// <summary>
+        /// basic constructor, loads no forms 
+        /// </summary>
+        /// <param name="f"></param>
         public RecordAdd(Form1 f)
         {
             InitializeComponent();
@@ -23,9 +29,22 @@ namespace RSRD
             {
                 toolStripComboBox1.Items.Add(r.formName);
             }
-        }
 
-        
+            #region RecordSizing
+
+            //sets it relatively sized to A4 iso standard, should be customizable later
+            Graphics g = this.CreateGraphics();
+            int width = (int)Math.Round(210 / 25.4 * g.DpiX);
+            int height = (int)Math.Round(297 / 25.4 * g.DpiY);
+
+            this.tabControl1.Size = new Size(width, height);
+
+            adjustRecordPlacement();
+
+            //needs to be re-anchored to allow autoscrolling
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
+            #endregion
+        }
         /// <summary>
         /// used to start the form with a few  record tabs already open
         /// usefull for creating a new animal or an event that needs more than one form to be recorded
@@ -35,15 +54,14 @@ namespace RSRD
         public RecordAdd(Form1 f, Record[] defaults) 
         {
             InitializeComponent();
-
+            caller = f;
             foreach (Record r in defaults) 
             {
                 newRecordTab(r);
             }
 
         }
-
-
+        #endregion
 
 
         /// <summary>
@@ -55,14 +73,6 @@ namespace RSRD
             TabPage t = new TabPage(r.formName + " " + r.timeStamp.ToShortDateString());
             t.AutoScroll = true;
             t.BackColor = Color.White;
-
-
-            //attempting to make size of tab standardized to letter size, ir something similar
-            //Graphics g = this.CreateGraphics();
-            //int width = (int)Math.Round(210 / 25.4 * g.DpiX);
-            //int height = (int)Math.Round(297 / 25.4 * g.DpiY);
-
-            //t.Size = new Size(width, height);
 
             int count = 0;
             foreach (FieldBox f in r.values) 
@@ -115,6 +125,25 @@ namespace RSRD
         }
 
         /// <summary>
+        /// makes sure that record is always centered horizontally, or scrollable
+        /// </summary>
+        private void adjustRecordPlacement()
+        {
+            if (MainRecordPanel.Width > tabControl1.Width + 10)
+            {
+                tabControl1.Location = new Point(((MainRecordPanel.Width - tabControl1.Width) / 2), tabControl1.Location.Y);
+            }
+            else
+            {
+                tabControl1.Location = new Point(1, tabControl1.Location.Y);
+            }
+            //needs to be re-anchored to allow autoscrolling
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
+        }
+
+        #region GUI Events
+
+        /// <summary>
         /// takes the selected tab and checks if the information in it is valid, and then saves it to the database
         /// </summary>
         /// <param name="sender"></param>
@@ -147,7 +176,15 @@ namespace RSRD
             newRecordTab(r);
         }
 
+        private void RecordAdd_Resize(object sender, EventArgs e)
+        {
+            adjustRecordPlacement();
+        }
 
+        #endregion
+
+
+        
 
 
     }

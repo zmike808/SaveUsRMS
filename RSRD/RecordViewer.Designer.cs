@@ -55,6 +55,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer1.Size = new System.Drawing.Size(871, 622);
             this.splitContainer1.SplitterDistance = 273;
@@ -86,7 +87,6 @@
             this.label1.Size = new System.Drawing.Size(36, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Types";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // checkedListBox1
             // 

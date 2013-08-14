@@ -35,16 +35,19 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
+            this.MainRecordPanel = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
+            this.MainRecordPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
-            this.tabControl1.Location = new System.Drawing.Point(0, 26);
+            this.tabControl1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tabControl1.Location = new System.Drawing.Point(121, 3);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(684, 726);
+            this.tabControl1.Size = new System.Drawing.Size(618, 706);
             this.tabControl1.TabIndex = 1;
             // 
             // menuStrip1
@@ -53,7 +56,7 @@
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(700, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(781, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -88,7 +91,8 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(625, 758);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(677, 750);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -96,20 +100,33 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // MainRecordPanel
+            // 
+            this.MainRecordPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.MainRecordPanel.AutoScroll = true;
+            this.MainRecordPanel.Controls.Add(this.tabControl1);
+            this.MainRecordPanel.Location = new System.Drawing.Point(13, 28);
+            this.MainRecordPanel.Name = "MainRecordPanel";
+            this.MainRecordPanel.Size = new System.Drawing.Size(756, 716);
+            this.MainRecordPanel.TabIndex = 4;
+            // 
             // RecordAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(700, 781);
+            this.ClientSize = new System.Drawing.Size(781, 781);
+            this.Controls.Add(this.MainRecordPanel);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RecordAdd";
             this.Text = "Add Record";
+            this.Resize += new System.EventHandler(this.RecordAdd_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.MainRecordPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,6 +141,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.Panel MainRecordPanel;
 
     }
 }

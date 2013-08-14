@@ -11,15 +11,30 @@ namespace RSRD
 {
     public partial class RecordViewer : Form
     {
+        #region local Variables
 
         Record selected;
         stringBox  i = new stringBox(100, 100, 20, 10, "test");
         intBox j = new intBox(100, 200, 20, 10, 22);
         List<FieldBox> list = new List<FieldBox>();
 
+        #endregion
+
+        #region constructors
+
         public RecordViewer()
         {
             InitializeComponent();
+            //sets it relatively sized to A4 iso standard, should be customizable later
+            Graphics g = this.CreateGraphics();
+            int width = (int)Math.Round(210 / 25.4 * g.DpiX);
+            int height = (int)Math.Round(297 / 25.4 * g.DpiY);
+
+            this.tabControl1.Size = new Size(width, height);
+
+            //needs to be re-anchored to allow autoscrolling
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)
+                ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
         }
 
         //method to take Animal ID and populate the record list box with it's records
@@ -27,14 +42,55 @@ namespace RSRD
         public RecordViewer(int animalID) 
         {
             InitializeComponent();
+            //sets it relatively sized to A4 iso standard, should be customizable later
+            Graphics g = this.CreateGraphics();
+            int width = (int)Math.Round(210 / 25.4 * g.DpiX);
+            int height = (int)Math.Round(297 / 25.4 * g.DpiY);
+
+            this.tabControl1.Size = new Size(width, height);
+
+            //needs to be re-anchored to allow autoscrolling
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)
+                ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
         }
 
+        #endregion
 
-        private void label1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// creates a tab and adds all of the record information to it
+        /// </summary>
+        /// <param name="r"></param>
+        private void showRecord(Record r)
         {
 
+
+            TabPage t = new TabPage(r.formName + " " + r.timeStamp.ToShortDateString());
+            t.BackColor = Color.White;
+
+            foreach (FieldBox f in r.values)
+            {
+
+                TextBox textbox = new TextBox();
+                textbox.Top = f.y_pos;
+                textbox.Left = f.x_pos;
+                textbox.TextChanged += new EventHandler(TextBox_Changed);
+                textbox.Text = Convert.ToString(f.value);
+                t.Controls.Add(textbox);
+            }
+            foreach (KeyValuePair<string, Point> k in r.labels)
+            {
+                Label l = new Label();
+                l.Text = k.Key;
+                l.Location = k.Value;
+                t.Controls.Add(l);
+            }
+            tabControl1.TabPages.Add(t);
+            tabControl1.TabPages[0].Show();
+
         }
 
+
+        #region GUI Events
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -54,39 +110,6 @@ namespace RSRD
 
 
         /// <summary>
-        /// creates a tab and adds all of the record information to it
-        /// </summary>
-        /// <param name="r"></param>
-        private void showRecord(Record r) 
-        {
-            
-            
-            TabPage t = new TabPage(r.formName + " " + r.timeStamp.ToShortDateString());
-            t.BackColor = Color.White;
-
-            foreach (FieldBox f in r.values) 
-            {
-
-                TextBox textbox = new TextBox();
-                textbox.Top = f.y_pos;
-                textbox.Left = f.x_pos;
-                textbox.TextChanged+= new EventHandler(TextBox_Changed);
-                textbox.Text = Convert.ToString(f.value);
-                t.Controls.Add(textbox);
-            }
-            foreach (KeyValuePair<string, Point> k in r.labels)
-            {
-                Label l = new Label();
-                l.Text = k.Key;
-                l.Location = k.Value;
-                t.Controls.Add(l);
-            }
-            tabControl1.TabPages.Add(t);
-            tabControl1.TabPages[0].Show();
-            
-        }
-
-        /// <summary>
         /// takes new information from text boxes and changes values within the record
         /// </summary>
         /// <param name="sender"></param>
@@ -94,8 +117,10 @@ namespace RSRD
         private void TextBox_Changed(object sender, System.EventArgs e)
         {
             TextBox t = (TextBox)sender;
-            
+
         }
+
+        #endregion
 
     }
 }

@@ -12,6 +12,8 @@ namespace RSRD
     public partial class FormMaker : Form
     {
 
+        #region local variables
+
         //the control that is currently being moved
         private Control activeControl;
         //the point that the control was at previously
@@ -27,10 +29,25 @@ namespace RSRD
 
         Record rec;
 
+        #endregion
+
+
+        #region constructors
+
         public FormMaker(Form1 f)
         {
             caller = f;
             InitializeComponent();
+
+            //sets it relatively sized to A4 iso standard, should be customizable later
+            Graphics g = this.CreateGraphics();
+            int width = (int)Math.Round(210 / 25.4 * g.DpiX);
+            int height = (int)Math.Round(297 / 25.4 * g.DpiY);
+
+            this.pictureBox1.Size = new Size(width, height);
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)
+                ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
+
             foreach (Record r in f.blankRecords) 
             {
              templateListBox.Items.Add(r.formName);
@@ -44,7 +61,7 @@ namespace RSRD
         }
 
 
-
+        #endregion
 
 
         /// <summary>
@@ -82,6 +99,7 @@ namespace RSRD
             templateLoaded = true;
         }
 
+        #region general GUI events
 
         /// <summary>
         /// loads a template form to be used
@@ -158,7 +176,7 @@ namespace RSRD
            
         }
 
-
+        #endregion
 
 
         #region Drag Components
@@ -260,8 +278,6 @@ namespace RSRD
         }
 
         #endregion
-
-
 
 
         /// <summary>

@@ -14,7 +14,23 @@ namespace RSRD
         [STAThread]
         static void Main()
         {
-            DBTest();
+            MySQLHandler db = new MySQLHandler("localhost", "test", "root", "root");
+           // DBTest();
+            List<string> columnnames = new List<string>();
+            columnnames.Add("name");
+            columnnames.Add("breed");
+
+            for (int x = 1; x < 100; x++)
+            {
+                Random r = new Random();
+
+                List<string> fieldvals = new List<string>();
+                string a = "" + x * r.Next(x); ;
+                string b = "" + x * r.Next(x); ;
+                fieldvals.Add(a);
+                fieldvals.Add(b);
+                db.Insert("animal", columnnames, fieldvals);
+            }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
@@ -52,6 +68,7 @@ namespace RSRD
             list2.AddRange(q);
 
             db.Insert("test1", list1, list2);
+          
             #endregion
 
         }

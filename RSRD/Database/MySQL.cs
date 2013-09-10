@@ -1,7 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Diagnostics;
 
@@ -327,6 +332,38 @@ namespace RSRD
             }
         }
         #endregion
+
+        public BindingList<Animal> loadAnimals()
+        {
+            try
+            {
+                // - DEBUG 
+                // MessageBox.Show("Connection successful!"); 
+                MySqlDataAdapter MyDA = new MySqlDataAdapter();
+                MyDA.SelectCommand = new MySqlCommand("SELECT * FROM `animal`", conn);
+                DataTable table = new DataTable();
+                MyDA.Fill(table);
+ 
+                BindingList<Animal> bindedanimals = new BindingList<Animal>();
+
+                foreach (DataRow row in table.Rows)
+                {
+                   int ID = (int)row.ItemArray[0];
+                   string name = (string)row.ItemArray[1];
+                   Animal a = new Animal(row.ItemArray);
+                   bindedanimals.Add(a);
+                }
+
+                return bindedanimals;
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                Close();
+            }
+            return null;
+        }
+
 
         /*
          * this needs to be edited for when we want to have fields that can store images as well as strings

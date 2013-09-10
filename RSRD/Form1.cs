@@ -32,6 +32,7 @@ namespace RSRD
 
         public void initializeHardcode() 
         {
+            /* no, this...this is just 
             animals.Add(new Animal(Animal.Species.Canine, Animal.Size.Medium, Animal.Status.Adopted, "Casper", true));
             animals[0].vacc = true;
             animals[0].Address = "RPI";
@@ -73,8 +74,9 @@ namespace RSRD
             }
 
             constrained = new BindingList<Animal>(animals);
-
-            dataGridView1.DataSource = constrained;
+            */
+            MySQLHandler dbh = new MySQLHandler("localhost","test","root","root");
+            dataGridView1.DataSource = dbh.loadAnimals();
         }
 
         #endregion 
@@ -91,8 +93,16 @@ namespace RSRD
             sterilizedCheckBox.CheckState = a.sterilized ? CheckState.Checked : CheckState.Unchecked;
             sterilizedCheckBox.Enabled = false;
 
-            vaccCheckBox.Checked = a.vacc;
-            vaccCheckBox.CheckState = a.vacc ? CheckState.Checked : CheckState.Unchecked;
+            //god damn it seabass...why did you have vacc as a bool in the first place -_-
+            if (a.vacc != null)
+            {
+                vaccCheckBox.Checked = true;
+            }
+            else
+            {
+                vaccCheckBox.Checked = false;
+            }
+            vaccCheckBox.CheckState = vaccCheckBox.CheckState;
             vaccCheckBox.Enabled = false;
 
             idTextBox.Text = a.ID.ToString();
@@ -209,7 +219,7 @@ namespace RSRD
 
         public void initializeRecords()
         {
-            string path = "C:\\Users\\Sebastian\\Documents\\Visual Studio 2010\\Projects\\RSRD\\";
+            string path = "..\\..\\..\\";
             string[] filePaths = Directory.GetFiles(@path, "*.recf");
             foreach (string filePath in filePaths)
             {

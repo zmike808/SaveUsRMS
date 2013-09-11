@@ -53,6 +53,15 @@ namespace RSRD
 
         private Species _species;
 
+        private Status _status;
+
+        [System.ComponentModel.DisplayName("Status")]
+        public Status status
+        {
+            get { return _status; }
+            set { _status = value; }
+        }
+
         [System.ComponentModel.DisplayName("Species")]
         public Species species
         {
@@ -81,16 +90,19 @@ namespace RSRD
 
         public string notes;
 
+        public string image;
+
         /*
          * Why would anyone ever want to type out all those parameters to create an animal, like really?
          */
 
-        public Animal(int id, string name, DateTime dob, long imagegarbage, bool estimate, DateTime vaccination, 
-            bool sterilized, bool female, string color, string size, string breed, string crossbread, string location, string owner, string notes)
+        public Animal(int id, string name, DateTime dob, string image, bool estimate, DateTime vaccination, 
+            bool sterilized, bool female, string color, string size, string breed, string crossbread, string location, string owner, string notes, Species species, Status status)
         {
             this.ID = id;
             this.Name = name;
             this.dob = dob;
+            this.image = image; 
             this.dobEstimate = estimate;
             this.vacc = vaccination;
             this.sterilized = sterilized;
@@ -102,13 +114,15 @@ namespace RSRD
             this.location = location;
             this.owner = owner;
             this.notes = notes;
+            this.species = species;
+            this.status = status;
         }
 
      
         /// <summary>
         /// constructs an animal from an array of objects, currently only used for the ui datagridview
         /// though it could end up being easier to use than specifying each variable in the constructor (seen above) 
-        /// array is a fixed size, equal to the number of columns in the animal sql table, first column is index 0, and the last column currently being at index 12
+        /// array is a fixed size, equal to the number of columns in the animal sql table, first column is index 0, and the last column currently being at index 15
         /// Typecasts every entry in the array to the appropriate type of the animal class variable
         ///
         /// </summary>
@@ -118,18 +132,22 @@ namespace RSRD
             //this hardcoding....well it works for now....
             this.ID = (int)a[0];
             this.Name = (string)a[1];
-            this.dob = (DateTime)a[2];
-            this.dobEstimate = (bool)a[3];
-            this.vacc = (DateTime)a[4];
-            this.sterilized = (bool)a[5];
-            this.female = (bool)a[6];
-            this.color = (string)a[7];
-            this.size = (Size)Enum.Parse(typeof(Animal.Size), (string)a[8]);
-            this.breed = (string)a[9];
-            this.crossbreed = (string)a[9];
-            this.location = (string)a[10];
-            this.owner = (string)a[11];
-            this.notes = (string)a[12];
+            this.dob = DateTime.Parse((string)a[2]);
+            this.image = (string)a[3];
+            this.dobEstimate = (bool)a[4];
+            this.vacc = DateTime.Parse((string)a[5]);
+            this.sterilized = (bool)a[6];
+            this.female = (bool)a[7];
+            this.color = (string)a[8];
+            this.size = (Size)Enum.Parse(typeof(Animal.Size), (string)a[9]);
+            this.breed = (string)a[10];
+            this.crossbreed = (string)a[11];
+            this.location = (string)a[12];
+            this.owner = (string)a[13];
+            this.notes = (string)a[14];
+            this.species = (Species)Enum.Parse(typeof(Animal.Species), (string)a[15]);
+            this.status = (Status)Enum.Parse(typeof(Animal.Status), (string)a[16]);
+
         }
 
         /// <summary>
@@ -145,9 +163,10 @@ namespace RSRD
 
             //all the hardcodings...cutler would frown
            //but srsly, thankgod for tostring methods, or this shit would have been like 100x more fugly...
-            ao.Add(a.ID.ToString());
+         //   ao.Add(a.ID.ToString()); don't add this mysql takes care of that
             ao.Add(a.Name);
             ao.Add(a.dob.ToString());
+            ao.Add(a.image);
             ao.Add(a.dobEstimate.ToString());
             ao.Add(a.vacc.ToString());
             ao.Add(a.sterilized.ToString());
@@ -159,6 +178,8 @@ namespace RSRD
             ao.Add(a.location);
             ao.Add(a.owner);
             ao.Add(a.notes);
+            ao.Add(a.species.ToString());
+            ao.Add(a.status.ToString());
            
             return ao;
         }

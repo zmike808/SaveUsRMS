@@ -1,17 +1,1 @@
-CREATE  TABLE IF NOT EXISTS `Animal` (
-  `ID` INT NOT NULL AUTO_INCREMENT ,
-  `name` TEXT NULL DEFAULT NULL ,
-  `DateofBirth` DATETIME NULL DEFAULT NULL ,
-  `image` LONGBLOB NULL DEFAULT NULL ,
-  `estimate` TINYINT(1) NULL DEFAULT NULL ,
-  `vaccination` DATETIME NULL DEFAULT NULL ,
-  `sterilized` TINYINT(1) NULL DEFAULT NULL ,
-  `female` TINYINT(1) NULL DEFAULT NULL ,
-  `color` TEXT NULL DEFAULT NULL ,
-  `size` TEXT NULL DEFAULT NULL ,
-  `breed` TEXT NULL DEFAULT NULL ,
-  `crossbreed` TEXT NULL DEFAULT NULL ,
-  `location` TEXT NULL DEFAULT NULL ,
-  `owner` TEXT NULL DEFAULT NULL ,
-  `notes` TEXT NULL DEFAULT NULL ,
-  PRIMARY KEY (`ID`) )
+CREATE TABLE IF NOT EXISTS `animal` (  `ID` int(11) NOT NULL AUTO_INCREMENT,  `name` text,  `species` text,  `status` text,  `DateofBirth` datetime DEFAULT NULL,  `image` longblob,  `estimate` tinyint(1) DEFAULT NULL,  `vaccination` datetime DEFAULT NULL,  `sterilized` tinyint(1) DEFAULT NULL,  `female` tinyint(1) DEFAULT NULL,  `color` text,  `size` text,  `breed` text,  `crossbreed` text,  `location` text,  `owner` text,  `notes` text,  PRIMARY KEY (`ID`)) ENGINE=InnoDB AUTO_INCREMENT=372 DEFAULT CHARSET=utf8;

@@ -348,8 +348,6 @@ namespace RSRD
 
                 foreach (DataRow row in table.Rows)
                 {
-                   int ID = (int)row.ItemArray[0];
-                   string name = (string)row.ItemArray[1];
                    Animal a = new Animal(row.ItemArray);
                    bindedanimals.Add(a);
                 }
@@ -364,7 +362,14 @@ namespace RSRD
             return null;
         }
 
+        public void saveAnimal(Animal a)
+        {
+            string[] animalTableColumns = { "name", "DateofBirth", "image", "estimate", "vaccination", "sterilized", "female", "color", "size", "breed", "crossbreed", "location", "owner", "notes", "species", "status"};
 
+            List<string> animalcolumns = new List<string>(animalTableColumns);
+            
+            this.Insert("animal", animalcolumns, Animal.toList(a)); 
+        }
         /*
          * this needs to be edited for when we want to have fields that can store images as well as strings
          * currently this only accounts for storing strings as fields

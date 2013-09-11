@@ -15,7 +15,6 @@ namespace RSRD
         static void Main()
         {
             DBSetup();
-            AnimalFilling();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
@@ -31,14 +30,16 @@ namespace RSRD
             MySQLHandler db = new MySQLHandler("localhost", "root", "root");
 
             #region database setup
-            db.sendCommand("CREATE DATABASE IF NOT EXISTS test");
-            db.sendCommand("USE test");
-            db.sendCommand("CREATE TABLE IF NOT EXISTS `Animal` (`ID` INT NOT NULL AUTO_INCREMENT ,`name` TEXT NULL DEFAULT NULL ,  `DateofBirth` DATETIME NULL DEFAULT NULL ,  `image` LONGBLOB NULL DEFAULT NULL ,  `estimate` TINYINT(1) NULL DEFAULT NULL ,  `vaccination` DATETIME NULL DEFAULT NULL ,  `sterilized` TINYINT(1) NULL DEFAULT NULL ,  `female` TINYINT(1) NULL DEFAULT NULL ,  `color` TEXT NULL DEFAULT NULL ,  `size` TEXT NULL DEFAULT NULL ,  `breed` TEXT NULL DEFAULT NULL ,  `crossbreed` TEXT NULL DEFAULT NULL ,  `location` TEXT NULL DEFAULT NULL ,  `owner` TEXT NULL DEFAULT NULL ,  `notes` TEXT NULL DEFAULT NULL ,  PRIMARY KEY (`ID`) )");
+            db.sendCommand("CREATE DATABASE IF NOT EXISTS `test`");
+            db.sendCommand("USE `test`");
+            db.sendCommand("CREATE TABLE IF NOT EXISTS `animal` (  `ID` int(11) NOT NULL AUTO_INCREMENT,  `name` text,  `DateofBirth` datetime DEFAULT NULL,  `image` longblob,  `estimate` tinyint(1) DEFAULT NULL,  `vaccination` datetime DEFAULT NULL,  `sterilized` tinyint(1) DEFAULT NULL,  `female` tinyint(1) DEFAULT NULL,  `color` text,  `size` text,  `breed` text,  `crossbreed` text,  `location` text,  `owner` text,  `notes` text, `species` text,  `status` text,  PRIMARY KEY (`ID`)) ENGINE=InnoDB AUTO_INCREMENT=372 DEFAULT CHARSET=utf8");
             #endregion
 
             
 
         }
+        /*
+         * doesnt work cause seabass is a bitch making me hardcode so much shit, needs to fill with the proper shit seabass can do it. /endrant
         /// <summary>
         /// provides that nice animal filling...
         /// but no really, it just populates the animal table with random strings of numbers for the name and breed
@@ -46,25 +47,25 @@ namespace RSRD
         static void AnimalFilling()
         {
             MySQLHandler db = new MySQLHandler("localhost", "test", "root", "root");
-            List<string> columnnames = new List<string>();
-            columnnames.Add("name");
-            columnnames.Add("breed");
             //lets flush the table each time we run this so we don't get a billion animals after running it 100 times...that wouldnt be fun.
             db.sendCommand("TRUNCATE 'animal'");
+            string[] animalTableColumns = { "name", "DateofBirth", "image", "estimate", "vaccination", "sterilized", "female", "color", "size", "breed", "crossbreed", "location", "owner", "notes", "species", "status" };
+            List<string> columnnames = new List<string>(animalTableColumns);
 
             //FILL IT UP
             for (int x = 1; x < 75; x++)
             {
-                Random r = new Random();
-
-                List<string> fieldvals = new List<string>();
-                string a = "" + x * r.Next(x); ;
-                string b = "" + x * r.Next(x); ;
-                fieldvals.Add(a);
-                fieldvals.Add(b);
+                List<string> fieldvals = new List<string>();   
+            
+                for (int y = 1; y <= 16; y++)
+                {
+                    int c = x + y;
+                    fieldvals.Add(c.ToString());
+                }
+                Debug.WriteLine(fieldvals.ToString());
                 db.Insert("animal", columnnames, fieldvals);
             }
-        }
+        }*/
         #endregion
 
     }

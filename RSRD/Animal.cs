@@ -130,14 +130,15 @@ namespace RSRD
         public Animal(object[] a)
         {
             //this hardcoding....well it works for now....
+            
             this.ID = (int)a[0];
             this.Name = (string)a[1];
             this.dob = DateTime.Parse((string)a[2]);
             this.image = (string)a[3];
-            this.dobEstimate = (bool)a[4];
+            this.dobEstimate = Convert.ToBoolean(a[4]);
             this.vacc = DateTime.Parse((string)a[5]);
-            this.sterilized = (bool)a[6];
-            this.female = (bool)a[7];
+            this.sterilized = Convert.ToBoolean((string)a[6]);
+            this.female = Convert.ToBoolean((string)a[7]);
             this.color = (string)a[8];
             this.size = (Size)Enum.Parse(typeof(Animal.Size), (string)a[9]);
             this.breed = (string)a[10];

@@ -15,6 +15,7 @@ namespace RSRD
         static void Main()
         {
             DBSetup();
+            AnimalFilling();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
@@ -32,14 +33,12 @@ namespace RSRD
             #region database setup
             db.sendCommand("CREATE DATABASE IF NOT EXISTS `test`");
             db.sendCommand("USE `test`");
-            db.sendCommand("CREATE TABLE IF NOT EXISTS `animal` (  `ID` int(11) NOT NULL AUTO_INCREMENT,  `name` text,  `DateofBirth` datetime DEFAULT NULL,  `image` longblob,  `estimate` tinyint(1) DEFAULT NULL,  `vaccination` datetime DEFAULT NULL,  `sterilized` tinyint(1) DEFAULT NULL,  `female` tinyint(1) DEFAULT NULL,  `color` text,  `size` text,  `breed` text,  `crossbreed` text,  `location` text,  `owner` text,  `notes` text, `species` text,  `status` text,  PRIMARY KEY (`ID`)) ENGINE=InnoDB AUTO_INCREMENT=372 DEFAULT CHARSET=utf8");
+            db.sendCommand("CREATE TABLE `animal` (  `ID` int(11) NOT NULL AUTO_INCREMENT,  `name` text,  `DateofBirth` text,  `image` text,  `estimate` text,  `vaccination` text,  `sterilized` text,  `female` text,  `color` text,  `size` text,  `breed` text,  `crossbreed` text,  `location` text,  `owner` text,  `notes` text,  `species` text,  `status` text,  PRIMARY KEY (`ID`)) ENGINE=InnoDB AUTO_INCREMENT=297 DEFAULT CHARSET=utf8");
             #endregion
 
             
 
         }
-        /*
-         * doesnt work cause seabass is a bitch making me hardcode so much shit, needs to fill with the proper shit seabass can do it. /endrant
         /// <summary>
         /// provides that nice animal filling...
         /// but no really, it just populates the animal table with random strings of numbers for the name and breed
@@ -55,17 +54,29 @@ namespace RSRD
             //FILL IT UP
             for (int x = 1; x < 75; x++)
             {
-                List<string> fieldvals = new List<string>();   
-            
-                for (int y = 1; y <= 16; y++)
-                {
-                    int c = x + y;
-                    fieldvals.Add(c.ToString());
-                }
+                List<string> fieldvals = new List<string>();
+
+                fieldvals.Add("doge" + x);
+                fieldvals.Add("11/04/2012 1" + ":" + x%2 + x%2 + ":" + x%2 + x%2 );
+                fieldvals.Add("");
+                fieldvals.Add("false");
+                fieldvals.Add("11/04/2012 1" + ":" + x % 2 + x % 2 + ":" + x % 2 + x % 2); 
+                fieldvals.Add("true");
+                fieldvals.Add("false");
+                fieldvals.Add("white" + x);
+                fieldvals.Add("Small");
+                fieldvals.Add("shibe" + x);
+                fieldvals.Add("shibedoge" + x);
+                fieldvals.Add("rpi" + x);
+                fieldvals.Add("shirly" + x);
+                fieldvals.Add("wow" + x);
+                fieldvals.Add("Canine");
+                fieldvals.Add("Lost");
+
                 Debug.WriteLine(fieldvals.ToString());
                 db.Insert("animal", columnnames, fieldvals);
             }
-        }*/
+        }
         #endregion
 
     }

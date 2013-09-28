@@ -8,21 +8,18 @@ namespace RSRD
     public class Animal
     {
         //variables that are public properties will automagically be picked up by the datagridview
-
         public enum Species 
         {
             Canine,
             Feline,
             Horse
         }
-
         public enum Size 
         {
             Small,
             Medium,
             Large
         }
-
         public enum Status 
         {
             Lost,
@@ -31,7 +28,7 @@ namespace RSRD
             Adopted,
             Fostered
         }
-
+        
         //all of the records associated with this particular animal
         public List<Record> records;
 
@@ -130,7 +127,6 @@ namespace RSRD
         public Animal(object[] a)
         {
             //this hardcoding....well it works for now....
-            
             this.ID = (int)a[0];
             this.Name = (string)a[1];
             this.dob = DateTime.Parse((string)a[2]);

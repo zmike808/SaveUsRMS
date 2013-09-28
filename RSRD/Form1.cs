@@ -32,50 +32,7 @@ namespace RSRD
 
         public void initializeHardcode() 
         {
-            /* no, this...this is just 
-            animals.Add(new Animal(Animal.Species.Canine, Animal.Size.Medium, Animal.Status.Adopted, "Casper", true));
-            animals[0].vacc = true;
-            animals[0].Address = "RPI";
-            animals[0].breed = "German Shepard";
-            animals[0].dobEstimate = true;
-            animals[0].dob = new DateTime(1994, 2, 15);
-            animals.Add(new Animal(Animal.Species.Feline, Animal.Size.Small, Animal.Status.Found, "Milo", false));
-            animals[1].Address = "4th ST.";
-            animals[1].breed = "Tabby";
-            animals[1].dobEstimate = true;
-            animals[1].dob = new DateTime(2004,6,15);
-            animals.Add(new Animal(Animal.Species.Canine, Animal.Size.Medium, Animal.Status.Adopted, "Jingles", true));
-            animals[2].Address = "Canada";
-            animals[2].breed = "Poodle";
-            animals[2].dobEstimate = false;
-            animals[2].dob = new DateTime(2012, 2, 21);
-            animals.Add(new Animal(Animal.Species.Horse, Animal.Size.Small, Animal.Status.Found, "Black Stallion", false));
-            animals[2].Address = "Governor's Mansion";
-            animals[2].breed = "Arabian";
-            animals[2].dobEstimate = true;
-            animals[2].dob = new DateTime(1914, 2, 18);
-            animals.Add(new Animal(Animal.Species.Canine, Animal.Size.Medium, Animal.Status.Adopted, "Odie", true));
-            animals[3].Address = "Blitman";
-            animals[3].breed = "Doberman";
-            animals[3].dobEstimate = false;
-            animals[3].dob = new DateTime(2024, 6, 24);
-            animals.Add(new Animal(Animal.Species.Feline, Animal.Size.Small, Animal.Status.Found, "Garfield", false));
-            animals[4].Address = "Delaware Ave";
-            animals[4].breed = "Sphinx";
-            animals[4].dobEstimate = true;
-            animals[4].dob = new DateTime(2008, 8, 5);
-            animals.Add(new Animal(Animal.Species.Canine, Animal.Size.Medium, Animal.Status.Adopted, "Otis", true));
-
-            int count = 1;
-            foreach (Animal a in animals) 
-            {
-                a.ID = count;
-                count++;
-            }
-
-            constrained = new BindingList<Animal>(animals);
-            */
-            MySQLHandler dbh = new MySQLHandler("localhost","test","root","root");
+            MySQLHandler dbh = new MySQLHandler();
             dataGridView1.DataSource = dbh.loadAnimals();
         }
 

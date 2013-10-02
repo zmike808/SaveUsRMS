@@ -120,9 +120,9 @@ namespace RSRD
         private string searchParameters()
         {
             string species = "species = ";
-            species += (speciesBox.SelectedValue.ToString() == null) ? "*" : speciesBox.SelectedValue.ToString();
+            species += (speciesComboBox.SelectedValue.ToString() == null) ? "*" : speciesComboBox.SelectedValue.ToString();
             string breed = "breed = ";
-            breed += (breedBox.SelectedValue.ToString() == null) ? "*" : breedBox.SelectedValue.ToString();
+            breed += (breedComboBox.SelectedValue.ToString() == null) ? "*" : breedComboBox.SelectedValue.ToString();
             //List<string> statuses = new List<string>();
             //for (int x = 0; x < statusBox.Items.Count; x++)
             //{
@@ -134,11 +134,11 @@ namespace RSRD
 
             string gender = "female =";
 
-            if (maleRB.Checked == true)
+            if (radioButton1.Checked == true)
             {
                 gender += Convert.ToString(false);
             }
-            else if (femaleRB.Checked == true)
+            else if (radioButton2.Checked == true)
             {
                 gender += Convert.ToString(true);
             }
@@ -148,7 +148,7 @@ namespace RSRD
             }
 
             string owner = "owner = ";
-            owner += (ownerName.Text == null) ? "*" : ownerName.Text;
+            owner += (ownerSearchTextBox.Text == null) ? "*" : ownerSearchTextBox.Text;
 
             string returnstr = species + " " + breed + " " + gender + " " + owner + " ";
             return returnstr;

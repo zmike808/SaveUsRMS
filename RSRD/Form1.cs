@@ -7,13 +7,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Globalization;
+using ZedGraph;
 
 namespace RSRD
 {
     public partial class Form1 : Form
     {
         //starts out as all animals, changes as search constraints are altered
-        List<Animal> animals = new List<Animal>();
+        //List<Animal> animals = new List<Animal>();
 
         //more hardcoded bullshit
         stringBox i = new stringBox(100, 100, 20, 10, "test");
@@ -209,5 +211,106 @@ namespace RSRD
         {
 
         }
+
+        private void CreatePie(GraphPane myPane, List<Animal> animals, string dataType)
+        {
+            double o = 0; //offset
+            int c = 0; //color counter
+            Color[] colors = { Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Purple, Color.Cyan, Color.SeaGreen, Color.MistyRose, Color.RosyBrown, Color.Sienna, Color.MintCream, Color.Navy, Color.Orange, Color.OldLace, Color.Olive }; //slice color array
+
+
+            //creates and fills a dictionary of dataType and integer of occurences
+            Dictionary<String, int> dataCount = new Dictionary<string, int>();
+            for (int i = 0; i < animals.Count; i++)
+            {
+                string s = "";
+                if (dataType == "Species")
+                    s = animals[i].species.ToString();
+                else if (dataType == "Gender")
+                    s = animals[i].female == false ? "Male" : "Female"; //gets gender strings
+                else if (dataType == "Date of Birth")
+                    s = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(animals[i].dob.Month); //gets month strings
+                if (dataCount.ContainsKey(s))
+                    dataCount[s]++; //increment key
+                else
+                    dataCount.Add(s, 1); //add new key
+            }
+            //adds pie slice for each key in dictionary
+            foreach (KeyValuePair<string, int> entry in dataCount)
+            {
+                myPane.AddPieSlice(entry.Value, colors[c], o, entry.Key); //add slice
+                c++; //iterating through color array to differentiate slice colors
+            }
+            myPane.AxisChange();
+            zg1.Invalidate();
+        }
+
+        private void TabControl1_Enter(object sender, EventArgs e)
+        {
+            List<string> graphType = new List<string>();
+            graphType.Add("Pie Chart");
+            graphType.Add("Bar Chart");
+            listBox1.DataSource = graphType;
+
+            MySQLHandler dbh = new MySQLHandler();
+            List<Animal> listanimals = dbh.loadAnimals().ToList();
+        }
+
+
+        private void listBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //fill listBox1 & corresponding listBox2
+            string select = listBox1.SelectedItem.ToString();
+            if (select == "Pie Chart")
+            {
+                List<string> pieType = new List<string>();
+                pieType.Add("Species");
+                pieType.Add("Gender");
+                pieType.Add("Date of Birth");
+                listBox2.DataSource = pieType;
+            }
+            if (select == "Bar Chart")
+            {
+                List<string> barType = new List<string>();
+                barType.Add("Nothing to see here");
+                listBox2.DataSource = barType;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //load animal list
+            MySQLHandler dbh = new MySQLHandler();
+            List<Animal> listanimals = dbh.loadAnimals().ToList();
+            //make new graph pane
+            GraphPane myPane = zg1.GraphPane;
+            myPane.CurveList.Clear();
+            string graphselect = listBox1.SelectedItem.ToString();
+            if (graphselect == "Pie Chart") //create pie chart
+            {
+                string select = listBox2.SelectedItem.ToString();
+                if (select == "Species")
+                {
+                    myPane.Title.Text = "Species Breakdown";
+                    CreatePie(myPane, listanimals, select);
+                }
+                if (select == "Gender")
+                {
+                    myPane.Title.Text = "Gender Breakdown";
+                    CreatePie(myPane, listanimals, select);
+                }
+                if (select == "Date of Birth")
+                {
+                    myPane.Title.Text = "Date of Birth Breakdown";
+                    CreatePie(myPane, listanimals, select);
+                }
+            }
+        }
+
+        private void zg1_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

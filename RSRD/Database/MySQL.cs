@@ -29,7 +29,7 @@ namespace RSRD
         /// admindev is empty when uploaded to github; contains admin access credentials to sql db
         /// </summary>
 #if admindev
-
+        
 #else
         public const string host = "saveus.myrpi.org";
         public const string username = "zemskm_user";

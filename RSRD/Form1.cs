@@ -117,6 +117,45 @@ namespace RSRD
 
         }
 
+        private string searchParameters()
+        {
+            string species = "species = ";
+            species += (speciesBox.SelectedValue.ToString() == null) ? "*" : speciesBox.SelectedValue.ToString();
+            string breed = "breed = ";
+            breed += (breedBox.SelectedValue.ToString() == null) ? "*" : breedBox.SelectedValue.ToString();
+            //List<string> statuses = new List<string>();
+            //for (int x = 0; x < statusBox.Items.Count; x++)
+            //{
+            //    if (statusBox.Items[x] != null)
+            //    {
+            //        statuses.Add(statusBox.Items[x].ToString());
+            //    }
+            //}
+
+            string gender = "female =";
+
+            if (maleRB.Checked == true)
+            {
+                gender += Convert.ToString(false);
+            }
+            else if (femaleRB.Checked == true)
+            {
+                gender += Convert.ToString(true);
+            }
+            else
+            {
+                gender = "*";
+            }
+
+            string owner = "owner = ";
+            owner += (ownerName.Text == null) ? "*" : ownerName.Text;
+
+            string returnstr = species + " " + breed + " " + gender + " " + owner + " ";
+            return returnstr;
+        }
+
+
+
         private void adoptButton_Click(object sender, EventArgs e)
         {
             /*

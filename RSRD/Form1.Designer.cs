@@ -35,13 +35,21 @@
             this.CreateAnimalButton = new System.Windows.Forms.Button();
             this.SearchButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ownerSearchTextBox = new System.Windows.Forms.TextBox();
+            this.ownerName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+<<<<<<< HEAD
             this.statusChecklistbox = new System.Windows.Forms.CheckedListBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.breedComboBox = new System.Windows.Forms.ComboBox();
             this.speciesComboBox = new System.Windows.Forms.ComboBox();
+=======
+            this.statusBox = new System.Windows.Forms.CheckedListBox();
+            this.femaleRB = new System.Windows.Forms.RadioButton();
+            this.maleRB = new System.Windows.Forms.RadioButton();
+            this.breedBox = new System.Windows.Forms.ComboBox();
+            this.speciesBox = new System.Windows.Forms.ComboBox();
+>>>>>>> development
             this.CommentsPanel = new System.Windows.Forms.Panel();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -94,8 +102,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+<<<<<<< HEAD
             this.label3 = new System.Windows.Forms.Label();
             this.TabControl1.SuspendLayout();
+=======
+            this.tabControl1.SuspendLayout();
+>>>>>>> development
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -151,13 +163,13 @@
             this.splitContainer1.Panel1.Controls.Add(this.CreateAnimalButton);
             this.splitContainer1.Panel1.Controls.Add(this.SearchButton);
             this.splitContainer1.Panel1.Controls.Add(this.dataGridView1);
-            this.splitContainer1.Panel1.Controls.Add(this.ownerSearchTextBox);
+            this.splitContainer1.Panel1.Controls.Add(this.ownerName);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.statusChecklistbox);
-            this.splitContainer1.Panel1.Controls.Add(this.radioButton2);
-            this.splitContainer1.Panel1.Controls.Add(this.radioButton1);
-            this.splitContainer1.Panel1.Controls.Add(this.breedComboBox);
-            this.splitContainer1.Panel1.Controls.Add(this.speciesComboBox);
+            this.splitContainer1.Panel1.Controls.Add(this.statusBox);
+            this.splitContainer1.Panel1.Controls.Add(this.femaleRB);
+            this.splitContainer1.Panel1.Controls.Add(this.maleRB);
+            this.splitContainer1.Panel1.Controls.Add(this.breedBox);
+            this.splitContainer1.Panel1.Controls.Add(this.speciesBox);
             // 
             // splitContainer1.Panel2
             // 
@@ -210,13 +222,13 @@
             this.dataGridView1.TabIndex = 29;
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.loadSelected);
             // 
-            // ownerSearchTextBox
+            // ownerName
             // 
-            this.ownerSearchTextBox.Location = new System.Drawing.Point(135, 55);
-            this.ownerSearchTextBox.Name = "ownerSearchTextBox";
-            this.ownerSearchTextBox.Size = new System.Drawing.Size(100, 20);
-            this.ownerSearchTextBox.TabIndex = 7;
-            this.ownerSearchTextBox.Text = "Owner";
+            this.ownerName.Location = new System.Drawing.Point(135, 55);
+            this.ownerName.Name = "ownerName";
+            this.ownerName.Size = new System.Drawing.Size(100, 20);
+            this.ownerName.TabIndex = 7;
+            this.ownerName.Text = "Owner";
             // 
             // label1
             // 
@@ -227,15 +239,16 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Status";
             // 
-            // statusChecklistbox
+            // statusBox
             // 
-            this.statusChecklistbox.FormattingEnabled = true;
-            this.statusChecklistbox.Items.AddRange(new object[] {
+            this.statusBox.FormattingEnabled = true;
+            this.statusBox.Items.AddRange(new object[] {
             "Lost",
             "Found",
             "Surrendered",
             "Adopted",
             "Fostered"});
+<<<<<<< HEAD
             this.statusChecklistbox.Location = new System.Drawing.Point(9, 71);
             this.statusChecklistbox.Name = "statusChecklistbox";
             this.statusChecklistbox.Size = new System.Drawing.Size(120, 79);
@@ -280,6 +293,52 @@
             this.speciesComboBox.Size = new System.Drawing.Size(121, 21);
             this.speciesComboBox.TabIndex = 0;
             this.speciesComboBox.Text = "Species";
+=======
+            this.statusBox.Location = new System.Drawing.Point(9, 71);
+            this.statusBox.Name = "statusBox";
+            this.statusBox.Size = new System.Drawing.Size(120, 79);
+            this.statusBox.TabIndex = 5;
+            // 
+            // femaleRB
+            // 
+            this.femaleRB.AutoSize = true;
+            this.femaleRB.Location = new System.Drawing.Point(132, 32);
+            this.femaleRB.Name = "femaleRB";
+            this.femaleRB.Size = new System.Drawing.Size(59, 17);
+            this.femaleRB.TabIndex = 3;
+            this.femaleRB.TabStop = true;
+            this.femaleRB.Text = "Female";
+            this.femaleRB.UseVisualStyleBackColor = true;
+            // 
+            // maleRB
+            // 
+            this.maleRB.AutoSize = true;
+            this.maleRB.Location = new System.Drawing.Point(132, 7);
+            this.maleRB.Name = "maleRB";
+            this.maleRB.Size = new System.Drawing.Size(48, 17);
+            this.maleRB.TabIndex = 2;
+            this.maleRB.TabStop = true;
+            this.maleRB.Text = "Male";
+            this.maleRB.UseVisualStyleBackColor = true;
+            // 
+            // breedBox
+            // 
+            this.breedBox.FormattingEnabled = true;
+            this.breedBox.Location = new System.Drawing.Point(5, 31);
+            this.breedBox.Name = "breedBox";
+            this.breedBox.Size = new System.Drawing.Size(121, 21);
+            this.breedBox.TabIndex = 1;
+            this.breedBox.Text = "Breed";
+            // 
+            // speciesBox
+            // 
+            this.speciesBox.FormattingEnabled = true;
+            this.speciesBox.Location = new System.Drawing.Point(5, 3);
+            this.speciesBox.Name = "speciesBox";
+            this.speciesBox.Size = new System.Drawing.Size(121, 21);
+            this.speciesBox.TabIndex = 0;
+            this.speciesBox.Text = "Species";
+>>>>>>> development
             // 
             // CommentsPanel
             // 
@@ -346,6 +405,100 @@
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // StatusPanel
+<<<<<<< HEAD
+=======
+            // 
+            this.StatusPanel.Controls.Add(this.litterTextBox);
+            this.StatusPanel.Controls.Add(this.animalMainPictureBox);
+            this.StatusPanel.Controls.Add(this.coatTextBox);
+            this.StatusPanel.Controls.Add(this.sterilizedCheckBox);
+            this.StatusPanel.Controls.Add(this.ownerTextBox);
+            this.StatusPanel.Controls.Add(this.vaccCheckBox);
+            this.StatusPanel.Controls.Add(this.crossBreedTextBox);
+            this.StatusPanel.Controls.Add(this.sexTestBox);
+            this.StatusPanel.Controls.Add(this.breedTextBox);
+            this.StatusPanel.Controls.Add(this.sexLabel);
+            this.StatusPanel.Controls.Add(this.locationTextBox);
+            this.StatusPanel.Controls.Add(this.colorLabel);
+            this.StatusPanel.Controls.Add(this.sizeTextBox);
+            this.StatusPanel.Controls.Add(this.dobEstimateCheckBox);
+            this.StatusPanel.Controls.Add(this.sizeLabel);
+            this.StatusPanel.Controls.Add(this.crossbreedCheckBox);
+            this.StatusPanel.Controls.Add(this.ColorTextBox);
+            this.StatusPanel.Controls.Add(this.label13);
+            this.StatusPanel.Controls.Add(this.nameLabel);
+            this.StatusPanel.Controls.Add(this.label9);
+            this.StatusPanel.Controls.Add(this.idTextBox);
+            this.StatusPanel.Controls.Add(this.label8);
+            this.StatusPanel.Controls.Add(this.idLabel);
+            this.StatusPanel.Controls.Add(this.label7);
+            this.StatusPanel.Controls.Add(this.nameTextBox);
+            this.StatusPanel.Controls.Add(this.locationLabel);
+            this.StatusPanel.Controls.Add(this.dobLabel);
+            this.StatusPanel.Controls.Add(this.dobTextBox);
+            this.StatusPanel.Location = new System.Drawing.Point(3, 3);
+            this.StatusPanel.Name = "StatusPanel";
+            this.StatusPanel.Size = new System.Drawing.Size(355, 340);
+            this.StatusPanel.TabIndex = 38;
+            // 
+            // litterTextBox
+            // 
+            this.litterTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.litterTextBox.Location = new System.Drawing.Point(82, 313);
+            this.litterTextBox.Name = "litterTextBox";
+            this.litterTextBox.ReadOnly = true;
+            this.litterTextBox.Size = new System.Drawing.Size(100, 20);
+            this.litterTextBox.TabIndex = 37;
+            // 
+            // animalMainPictureBox
+            // 
+            this.animalMainPictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.animalMainPictureBox.Location = new System.Drawing.Point(3, 4);
+            this.animalMainPictureBox.Name = "animalMainPictureBox";
+            this.animalMainPictureBox.Size = new System.Drawing.Size(135, 123);
+            this.animalMainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.animalMainPictureBox.TabIndex = 0;
+            this.animalMainPictureBox.TabStop = false;
+            // 
+            // coatTextBox
+            // 
+            this.coatTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.coatTextBox.Location = new System.Drawing.Point(82, 287);
+            this.coatTextBox.Name = "coatTextBox";
+            this.coatTextBox.ReadOnly = true;
+            this.coatTextBox.Size = new System.Drawing.Size(100, 20);
+            this.coatTextBox.TabIndex = 36;
+            // 
+            // sterilizedCheckBox
+            // 
+            this.sterilizedCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.sterilizedCheckBox.AutoSize = true;
+            this.sterilizedCheckBox.Location = new System.Drawing.Point(144, 5);
+            this.sterilizedCheckBox.Name = "sterilizedCheckBox";
+            this.sterilizedCheckBox.Size = new System.Drawing.Size(68, 17);
+            this.sterilizedCheckBox.TabIndex = 24;
+            this.sterilizedCheckBox.Text = "Sterilized";
+            this.sterilizedCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // ownerTextBox
+            // 
+            this.ownerTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ownerTextBox.Location = new System.Drawing.Point(82, 230);
+            this.ownerTextBox.Name = "ownerTextBox";
+            this.ownerTextBox.ReadOnly = true;
+            this.ownerTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ownerTextBox.TabIndex = 35;
+            // 
+            // vaccCheckBox
+>>>>>>> development
             // 
             this.StatusPanel.Controls.Add(this.litterTextBox);
             this.StatusPanel.Controls.Add(this.animalMainPictureBox);
@@ -412,8 +565,75 @@
             this.coatTextBox.Size = new System.Drawing.Size(100, 20);
             this.coatTextBox.TabIndex = 36;
             // 
-            // sterilizedCheckBox
+            // crossBreedTextBox
             // 
+            this.crossBreedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.crossBreedTextBox.Location = new System.Drawing.Point(246, 263);
+            this.crossBreedTextBox.Name = "crossBreedTextBox";
+            this.crossBreedTextBox.ReadOnly = true;
+            this.crossBreedTextBox.Size = new System.Drawing.Size(100, 20);
+            this.crossBreedTextBox.TabIndex = 34;
+            // 
+            // sexTestBox
+            // 
+            this.sexTestBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.sexTestBox.Location = new System.Drawing.Point(230, 45);
+            this.sexTestBox.Name = "sexTestBox";
+            this.sexTestBox.ReadOnly = true;
+            this.sexTestBox.Size = new System.Drawing.Size(100, 20);
+            this.sexTestBox.TabIndex = 29;
+            // 
+            // breedTextBox
+            // 
+            this.breedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.breedTextBox.Location = new System.Drawing.Point(82, 260);
+            this.breedTextBox.Name = "breedTextBox";
+            this.breedTextBox.ReadOnly = true;
+            this.breedTextBox.Size = new System.Drawing.Size(100, 20);
+            this.breedTextBox.TabIndex = 33;
+            // 
+            // sexLabel
+            // 
+            this.sexLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.sexLabel.AutoSize = true;
+            this.sexLabel.Location = new System.Drawing.Point(144, 48);
+            this.sexLabel.Name = "sexLabel";
+            this.sexLabel.Size = new System.Drawing.Size(25, 13);
+            this.sexLabel.TabIndex = 17;
+            this.sexLabel.Text = "Sex";
+            // 
+            // locationTextBox
+            // 
+            this.locationTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.locationTextBox.Location = new System.Drawing.Point(82, 204);
+            this.locationTextBox.Name = "locationTextBox";
+            this.locationTextBox.ReadOnly = true;
+            this.locationTextBox.Size = new System.Drawing.Size(100, 20);
+            this.locationTextBox.TabIndex = 32;
+            // 
+            // colorLabel
+            // 
+            this.colorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.colorLabel.AutoSize = true;
+            this.colorLabel.Location = new System.Drawing.Point(144, 71);
+            this.colorLabel.Name = "colorLabel";
+            this.colorLabel.Size = new System.Drawing.Size(31, 13);
+            this.colorLabel.TabIndex = 18;
+            this.colorLabel.Text = "Color";
+            // 
+<<<<<<< HEAD
             this.sterilizedCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -424,6 +644,18 @@
             this.sterilizedCheckBox.TabIndex = 24;
             this.sterilizedCheckBox.Text = "Sterilized";
             this.sterilizedCheckBox.UseVisualStyleBackColor = true;
+=======
+            // sizeTextBox
+            // 
+            this.sizeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.sizeTextBox.Location = new System.Drawing.Point(230, 94);
+            this.sizeTextBox.Name = "sizeTextBox";
+            this.sizeTextBox.ReadOnly = true;
+            this.sizeTextBox.Size = new System.Drawing.Size(100, 20);
+            this.sizeTextBox.TabIndex = 31;
+>>>>>>> development
             // 
             // ownerTextBox
             // 
@@ -544,9 +776,15 @@
             // 
             // sizeLabel
             // 
+<<<<<<< HEAD
             this.sizeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+=======
+            this.sizeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+>>>>>>> development
             this.sizeLabel.AutoSize = true;
             this.sizeLabel.Location = new System.Drawing.Point(144, 97);
             this.sizeLabel.Name = "sizeLabel";
@@ -570,9 +808,15 @@
             // 
             // ColorTextBox
             // 
+<<<<<<< HEAD
             this.ColorTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+=======
+            this.ColorTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+>>>>>>> development
             this.ColorTextBox.Location = new System.Drawing.Point(230, 68);
             this.ColorTextBox.Name = "ColorTextBox";
             this.ColorTextBox.ReadOnly = true;
@@ -593,9 +837,15 @@
             // 
             // nameLabel
             // 
+<<<<<<< HEAD
             this.nameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+=======
+            this.nameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+>>>>>>> development
             this.nameLabel.AutoSize = true;
             this.nameLabel.Location = new System.Drawing.Point(16, 135);
             this.nameLabel.Name = "nameLabel";
@@ -617,9 +867,15 @@
             // 
             // idTextBox
             // 
+<<<<<<< HEAD
             this.idTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+=======
+            this.idTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+>>>>>>> development
             this.idTextBox.Location = new System.Drawing.Point(82, 158);
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.ReadOnly = true;
@@ -640,9 +896,15 @@
             // 
             // idLabel
             // 
+<<<<<<< HEAD
             this.idLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+=======
+            this.idLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+>>>>>>> development
             this.idLabel.AutoSize = true;
             this.idLabel.Location = new System.Drawing.Point(16, 161);
             this.idLabel.Name = "idLabel";
@@ -664,9 +926,15 @@
             // 
             // nameTextBox
             // 
+<<<<<<< HEAD
             this.nameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+=======
+            this.nameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+>>>>>>> development
             this.nameTextBox.Location = new System.Drawing.Point(82, 132);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.ReadOnly = true;
@@ -699,9 +967,15 @@
             // 
             // dobTextBox
             // 
+<<<<<<< HEAD
             this.dobTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+=======
+            this.dobTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+>>>>>>> development
             this.dobTextBox.Location = new System.Drawing.Point(82, 183);
             this.dobTextBox.Name = "dobTextBox";
             this.dobTextBox.ReadOnly = true;
@@ -870,6 +1144,7 @@
             this.newFormToolStripMenuItem.Text = "New Form";
             this.newFormToolStripMenuItem.Click += new System.EventHandler(this.newFormToolStripMenuItem_Click);
             // 
+<<<<<<< HEAD
             // label3
             // 
             this.label3.AutoSize = true;
@@ -879,6 +1154,8 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Data to Graph";
             // 
+=======
+>>>>>>> development
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -925,13 +1202,13 @@
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TextBox ownerSearchTextBox;
+        private System.Windows.Forms.TextBox ownerName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckedListBox statusChecklistbox;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.ComboBox breedComboBox;
-        private System.Windows.Forms.ComboBox speciesComboBox;
+        private System.Windows.Forms.CheckedListBox statusBox;
+        private System.Windows.Forms.RadioButton femaleRB;
+        private System.Windows.Forms.RadioButton maleRB;
+        private System.Windows.Forms.ComboBox breedBox;
+        private System.Windows.Forms.ComboBox speciesBox;
         private System.Windows.Forms.PictureBox animalMainPictureBox;
         private System.Windows.Forms.Button adoptButton;
         private System.Windows.Forms.Button addRecordButton;

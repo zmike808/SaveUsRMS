@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace RSRD
 {
@@ -129,7 +130,14 @@ namespace RSRD
             //this hardcoding....well it works for now....
             this.ID = (int)a[0];
             this.Name = (string)a[1];
-            this.dob = DateTime.Parse((string)a[2]);
+            try
+            {
+                this.dob = DateTime.Parse((string)a[2]);
+            }
+            catch
+            {
+                MessageBox.Show((string)a[2]);
+            }
             this.image = (string)a[3];
             this.dobEstimate = Convert.ToBoolean(a[4]);
             this.vacc = DateTime.Parse((string)a[5]);

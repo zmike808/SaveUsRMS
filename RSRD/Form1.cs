@@ -251,12 +251,16 @@ namespace RSRD
 
         }
 
-        private void CreatePie(GraphPane myPane, List<Animal> animals, string dataType)
+        private void createPie(GraphPane myPane, List<Animal> animals, string dataType)
         {
+            myPane.IsFontsScaled = false;
+            myPane.Fill = new Fill(Color.White, Color.LightGray, 45.0f);
+            // No fill for the chart background
+            myPane.Chart.Fill.Type = FillType.None;
+
             double o = 0; //offset
             int c = 0; //color counter
-            Color[] colors = { Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Purple, Color.Cyan, Color.SeaGreen, Color.MistyRose, Color.RosyBrown, Color.Sienna, Color.MintCream, Color.Navy, Color.Orange, Color.OldLace, Color.Olive }; //slice color array
-
+            Color[] colors = { Color.Red, Color.Blue, Color.Green, Color.Yellow, Color.Purple, Color.Cyan, Color.SeaGreen, Color.MistyRose, Color.RosyBrown, Color.Sienna, Color.MintCream, Color.Navy, Color.Orange, Color.OldLace, Color.Olive }; //slice color array
 
             //creates and fills a dictionary of dataType and integer of occurences
             Dictionary<String, int> dataCount = new Dictionary<string, int>();
@@ -277,9 +281,55 @@ namespace RSRD
             //adds pie slice for each key in dictionary
             foreach (KeyValuePair<string, int> entry in dataCount)
             {
-                myPane.AddPieSlice(entry.Value, colors[c], o, entry.Key); //add slice
+                myPane.AddPieSlice(entry.Value, Color.White, colors[c],45f, o, entry.Key); //add slice
                 c++; //iterating through color array to differentiate slice colors
             }
+            //myPane.Chart.Fill = new Fill(Color.White, Color.FromArgb(220, 220, 255), 45);
+            //myPane.Fill = new Fill(Color.White, Color.FromArgb(255, 255, 225), 45);
+            myPane.AxisChange();
+            zg1.Invalidate();
+        }
+
+        private void createBar(GraphPane myPane,List<Animal> animals, string dataType)
+        {
+            myPane.XAxis.IsVisible = true;
+            myPane.YAxis.IsVisible = true;
+            myPane.XAxis.Title.Text = "Date of Birth";
+            myPane.YAxis.Title.Text = "Animals";
+            myPane.YAxis.Scale.Format = "#";
+
+            PointPairList list = new PointPairList();
+            Dictionary<int, int> ageCount = new Dictionary<int, int>();
+            for (int i = 0; i < animals.Count; i++)
+            {
+                int a = animals[i].dob.Year;
+                if (ageCount.ContainsKey(a))
+                    ageCount[a]++;
+                else
+                    ageCount.Add(a, 1);
+            }
+            int c = 0;
+            double z=0;
+            foreach(KeyValuePair<int,int> entry in ageCount)
+            {
+                z = c / 4.0;
+                list.Add(entry.Key,entry.Value,z);
+                c++; //color increment
+            }
+
+            BarItem myCurve = myPane.AddBar("Multi-Colored Bars", list, Color.Blue);
+            Color[] colors = { Color.Red, Color.Yellow, Color.Green, Color.Blue, Color.Purple};
+            //Color[] colors = { Color.Red, Color.Blue, Color.Green };
+            myCurve.Bar.Fill = new Fill(colors);
+            myCurve.Bar.Fill.Type = FillType.GradientByZ;
+
+            myCurve.Bar.Fill.RangeMin = 0;
+            myCurve.Bar.Fill.RangeMax = 10;
+
+            myPane.Chart.Fill = new Fill(Color.White, Color.FromArgb(220, 220, 255), 45);
+            myPane.Fill = new Fill(Color.White, Color.FromArgb(255, 255, 225), 45);
+            myPane.Legend.IsVisible = false;
+
             myPane.AxisChange();
             zg1.Invalidate();
         }
@@ -311,13 +361,15 @@ namespace RSRD
             if (select == "Bar Chart")
             {
                 List<string> barType = new List<string>();
-                barType.Add("Nothing to see here");
+                barType.Add("Date of Birth");
                 listBox2.DataSource = barType;
+
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+           
             //load animal list
             MySQLHandler dbh = new MySQLHandler();
             List<Animal> listanimals = dbh.loadAnimals().ToList();
@@ -331,17 +383,26 @@ namespace RSRD
                 if (select == "Species")
                 {
                     myPane.Title.Text = "Species Breakdown";
-                    CreatePie(myPane, listanimals, select);
+                    createPie(myPane, listanimals, select);
                 }
                 if (select == "Gender")
                 {
                     myPane.Title.Text = "Gender Breakdown";
-                    CreatePie(myPane, listanimals, select);
+                    createPie(myPane, listanimals, select);
                 }
                 if (select == "Date of Birth")
                 {
                     myPane.Title.Text = "Date of Birth Breakdown";
-                    CreatePie(myPane, listanimals, select);
+                    createPie(myPane, listanimals, select);
+                }
+            }
+            if (graphselect == "Bar Chart") //create bar chart
+            {
+                string select = listBox2.SelectedItem.ToString();
+                if(select=="Date of Birth")
+                {
+                    myPane.Title.Text = "Date of Birth Breakdown";
+                    createBar(myPane, listanimals, select);
                 }
             }
         }

@@ -253,14 +253,14 @@ namespace RSRD
 
         private void createPie(GraphPane myPane, List<Animal> animals, string dataType)
         {
-            myPane.IsFontsScaled = false;
+            myPane.Legend.IsVisible = true;
+            //myPane.IsFontsScaled = false;
             myPane.Fill = new Fill(Color.White, Color.LightGray, 45.0f);
             // No fill for the chart background
             myPane.Chart.Fill.Type = FillType.None;
 
             double o = 0; //offset
-            int c = 0; //color counter
-            Color[] colors = { Color.Red, Color.Blue, Color.Green, Color.Yellow, Color.Purple, Color.Cyan, Color.SeaGreen, Color.MistyRose, Color.RosyBrown, Color.Sienna, Color.MintCream, Color.Navy, Color.Orange, Color.OldLace, Color.Olive }; //slice color array
+            int c = 0; //color index
 
             //creates and fills a dictionary of dataType and integer of occurences
             Dictionary<String, int> dataCount = new Dictionary<string, int>();
@@ -271,21 +271,21 @@ namespace RSRD
                     s = animals[i].species.ToString();
                 else if (dataType == "Gender")
                     s = animals[i].female == false ? "Male" : "Female"; //gets gender strings
-                else if (dataType == "Date of Birth")
+                else if (dataType == "Birthday")
                     s = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(animals[i].dob.Month); //gets month strings
                 if (dataCount.ContainsKey(s))
                     dataCount[s]++; //increment key
                 else
                     dataCount.Add(s, 1); //add new key
             }
+            Color[] colors = genColors(dataCount.Count); //generate colors
+
             //adds pie slice for each key in dictionary
             foreach (KeyValuePair<string, int> entry in dataCount)
             {
-                myPane.AddPieSlice(entry.Value, Color.White, colors[c],45f, o, entry.Key); //add slice
+                myPane.AddPieSlice(entry.Value, Color.White, colors[c], 45f, o, entry.Key); //add slice
                 c++; //iterating through color array to differentiate slice colors
             }
-            //myPane.Chart.Fill = new Fill(Color.White, Color.FromArgb(220, 220, 255), 45);
-            //myPane.Fill = new Fill(Color.White, Color.FromArgb(255, 255, 225), 45);
             myPane.AxisChange();
             zg1.Invalidate();
         }
@@ -294,32 +294,32 @@ namespace RSRD
         {
             myPane.XAxis.IsVisible = true;
             myPane.YAxis.IsVisible = true;
-            myPane.XAxis.Title.Text = "Date of Birth";
-            myPane.YAxis.Title.Text = "Animals";
-            myPane.YAxis.Scale.Format = "#";
-
             PointPairList list = new PointPairList();
-            Dictionary<int, int> ageCount = new Dictionary<int, int>();
+            Dictionary<int, int> dataCount = new Dictionary<int, int>();
             for (int i = 0; i < animals.Count; i++)
             {
-                int a = animals[i].dob.Year;
-                if (ageCount.ContainsKey(a))
-                    ageCount[a]++;
+                int a = 0;
+                if (dataType == "Date of Birth")
+                    a = animals[i].dob.Year;
+                else if (dataType == "Age")
+                    a = DateTime.Now.Year - animals[i].dob.Year;
+                if (dataCount.ContainsKey(a))
+                    dataCount[a]++;
                 else
-                    ageCount.Add(a, 1);
+                    dataCount.Add(a, 1);
             }
             int c = 0;
-            double z=0;
-            foreach(KeyValuePair<int,int> entry in ageCount)
+            double z = 0;
+            foreach (KeyValuePair<int, int> entry in dataCount)
             {
                 z = c / 4.0;
-                list.Add(entry.Key,entry.Value,z);
+                list.Add(entry.Key, entry.Value, z);
                 c++; //color increment
             }
 
-            BarItem myCurve = myPane.AddBar("Multi-Colored Bars", list, Color.Blue);
-            Color[] colors = { Color.Red, Color.Yellow, Color.Green, Color.Blue, Color.Purple};
-            //Color[] colors = { Color.Red, Color.Blue, Color.Green };
+            BarItem myCurve = myPane.AddBar(dataType, list, Color.Blue);
+            //Color[] colors = genColors(dataCount.Count);
+            Color[] colors = { Color.Red, Color.Yellow, Color.Green, Color.Blue, Color.Purple };
             myCurve.Bar.Fill = new Fill(colors);
             myCurve.Bar.Fill.Type = FillType.GradientByZ;
 
@@ -328,7 +328,7 @@ namespace RSRD
 
             myPane.Chart.Fill = new Fill(Color.White, Color.FromArgb(220, 220, 255), 45);
             myPane.Fill = new Fill(Color.White, Color.FromArgb(255, 255, 225), 45);
-            myPane.Legend.IsVisible = false;
+            //myPane.Legend.IsVisible = false;
 
             myPane.AxisChange();
             zg1.Invalidate();
@@ -345,7 +345,6 @@ namespace RSRD
             List<Animal> listanimals = dbh.loadAnimals().ToList();
         }
 
-
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             //fill listBox1 & corresponding listBox2
@@ -355,13 +354,14 @@ namespace RSRD
                 List<string> pieType = new List<string>();
                 pieType.Add("Species");
                 pieType.Add("Gender");
-                pieType.Add("Date of Birth");
+                pieType.Add("Birthday");
                 listBox2.DataSource = pieType;
             }
             if (select == "Bar Chart")
             {
                 List<string> barType = new List<string>();
                 barType.Add("Date of Birth");
+                barType.Add("Age");
                 listBox2.DataSource = barType;
 
             }
@@ -402,11 +402,99 @@ namespace RSRD
                 if(select=="Date of Birth")
                 {
                     myPane.Title.Text = "Date of Birth Breakdown";
+                    myPane.XAxis.Title.Text = "Birthday";
+                    myPane.YAxis.Title.Text = "Animals";
+                    myPane.YAxis.Scale.Format = "#";
                     createBar(myPane, listanimals, select);
+                }
+                if(select=="Age")
+                {
+                    myPane.Title.Text = "Age Breakdown";
+                    myPane.XAxis.Title.Text="Age";
+                    myPane.YAxis.Title.Text="Animals";
+                    myPane.YAxis.Scale.Format="#";
+                    createBar(myPane,listanimals,select);
                 }
             }
         }
 
+
+        // Given H,S,L in range of 0-1
+        // Returns a Color (RGB struct) in range of 0-255
+        public static Color HSL2RGB(double h, double sl, double l)
+        {
+            double v;
+            double r, g, b;
+
+            r = l;   // default to gray
+            g = l;
+            b = l;
+            v = (l <= 0.5) ? (l * (1.0 + sl)) : (l + sl - l * sl);
+            if (v > 0)
+            {
+                double m;
+                double sv;
+                int sextant;
+                double fract, vsf, mid1, mid2;
+
+                m = l + l - v;
+                sv = (v - m) / v;
+                h *= 6.0;
+                sextant = (int)h;
+                fract = h - sextant;
+                vsf = v * sv * fract;
+                mid1 = m + vsf;
+                mid2 = v - vsf;
+                switch (sextant)
+                {
+                    case 0:
+                        r = v;
+                        g = mid1;
+                        b = m;
+                        break;
+                    case 1:
+                        r = mid2;
+                        g = v;
+                        b = m;
+                        break;
+                    case 2:
+                        r = m;
+                        g = v;
+                        b = mid1;
+                        break;
+                    case 3:
+                        r = m;
+                        g = mid2;
+                        b = v;
+                        break;
+                    case 4:
+                        r = mid1;
+                        g = m;
+                        b = v;
+                        break;
+                    case 5:
+                        r = v;
+                        g = m;
+                        b = mid2;
+                        break;
+                }
+            }
+            Color rgb;
+            rgb = Color.FromArgb(Convert.ToByte(r * 255.0f), Convert.ToByte(g * 255.0f), Convert.ToByte(b * 255.0f));
+            return rgb;
+        }
+
+
+        private Color[] genColors(int s)
+        {
+
+            Color[] colors= new Color[100];
+            for (int i = 0; i < s; i++)
+            {
+                colors[i] = HSL2RGB(i / (double)s, 0.9, 0.4);
+            }
+                return colors;
+        }
         private void zg1_Load(object sender, EventArgs e)
         {
 

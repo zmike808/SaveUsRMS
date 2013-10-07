@@ -328,7 +328,7 @@ namespace RSRD
 
             myPane.Chart.Fill = new Fill(Color.White, Color.FromArgb(220, 220, 255), 45);
             myPane.Fill = new Fill(Color.White, Color.FromArgb(255, 255, 225), 45);
-            //myPane.Legend.IsVisible = false;
+            myPane.Legend.IsVisible = false;
 
             myPane.AxisChange();
             zg1.Invalidate();
@@ -390,9 +390,9 @@ namespace RSRD
                     myPane.Title.Text = "Gender Breakdown";
                     createPie(myPane, listanimals, select);
                 }
-                if (select == "Date of Birth")
+                if (select == "Birthday")
                 {
-                    myPane.Title.Text = "Date of Birth Breakdown";
+                    myPane.Title.Text = "Birthday Breakdown";
                     createPie(myPane, listanimals, select);
                 }
             }

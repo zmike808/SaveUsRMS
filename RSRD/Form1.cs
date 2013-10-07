@@ -336,6 +336,7 @@ namespace RSRD
 
         private void TabControl1_Enter(object sender, EventArgs e)
         {
+            zg1.Visible = false;
             List<string> graphType = new List<string>();
             graphType.Add("Pie Chart");
             graphType.Add("Bar Chart");
@@ -369,7 +370,7 @@ namespace RSRD
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+            zg1.Visible = true;
             //load animal list
             MySQLHandler dbh = new MySQLHandler();
             List<Animal> listanimals = dbh.loadAnimals().ToList();

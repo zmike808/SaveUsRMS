@@ -315,6 +315,7 @@ namespace RSRD
 
                         for (int i = 0; i < dataReader.FieldCount; i++)
                         {
+                         //   dataReader.
                             selectResult.Add(dataReader.GetName(i).ToString(), dataReader.GetValue(i).ToString());
                         }
 
@@ -381,6 +382,37 @@ namespace RSRD
                    bindedanimals.Add(a);
                 }
 
+                return bindedanimals;
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                Close();
+            }
+            return null;
+        }
+
+        public BindingList<Animal> loadAnimals(string constrants)
+        {
+            try
+            {
+                // - DEBUG 
+                // MessageBox.Show("Connection successful!"); 
+                MySqlDataAdapter MyDA = new MySqlDataAdapter();
+                string cmdstr = "SELECT * FROM `animal` WHERE " + constrants;
+                MessageBox.Show(cmdstr);
+                MyDA.SelectCommand = new MySqlCommand(cmdstr, conn);
+                DataTable table = new DataTable();
+                MyDA.Fill(table);
+                
+                BindingList<Animal> bindedanimals = new BindingList<Animal>();
+                foreach (DataRow row in table.Rows)
+                {
+                    Animal a = new Animal(row.ItemArray);
+                    bindedanimals.Add(a);
+                }
+
+                MessageBox.Show(table.Rows.Count.ToString());
                 return bindedanimals;
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)

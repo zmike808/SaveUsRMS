@@ -99,12 +99,12 @@ namespace RSRD
             
         }
 
-        //checks all constraints and eliminates the non-valid animals
-        public List<Animal> searchBy(List<Animal> original) 
-        {
-            List<Animal> culled = original;
-            return culled;
-        }
+        ////checks all constraints and eliminates the non-valid animals
+        //public List<Animal> searchBy(List<Animal> original) 
+        //{
+        //    List<Animal> culled = original;
+        //    return culled;
+        //}
 
         public Form1()
         {
@@ -117,12 +117,12 @@ namespace RSRD
 
         }
 
-        private string searchParameters()
+      /*  private string searchParameters()
         {
             string species = "species = ";
             species += (speciesComboBox.SelectedValue.ToString() == null) ? "*" : speciesComboBox.SelectedValue.ToString();
             string breed = "breed = ";
-            breed += (breedComboBox.SelectedValue.ToString() == null) ? "*" : breedComboBox.SelectedValue.ToString();
+            breed += (sizeComboBox.SelectedValue.ToString() == null) ? "*" : sizeComboBox.SelectedValue.ToString();
             //List<string> statuses = new List<string>();
             //for (int x = 0; x < statusBox.Items.Count; x++)
             //{
@@ -151,8 +151,8 @@ namespace RSRD
             owner += (ownerSearchTextBox.Text == null) ? "*" : ownerSearchTextBox.Text;
 
             string returnstr = species + " " + breed + " " + gender + " " + owner + " ";
-            return returnstr;
-        }
+           // return returnstr;
+        }*/
 
 
 
@@ -228,6 +228,65 @@ namespace RSRD
             }
 
         }
+        public void searchHandler(string comp)
+        {
+            string speciesState = (speciesComboBox.SelectedItem == null) ? "" : speciesComboBox.SelectedItem.ToString();
+            string sizeState = (sizeComboBox.SelectedItem == null) ? "" : sizeComboBox.SelectedItem.ToString();
+            string statusState = (statusComboBox.SelectedItem == null) ? "" : statusComboBox.SelectedItem.ToString();
+            string genderState = (genderComboBox.SelectedItem == null) ? "" : genderComboBox.SelectedItem.ToString();
+            if (genderState == "Male")
+            {
+                genderState = "false";
+            }
+            else if (genderState == "Female")
+            {
+                genderState = "true";
+            }
+            comp = " " + comp + " ";
+            //var ownerState = ownerSearchTextBox.Text;
+            string query = "";
+            MySQLHandler dbh = new MySQLHandler();
+            int prevqlen = 0;
+            //dont judge, it gets shit done.
+            if (speciesState != "")
+            {
+                query += "species='" + speciesState + "'";
+            }
+
+            if (query.Length > prevqlen && sizeState != "")
+            {
+                prevqlen = query.Length;
+                query += comp + "size='" + sizeState + "'";
+            }
+            else if (sizeState != "")
+            {
+                query += "size='" + sizeState + "'";
+            }
+
+            if (query.Length > prevqlen && statusState != "")
+            {
+                prevqlen = query.Length;
+                query += comp + "status='" + statusState + "'";
+            }
+            else if (statusState != "")
+            {
+                query += "status='" + statusState + "'";
+            }
+
+            if (query.Length > prevqlen && genderState != "")
+            {
+                prevqlen = query.Length;
+                query += comp + "female='" + genderState + "'";
+            }
+            else if (genderState != "")
+            {
+                query += "female='" + genderState + "'";
+            }
+            if (query != "")
+            {
+                dataGridView1.DataSource = dbh.loadAnimals(query);
+            }
+        }
 
         /// <summary>
         /// should bring up a a form for animal creation,
@@ -248,7 +307,7 @@ namespace RSRD
         /// <param name="e"></param>
         private void SearchButton_Click(object sender, EventArgs e)
         {
-
+            searchHandler("AND");
         }
 
         private void createPie(GraphPane myPane, List<Animal> animals, string dataType)
@@ -499,6 +558,16 @@ namespace RSRD
         private void zg1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            searchHandler("OR");
         }
 
     }

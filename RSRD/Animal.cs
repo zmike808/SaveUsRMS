@@ -6,22 +6,24 @@ using System.Windows.Forms;
 
 namespace RSRD
 {
+  
+        
     public class Animal
     {
         //variables that are public properties will automagically be picked up by the datagridview
-        public enum Species 
+        public enum Species
         {
             Canine,
             Feline,
             Horse
         }
-        public enum Size 
+        public enum Size
         {
             Small,
             Medium,
             Large
         }
-        public enum Status 
+        public enum Status
         {
             Lost,
             Found,
@@ -29,7 +31,11 @@ namespace RSRD
             Adopted,
             Fostered
         }
-        
+        public enum Gender
+        {
+            Male,
+            Female
+        }
         //all of the records associated with this particular animal
         public List<Record> records;
 

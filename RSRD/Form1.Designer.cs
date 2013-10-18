@@ -830,19 +830,7 @@
             // 
             // genderBindingSource
             // 
-            this.genderBindingSource.DataSource = typeof(RSRD.Animal.Gender);
-            // 
-            // statusBindingSource
-            // 
-            this.statusBindingSource.DataSource = typeof(RSRD.Animal.Status);
-            // 
-            // sizeBindingSource
-            // 
-            this.sizeBindingSource.DataSource = typeof(RSRD.Animal.Size);
-            // 
-            // speciesBindingSource
-            // 
-            this.speciesBindingSource.DataSource = typeof(RSRD.Animal.Species);
+         
             // 
             // statusStrip1
             // 
@@ -893,15 +881,7 @@
             // 
             // statusBindingSource1
             // 
-            this.statusBindingSource1.DataSource = typeof(RSRD.Animal.Status);
-            // 
-            // speciesBindingSource1
-            // 
-            this.speciesBindingSource1.DataSource = typeof(RSRD.Animal.Species);
-            // 
-            // speciesBindingSource2
-            // 
-            this.speciesBindingSource2.DataSource = typeof(RSRD.Animal.Species);
+        
             // 
             // button2
             // 
@@ -915,7 +895,7 @@
             // 
             // animalBindingSource
             // 
-            this.animalBindingSource.DataSource = typeof(RSRD.Animal);
+//            this.animalBindingSource.DataSource = typeof(RSRD.Animal);
             // 
             // Form1
             // 

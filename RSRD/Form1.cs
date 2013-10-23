@@ -317,9 +317,11 @@ namespace RSRD
             myPane.Fill = new Fill(Color.White, Color.LightGray, 45.0f);
             // No fill for the chart background
             myPane.Chart.Fill.Type = FillType.None;
+            myPane.Title.Text = dataType + " Breakdown";
 
             double o = 0; //offset
             int c = 0; //color index
+
 
             //creates and fills a dictionary of dataType and integer of occurences
             Dictionary<String, int> dataCount = new Dictionary<string, int>();
@@ -330,8 +332,12 @@ namespace RSRD
                     s = animals[i].species.ToString();
                 else if (dataType == "Gender")
                     s = animals[i].female == false ? "Male" : "Female"; //gets gender strings
-                else if (dataType == "Birthday")
+                else if (dataType == "Breed")
+                    s = animals[i].breed;
+                else if (dataType == "Month of Birth")
                     s = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(animals[i].dob.Month); //gets month strings
+                else if (dataType == "Year of Birth")
+                    s = animals[i].dob.Year.ToString();
                 if (dataCount.ContainsKey(s))
                     dataCount[s]++; //increment key
                 else
@@ -414,7 +420,9 @@ namespace RSRD
                 List<string> pieType = new List<string>();
                 pieType.Add("Species");
                 pieType.Add("Gender");
-                pieType.Add("Birthday");
+                pieType.Add("Breed");
+                pieType.Add("Month of Birth");
+                pieType.Add("Year of Birth");
                 listBox2.DataSource = pieType;
             }
             if (select == "Bar Chart")
@@ -440,21 +448,7 @@ namespace RSRD
             if (graphselect == "Pie Chart") //create pie chart
             {
                 string select = listBox2.SelectedItem.ToString();
-                if (select == "Species")
-                {
-                    myPane.Title.Text = "Species Breakdown";
-                    createPie(myPane, listanimals, select);
-                }
-                if (select == "Gender")
-                {
-                    myPane.Title.Text = "Gender Breakdown";
-                    createPie(myPane, listanimals, select);
-                }
-                if (select == "Birthday")
-                {
-                    myPane.Title.Text = "Birthday Breakdown";
-                    createPie(myPane, listanimals, select);
-                }
+                createPie(myPane, listanimals, select);
             }
             if (graphselect == "Bar Chart") //create bar chart
             {
@@ -547,8 +541,7 @@ namespace RSRD
 
         private Color[] genColors(int s)
         {
-
-            Color[] colors= new Color[100];
+            Color[] colors= new Color[s];
             for (int i = 0; i < s; i++)
             {
                 colors[i] = HSL2RGB(i / (double)s, 0.9, 0.4);

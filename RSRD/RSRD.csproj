@@ -142,7 +142,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    
+       <None Include="Properties\DataSources\Animal.datasource" />
+    <None Include="Properties\DataSources\Animal.Gender.datasource" />
+    <None Include="Properties\DataSources\Animal.Size.datasource" />
+    <None Include="Properties\DataSources\Animal.Species.datasource" />
+    <None Include="Properties\DataSources\Animal.Status.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.TabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -120,7 +119,7 @@
             this.TabControl1.Location = new System.Drawing.Point(0, 28);
             this.TabControl1.Name = "TabControl1";
             this.TabControl1.SelectedIndex = 0;
-            this.TabControl1.Size = new System.Drawing.Size(1440, 674);
+            this.TabControl1.Size = new System.Drawing.Size(1360, 674);
             this.TabControl1.TabIndex = 0;
             this.TabControl1.Enter += new System.EventHandler(this.TabControl1_Enter);
             // 
@@ -130,7 +129,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1432, 648);
+            this.tabPage2.Size = new System.Drawing.Size(1352, 648);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Animal";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -164,8 +163,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.addRecordButton);
             this.splitContainer1.Panel2.Controls.Add(this.viewRecordButton);
             this.splitContainer1.Panel2.ForeColor = System.Drawing.Color.Black;
-            this.splitContainer1.Size = new System.Drawing.Size(1426, 642);
-            this.splitContainer1.SplitterDistance = 376;
+            this.splitContainer1.Size = new System.Drawing.Size(1346, 642);
+            this.splitContainer1.SplitterDistance = 354;
             this.splitContainer1.TabIndex = 0;
             // 
             // button2
@@ -238,7 +237,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(368, 449);
+            this.dataGridView1.Size = new System.Drawing.Size(368, 432);
             this.dataGridView1.TabIndex = 29;
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.loadSelected);
             // 
@@ -825,7 +824,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 705);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1442, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1362, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -841,7 +840,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1442, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1362, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -864,7 +863,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1442, 727);
+            this.ClientSize = new System.Drawing.Size(1362, 727);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.TabControl1);

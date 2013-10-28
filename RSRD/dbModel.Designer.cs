@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Runtime.Serialization;
+using System.Data.EntityClient;
+using System.ComponentModel;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
+
 namespace RSRD
 {
     #region Contexts
@@ -98,7 +98,6 @@ namespace RSRD
         private ObjectSet<dbanimal> _dbanimals;
 
         #endregion
-
         #region AddTo Methods
     
         /// <summary>
@@ -118,11 +117,11 @@ namespace RSRD
         }
 
         #endregion
-
     }
+    
 
     #endregion
-
+    
     #region Entities
     
     /// <summary>
@@ -147,7 +146,6 @@ namespace RSRD
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -538,7 +536,6 @@ namespace RSRD
         partial void OnstatusChanged();
 
         #endregion
-
     
     }
     
@@ -564,7 +561,6 @@ namespace RSRD
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -835,11 +831,9 @@ namespace RSRD
         partial void OnlogoChanged();
 
         #endregion
-
     
     }
 
     #endregion
-
     
 }

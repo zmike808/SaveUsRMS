@@ -156,7 +156,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="dbModel">
+      <Diagram Name="dbModel" ZoomLevel="72">
         <EntityTypeShape EntityType="RSRD.Organization" Width="1.5" PointX="2.75" PointY="0.75" Height="3.1340950520833326" IsExpanded="true" />
         <EntityTypeShape EntityType="RSRD.dbanimal" Width="1.5" PointX="1" PointY="1.375" Height="4.0956022135416656" />
       </Diagram>

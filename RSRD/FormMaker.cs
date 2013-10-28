@@ -213,66 +213,76 @@ namespace RSRD
             {
                 location.Y = pictureBox1.Height - activeControl.Height - 1;
             }
-
-            int dy = e.Location.Y - previousLocation.Y;
-            int dx = e.Location.X - previousLocation.X;
-            
-            //checks for box collisions
-            foreach (Control c in pictureBox1.Controls)
-            {
-                if (c == activeControl)
-                    continue;
-
-
-
-                if (activeControl.Bounds.IntersectsWith(c.Bounds))
-                {
-                    #region mings code
-
-                    //bool rc = location.X + activeControl.Width + 1 >= c.Location.X;
-                    //bool lc = location.X <= c.Location.X + c.Width + 1;
-                    //bool bc = location.Y + activeControl.Height + 1 >= c.Location.Y;
-                    //bool tc = location.Y <= c.Location.Y + c.Height + 1;
-
-                    //bool up = (Math.Abs(dx) < Math.Abs(dy));
-
-                    //bool vc = (location.Y + activeControl.Height + 1 >= c.Location.Y &&
-                    //    location.Y + activeControl.Height <= c.Location.Y + c.Height + 1)
-                    //    || (location.Y >= c.Location.Y && location.Y <= c.Location.Y + c.Height);
-                    //bool hc = (location.X + activeControl.Width + 1 >= c.Location.X &&
-                    //    location.X + activeControl.Width + 1 <= c.Location.X + c.Width + 1)
-                    //    || (location.X <= c.Location.X + c.Width + 1 && location.X <= c.Location.X);
-
-                    //if (dx > 0 && rc && (vc))
-                    //{
-                    //    location.X = c.Location.X - activeControl.Width - 1;
-                    //    continue;
-                    //}
-                    //else if (dx < 0 && lc && (vc))
-                    //{
-                    //    location.X = c.Location.X + activeControl.Width + 1;
-                    //    continue;
-                    //}
-                    //if (dy > 0 && bc && (hc))
-                    //{
-                    //    location.Y = c.Location.Y - activeControl.Height - 1;
-                    //    continue;
-                    //}
-                    //else if (dy < 0 && tc && (hc))
-                    //{
-                    //    location.Y = c.Location.Y + activeControl.Height + 1;
-                    //    continue;
-                    //}
-
-                    #endregion
-                }
-            }
-
             activeControl.Location = location;
         }
 
         public void textbox_MouseUp(object sender, MouseEventArgs e)
         {
+            var location = activeControl.Location;
+            //checks for box collisions
+            List<Control> collisions = new List<Control>();
+            foreach (Control c in pictureBox1.Controls)
+            {
+                if (c == activeControl)
+                    continue;
+
+                if (activeControl.Bounds.IntersectsWith(c.Bounds))
+                {
+                    collisions.Add(c);
+                }
+            }
+            while (collisions.Count > 0)
+            {
+                foreach (Control c in collisions)
+                {
+                    int axc = location.X + (activeControl.Width / 2);
+                    int ayc = location.Y + (activeControl.Height / 2);
+                    int cxc = c.Location.X + (c.Width / 2);
+                    int cyc = c.Location.Y + (c.Height / 2);
+
+                    int xdiff = axc - cxc;
+                    int ydiff = ayc - cyc;
+
+                    if (Math.Abs(xdiff) >= Math.Abs(ydiff))
+                    {
+                        if (xdiff >= 0)
+                        {
+                            location.X = c.Location.X + c.Width + 1;
+                            break;
+                        }
+                        else
+                        {
+                            location.X = c.Location.X - activeControl.Width - 1;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (ydiff >= 0)
+                        {
+                            location.Y = c.Location.Y + c.Height + 1;
+                            break;
+                        }
+                        else
+                        {
+                            location.Y = c.Location.Y - activeControl.Height - 1;
+                            break;
+                        }
+                    }
+                }
+                activeControl.Location = location;
+                collisions.Clear();
+                foreach (Control c in pictureBox1.Controls)
+                {
+                    if (c == activeControl)
+                        continue;
+
+                    if (activeControl.Bounds.IntersectsWith(c.Bounds))
+                    {
+                        collisions.Add(c);
+                    }
+                }
+            }
             activeControl = null;
             Cursor = Cursors.Default;
         }

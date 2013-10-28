@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="dbModelStoreContainer">
+          <EntitySet Name="animal" EntityType="dbModel.Store.animal" store:Type="Tables" Schema="zemskm_saveus" />
+          <EntitySet Name="Organizations" EntityType="dbModel.Store.Organizations" store:Type="Tables" Schema="zemskm_saveus" />
+        </EntityContainer>
+        <EntityType Name="animal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="text" />
+          <Property Name="DateofBirth" Type="datetime" />
+          <Property Name="dobIsEstimated" Type="bool" />
+          <Property Name="vaccinationDate" Type="datetime" />
+          <Property Name="sterilized" Type="bool" />
+          <Property Name="gender" Type="text" />
+          <Property Name="color" Type="text" />
+          <Property Name="size" Type="text" />
+          <Property Name="breed" Type="text" />
+          <Property Name="crossbreed" Type="text" />
+          <Property Name="location" Type="text" />
+          <Property Name="owner" Type="text" />
+          <Property Name="notes" Type="text" />
+          <Property Name="species" Type="text" />
+          <Property Name="status" Type="text" />
+        </EntityType>
+        <EntityType Name="Organizations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="text" />
+          <Property Name="address" Type="text" />
+          <Property Name="phone" Type="text" />
+          <Property Name="email" Type="text" />
+          <Property Name="fax" Type="text" />
+          <Property Name="website" Type="text" />
+          <Property Name="aboutus" Type="text" />
+          <Property Name="hours" Type="text" />
+          <Property Name="servicesprovided" Type="text" />
+          <Property Name="logo" Type="blob" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RSRD" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Organizations" EntityType="RSRD.Organization" />
+          <EntitySet Name="dbanimals" EntityType="RSRD.dbanimal" />
+        </EntityContainer>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="65535" Unicode="false" FixedLength="false" />
+          <Property Name="address" Type="String" MaxLength="65535" Unicode="false" FixedLength="false" />
+          <Property Name="phone" Type="String" MaxLength="65535" Unicode="false" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="65535" Unicode="false" FixedLength="false" />
+          <Property Name="fax" Type="String" MaxLength="65535" Unicode="false" FixedLength="false" />
+          <Property Name="website" Type="String" MaxLength="65535" Unicode="false" FixedLength="false" />
+          <Property Name="aboutus" Type="String" MaxLength="65535" Unicode="false" FixedLength="false" />
+          <Property Name="hours" Type="String" MaxLength="65535" Unicode="false" FixedLength="false" />
+          <Property Name="servicesprovided" Type="String" MaxLength="65535" Unicode="false" FixedLength="false" />
+          <Property Name="logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="dbanimal" a:TypeAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DateofBirth" />
+          <Property Type="Boolean" Name="dobIsEstimated" />
+          <Property Type="DateTime" Name="vaccinationDate" />
+          <Property Type="Boolean" Name="sterilized" />
+          <Property Type="String" Name="gender" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="color" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="size" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="breed" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="crossbreed" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="location" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="owner" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="notes" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="species" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="status" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbEntities">
+          <EntitySetMapping Name="Organizations">
+            <EntityTypeMapping TypeName="RSRD.Organization">
+              <MappingFragment StoreEntitySet="Organizations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="aboutus" ColumnName="aboutus" />
+                <ScalarProperty Name="hours" ColumnName="hours" />
+                <ScalarProperty Name="servicesprovided" ColumnName="servicesprovided" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dbanimals">
+            <EntityTypeMapping TypeName="RSRD.dbanimal">
+              <MappingFragment StoreEntitySet="animal">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="species" ColumnName="species" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="crossbreed" ColumnName="crossbreed" />
+                <ScalarProperty Name="breed" ColumnName="breed" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="sterilized" ColumnName="sterilized" />
+                <ScalarProperty Name="vaccinationDate" ColumnName="vaccinationDate" />
+                <ScalarProperty Name="dobIsEstimated" ColumnName="dobIsEstimated" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="dbModel">
+        <EntityTypeShape EntityType="RSRD.Organization" Width="1.5" PointX="2.75" PointY="0.75" Height="3.1340950520833326" IsExpanded="true" />
+        <EntityTypeShape EntityType="RSRD.dbanimal" Width="1.5" PointX="1" PointY="1.375" Height="4.0956022135416656" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

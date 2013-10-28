@@ -14,7 +14,7 @@ namespace RSRD
     public class Record
     {
         //the image to show up behind the field boxes
-        Bitmap image;
+        //Bitmap image;
 
         //id of the animal or person or whatever
         public string entityID;

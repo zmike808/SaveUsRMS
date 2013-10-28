@@ -3,199 +3,179 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MySql.Data;
+using MySql.Data.Types;
+
 
 namespace RSRD
 {
-  
-        
+    /// <summary>
+    /// as of 10-28-2013 the Animal Class is basically just a wrapper for the animal db table 
+    /// this way all the code done thusfar is still usable #legacySupport #backWardsCompatible
+    /// 
+    /// </summary>
     public class Animal
     {
         //variables that are public properties will automagically be picked up by the datagridview
-        public enum Species
-        {
-            Canine,
-            Feline,
-            Horse
-        }
-        public enum Size
-        {
-            Small,
-            Medium,
-            Large
-        }
-        public enum Status
-        {
-            Lost,
-            Found,
-            Surrendered,
-            Adopted,
-            Fostered
-        }
-        public enum Gender
-        {
-            Male,
-            Female
-        }
+        //public enum Species
+        //{
+        //    Canine,
+        //    Feline,
+        //    Horse
+        //}
+        //public enum Size
+        //{
+        //    Small,
+        //    Medium,
+        //    Large
+        //}
+        //public enum Status
+        //{
+        //    Lost,
+        //    Found,
+        //    Surrendered,
+        //    Adopted,
+        //    Fostered
+        //}
+        //public enum Gender
+        //{
+        //    Male,
+        //    Female
+        //}
         //all of the records associated with this particular animal
-        public List<Record> records;
+        //public List<Record> records;
 
-        public DateTime vacc;
+        #region Class Variables
+        
+        private dbanimal local; //store the db copy of this animal
 
-        public bool sterilized;
+        public bool female; 
+        
+       
 
-        public bool female;
-
-        private string _name;
-
-        public int ID{get; set;}
+        //this should not be settable, only gettable since this is the key component in the db
+         public int ID {
+            get { return local.ID; }
+        }
 
         public string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get { return local.name; }
+            set { local.name = value; }
         }
 
-        private Species _species;
-
-        private Status _status;
-
         [System.ComponentModel.DisplayName("Status")]
-        public Status status
+        public string status
         {
-            get { return _status; }
-            set { _status = value; }
+            get { return local.status; }
+            set { local.status = value; }
         }
 
         [System.ComponentModel.DisplayName("Species")]
-        public Species species
+        public string species
         {
-            get { return _species; }
-            set { _species = value; }
+            get { return local.species; }
+            set { local.species = value; }
+        }
+        
+        public DateTime vacc;
+        //{
+        //    get { return new MySqlDateTime(local.vaccinationDate.Value).GetDateTime(); }
+        //    set { local.vaccinationDate = (DateTime?)value; }
+        //}
+
+        public bool sterilized;
+        //{
+        //    get { return local.sterilized.Value; }
+        //    set { local.sterilized = value; }
+        //}
+    
+        public string gender;
+        //{
+        //    get { return local.gender; }
+        //    set { local.gender = value; }
+        //}
+        public string color;
+        //{
+        //    get { return local.color; }
+        //    set { local.color = value; }
+        //}
+
+        public string size;
+        //{
+        //    get { return local.size; }
+        //    set { local.size = value; }
+        //}
+        
+        [System.ComponentModel.DisplayName("DOB")]
+        public DateTime dob
+        {
+            get { return new MySqlDateTime(local.DateofBirth.Value).GetDateTime(); }
+            set { local.DateofBirth = (DateTime?)value; }
         }
 
-        public string color;
-
-        public Size size;
-
-        [System.ComponentModel.DisplayName("DOB")]
-        public DateTime dob { get; set; }
-
-        public bool dobEstimate;
-
-        public string Address;
+        public bool dobIsEstimated;
+        //{
+        //    get { return local.dobIsEstimated.Value; }
+        //    set { local.dobIsEstimated = value; }
+        //}
 
         public string breed;
+        //{
+        //    get { return local.breed; }
+        //    set { local.breed = value; }
+        //}
 
         public string crossbreed;
-
+        //{
+        //    get { return local.crossbreed; }
+        //    set { local.crossbreed = value; }
+        //}
+      
         public string location;
+        //{
+        //    get { return local.location; }
+        //    set { local.location = value; }
+        //}
 
         public string owner;
+        //{
+        //    get { return local.owner; }
+        //    set { local.owner = value; }
+        //}
 
         public string notes;
-
-        public string image;
-
-        /*
-         * Why would anyone ever want to type out all those parameters to create an animal, like really?
-         */
-
-        public Animal(int id, string name, DateTime dob, string image, bool estimate, DateTime vaccination, 
-            bool sterilized, bool female, string color, string size, string breed, string crossbread, string location, string owner, string notes, Species species, Status status)
-        {
-            this.ID = id;
-            this.Name = name;
-            this.dob = dob;
-            this.image = image; 
-            this.dobEstimate = estimate;
-            this.vacc = vaccination;
-            this.sterilized = sterilized;
-            this.female = female;
-            this.color = color;
-            this.size = (Size)Enum.Parse(typeof(Animal.Size), size);
-            this.breed = breed;
-            this.crossbreed = crossbread;
-            this.location = location;
-            this.owner = owner;
-            this.notes = notes;
-            this.species = species;
-            this.status = status;
-        }
-
-     
+        //{
+        //    get { return local.notes; }
+        //    set { local.notes = value; }
+        //}
+#endregion
+        
         /// <summary>
-        /// constructs an animal from an array of objects, currently only used for the ui datagridview
-        /// though it could end up being easier to use than specifying each variable in the constructor (seen above) 
-        /// array is a fixed size, equal to the number of columns in the animal sql table, first column is index 0, and the last column currently being at index 15
-        /// Typecasts every entry in the array to the appropriate type of the animal class variable
-        ///
+        /// Creates an Animal from the animal datasource which is linked directly to the animal database table
         /// </summary>
-        /// <param name="a">array of objects pulled from the animal sql table</param>
-        public Animal(object[] a)
+        /// <param name="a">c# animal datasource object</param>
+        public Animal(dbanimal a)
         {
-            //this hardcoding....well it works for now....
-            this.ID = (int)a[0];
-            this.Name = (string)a[1];
-            try
-            {
-                this.dob = DateTime.Parse((string)a[2]);
-            }
-            catch
-            {
-                MessageBox.Show((string)a[2]);
-            }
-            this.image = (string)a[3];
-            this.dobEstimate = Convert.ToBoolean(a[4]);
-            this.vacc = DateTime.Parse((string)a[5]);
-            this.sterilized = Convert.ToBoolean((string)a[6]);
-            this.female = Convert.ToBoolean((string)a[7]);
-            this.color = (string)a[8];
-            this.size = (Size)Enum.Parse(typeof(Animal.Size), (string)a[9]);
-            this.breed = (string)a[10];
-            this.crossbreed = (string)a[11];
-            this.location = (string)a[12];
-            this.owner = (string)a[13];
-            this.notes = (string)a[14];
-            this.species = (Species)Enum.Parse(typeof(Animal.Species), (string)a[15]);
-            this.status = (Status)Enum.Parse(typeof(Animal.Status), (string)a[16]);
-
+            local = a;
+            female = local.gender == "Male" ? false : true;
+            vacc = local.vaccinationDate.Value;
+            sterilized = local.sterilized.Value;
+            gender = local.gender;
+            color = local.color;
+            size = local.size;
+            dobIsEstimated = local.dobIsEstimated.Value;
+            breed = local.breed;
+            crossbreed = local.crossbreed;
+            location = local.location;
+            owner = local.owner;
+            notes = local.notes;
         }
 
-        /// <summary>
-        /// this is just a fugly method that just gets shit done...
-        /// useful for taking an animal object and changing it into a list of strings, which is required for using the mysql database accessor/manipulator methods
-        /// but really, don't look at this method, its just...not worth it.
-        /// </summary>
-        /// <param name="a">Animal object to convert to list of strings</param>
-        /// <returns>List of strings</returns>
-       public static List<string> toList(Animal a)
+        public Animal()
         {
-            List<string> ao = new List<string>();
-
-            //all the hardcodings...cutler would frown
-           //but srsly, thankgod for tostring methods, or this shit would have been like 100x more fugly...
-         //   ao.Add(a.ID.ToString()); don't add this mysql takes care of that
-            ao.Add(a.Name);
-            ao.Add(a.dob.ToString());
-            ao.Add(a.image);
-            ao.Add(a.dobEstimate.ToString());
-            ao.Add(a.vacc.ToString());
-            ao.Add(a.sterilized.ToString());
-            ao.Add(a.female.ToString());
-            ao.Add(a.color);
-            ao.Add(a.size.ToString());
-            ao.Add(a.breed);
-            ao.Add(a.crossbreed);
-            ao.Add(a.location);
-            ao.Add(a.owner);
-            ao.Add(a.notes);
-            ao.Add(a.species.ToString());
-            ao.Add(a.status.ToString());
-           
-            return ao;
+            local = null;
         }
-
-
 
         
 

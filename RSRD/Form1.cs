@@ -14,9 +14,9 @@ namespace RSRD
 {
     public partial class Form1 : Form
     {
-        //starts out as all animals, changes as search constraints are altered
-        //List<Animal> animals = new List<Animal>();
-
+        
+       
+        
         //more hardcoded bullshit
         stringBox i = new stringBox(100, 100, 20, 10, "test");
         intBox j = new intBox(100, 200, 20, 10, 0);
@@ -24,7 +24,7 @@ namespace RSRD
         List<KeyValuePair<string, Point>> labels = new List<KeyValuePair<string, Point>>();
 
 
-        BindingList<Animal> constrained;
+ 
 
         public List<Record> blankRecords = new List<Record>();
 
@@ -67,12 +67,12 @@ namespace RSRD
             idTextBox.Text = a.ID.ToString();
 
             dobTextBox.Text = a.dob.ToShortDateString();
-            
-            dobEstimateCheckBox.Checked = a.dobEstimate;
-            dobEstimateCheckBox.CheckState = a.dobEstimate ? CheckState.Checked : CheckState.Unchecked;
+
+            dobEstimateCheckBox.Checked = a.dobIsEstimated;
+            dobEstimateCheckBox.CheckState = a.dobIsEstimated ? CheckState.Checked : CheckState.Unchecked;
             dobEstimateCheckBox.Enabled = false;
 
-            locationTextBox.Text = a.Address;
+            locationTextBox.Text = a.location;
 
             breedTextBox.Text = a.breed;
 
@@ -91,9 +91,10 @@ namespace RSRD
                 crossBreedTextBox.Text = "None";
             }
 
-            if (a.female)
-            { sexTestBox.Text = "MALE"; }
-            else { sexTestBox.Text = "FEMALE"; }
+            //if (a.gender)
+            //{ sexTestBox.Text = "MALE"; }
+            //else { sexTestBox.Text = "FEMALE"; }
+            sexTestBox.Text = a.gender;
 
             
             

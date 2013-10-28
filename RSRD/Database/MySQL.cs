@@ -1,4 +1,4 @@
-﻿//#define admindev
+﻿#define admindev
 
 using System;
 using System.IO;
@@ -10,6 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using MySql.Data;
+using MySql.Data.Entity;
+using MySql.Data.Types;
 using System.Diagnostics;
 
 namespace RSRD
@@ -29,7 +32,10 @@ namespace RSRD
         /// admindev is empty when uploaded to github; contains admin access credentials to sql db
         /// </summary>
 #if admindev
-        
+         public const string host = "saveus.myrpi.org";
+        public const string username = "zemskm_dev";
+        public const string password = "saveus123";
+        public const string database = "zemskm_saveus";
 #else
         public const string host = "saveus.myrpi.org";
         public const string username = "zemskm_user";
@@ -40,7 +46,7 @@ namespace RSRD
 
     public class MySQLHandler
     {
-        MySqlConnection conn = null;
+       public MySqlConnection conn = null;
 
 
         #region Constructors
@@ -68,7 +74,7 @@ namespace RSRD
         /// </summary>
         public MySQLHandler()
         {
-            conn = new MySqlConnection("host=" + DBInfo.host + ";database=" + DBInfo.database + ";username=" + DBInfo.username + ";password=" + DBInfo.password + ";");
+            conn = new MySqlConnection("host=" + DBInfo.host + ";database=" + DBInfo.database + ";username=" + DBInfo.username + ";password=" + DBInfo.password + ";" + "Allow User Variables=true;");
         }
         #endregion
 
@@ -178,11 +184,11 @@ namespace RSRD
 
         #region Database Multi-field Manipulators
         //TYPICALLY USE THESE!
-        public void Insert(string table, List<string> fieldnames, List<string> fieldvalues)
+        public void Insert(string table, List<string> fieldnames, List<object> fieldvalues)
         {
             //Insert values into the database.
-
-            //Example: INSERT INTO names (name, age) VALUES('John Smith', '33')
+            
+           
             string query = "INSERT INTO " + table + " (";
             foreach (string field in fieldnames)
             {
@@ -192,9 +198,26 @@ namespace RSRD
             Debug.WriteLine(query);
 
            //i mean, i could just use a counter but fuck it
-            foreach (string field in fieldvalues)
+            foreach (var field in fieldvalues)
             {
-                query = query + "'" + field + "'" + ",";
+                //if (field.GetType() == typeof(MySqlDateTime))
+                //{
+                //    MySqlDateTime t = new MySqlDateTime((DateTime)field);
+                //    MessageBox.Show(t.ToString());
+                //    query = query + "'" + t. + "'" + ",";
+                //}
+                 if (field.ToString() == "False")
+                {
+                    query = query + "'" + "0" + "'" + ",";
+                }
+                else if( field.ToString() == "True")
+                {
+                    query = query + "'" + "1" + "'" + ",";
+                }
+                else
+                {
+                    query = query + "'" + field.ToString() + "'" + ",";
+                }
             }
 
             query = query.Remove(query.Length - 1) + ")";
@@ -366,60 +389,71 @@ namespace RSRD
         /// <returns>a bindinglist of type animal which can be converted to a list of type animal</returns>
         public BindingList<Animal> loadAnimals()
         {
-            try
-            {
-                // - DEBUG 
-                // MessageBox.Show("Connection successful!"); 
-                MySqlDataAdapter MyDA = new MySqlDataAdapter();
-                MyDA.SelectCommand = new MySqlCommand("SELECT * FROM `animal`", conn);
-                DataTable table = new DataTable();
-                MyDA.Fill(table);
+           dbEntities db = new dbEntities();
+            BindingList<Animal> bindedanimals = new BindingList<Animal>();
+            var animals = from e in db.dbanimals
+                          where e.ID > 0
+                          select e;
+           foreach(var a in animals)
+           {
+                bindedanimals.Add(new Animal(a));
+           }
+           
+            return bindedanimals;
+            //try
+            //{
+            //    // - DEBUG 
+            //    // MessageBox.Show("Connection successful!"); 
+            //    MySqlDataAdapter MyDA = new MySqlDataAdapter();
+            //    MyDA.SelectCommand = new MySqlCommand("SELECT * FROM `animal`", conn);
+            //    DataTable table = new DataTable();
+            //    MyDA.Fill(table);
  
-                BindingList<Animal> bindedanimals = new BindingList<Animal>();
-                foreach (DataRow row in table.Rows)
-                {
-                   Animal a = new Animal(row.ItemArray);
-                   bindedanimals.Add(a);
-                }
+            //    BindingList<Animal> bindedanimals = new BindingList<Animal>();
+            //    foreach (DataRow row in table.Rows)
+            //    {
+            //       Animal a = new Animal(row.ItemArray);
+            //       bindedanimals.Add(a);
+            //    }
 
-                return bindedanimals;
-            }
-            catch (MySql.Data.MySqlClient.MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                Close();
-            }
-            return null;
+            //    return bindedanimals;
+            //}
+            //catch (MySql.Data.MySqlClient.MySqlException ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //    Close();
+            //}
+            //return null;
         }
 
         public BindingList<Animal> loadAnimals(string constrants)
         {
-            try
-            {
-                // - DEBUG 
-                // MessageBox.Show("Connection successful!"); 
-                MySqlDataAdapter MyDA = new MySqlDataAdapter();
-                string cmdstr = "SELECT * FROM `animal` WHERE " + constrants;
-                MessageBox.Show(cmdstr);
-                MyDA.SelectCommand = new MySqlCommand(cmdstr, conn);
-                DataTable table = new DataTable();
-                MyDA.Fill(table);
+            //try
+            //{
+            //    // - DEBUG 
+            //    // MessageBox.Show("Connection successful!"); 
+            //    MySqlDataAdapter MyDA = new MySqlDataAdapter();
+            //    string cmdstr = "SELECT * FROM `animal` WHERE " + constrants;
+            //    MessageBox.Show(cmdstr);
+            //    MyDA.SelectCommand = new MySqlCommand(cmdstr, conn);
+            //    DataTable table = new DataTable();
+            //    MyDA.Fill(table);
                 
-                BindingList<Animal> bindedanimals = new BindingList<Animal>();
-                foreach (DataRow row in table.Rows)
-                {
-                    Animal a = new Animal(row.ItemArray);
-                    bindedanimals.Add(a);
-                }
+            //    BindingList<Animal> bindedanimals = new BindingList<Animal>();
+            //    foreach (DataRow row in table.Rows)
+            //    {
+            //        Animal a = new Animal(row.ItemArray);
+            //        bindedanimals.Add(a);
+            //    }
 
-                MessageBox.Show(table.Rows.Count.ToString());
-                return bindedanimals;
-            }
-            catch (MySql.Data.MySqlClient.MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                Close();
-            }
+            //    MessageBox.Show(table.Rows.Count.ToString());
+            //    return bindedanimals;
+            //}
+            //catch (MySql.Data.MySqlClient.MySqlException ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //    Close();
+            //}
             return null;
         }
         /// <summary>
@@ -428,11 +462,11 @@ namespace RSRD
         /// <param name="a">Animal to add to database</param>
         public void saveAnimal(Animal a)
         {
-            string[] animalTableColumns = { "name", "DateofBirth", "image", "estimate", "vaccination", "sterilized", "female", "color", "size", "breed", "crossbreed", "location", "owner", "notes", "species", "status"};
+            //string[] animalTableColumns = { "name", "DateofBirth", "image", "estimate", "vaccination", "sterilized", "female", "color", "size", "breed", "crossbreed", "location", "owner", "notes", "species", "status"};
 
-            List<string> animalcolumns = new List<string>(animalTableColumns);
+            //List<string> animalcolumns = new List<string>(animalTableColumns);
             
-            this.Insert("animal", animalcolumns, Animal.toList(a)); 
+            //this.Insert("animal", animalcolumns, Animal.toList(a)); 
         }
         /// <summary>
         /// untested, but should create a new table based off the parameters given, ideally used for custom form creation

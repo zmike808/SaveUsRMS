@@ -32,6 +32,7 @@
             this.TabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.button2 = new System.Windows.Forms.Button();
             this.genderComboBox = new System.Windows.Forms.ComboBox();
             this.statusComboBox = new System.Windows.Forms.ComboBox();
             this.CreateAnimalButton = new System.Windows.Forms.Button();
@@ -86,21 +87,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.genderBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.statusBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sizeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.speciesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.speciesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.speciesBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.button2 = new System.Windows.Forms.Button();
-            this.animalBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -114,16 +105,8 @@
             this.StatusPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animalMainPictureBox)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.genderBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.statusBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sizeBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.speciesBindingSource)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.statusBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.speciesBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.speciesBindingSource2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.animalBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // TabControl1
@@ -185,6 +168,16 @@
             this.splitContainer1.SplitterDistance = 376;
             this.splitContainer1.TabIndex = 0;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(132, 99);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(116, 23);
+            this.button2.TabIndex = 34;
+            this.button2.Text = "Search (OR)";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // genderComboBox
             // 
             this.genderComboBox.FormattingEnabled = true;
@@ -240,12 +233,12 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(5, 156);
+            this.dataGridView1.Location = new System.Drawing.Point(17, 153);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(368, 483);
+            this.dataGridView1.Size = new System.Drawing.Size(368, 449);
             this.dataGridView1.TabIndex = 29;
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.loadSelected);
             // 
@@ -264,8 +257,6 @@
             // 
             // speciesComboBox
             // 
-            this.speciesComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.animalBindingSource, "species", true));
-            this.speciesComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.animalBindingSource, "species", true));
             this.speciesComboBox.FormattingEnabled = true;
             this.speciesComboBox.Items.AddRange(new object[] {
             "Canine",
@@ -828,60 +819,9 @@
             this.listBox1.TabIndex = 1;
             this.listBox1.SelectedValueChanged += new System.EventHandler(this.listBox1_SelectedValueChanged);
             // 
-            // genderBindingSource
-            // 
-                      // 
-             // genderBindingSource
-             // 
-            this.genderBindingSource.DataSource = typeof(RSRD.Animal.Gender);
-            // 
-            // statusBindingSource
-            // 
-            this.statusBindingSource.DataSource = typeof(RSRD.Animal.Status);
-            // 
-            // sizeBindingSource
-            // 
-            this.sizeBindingSource.DataSource = typeof(RSRD.Animal.Size);
-            // 
-            // speciesBindingSource
-            // 
-            this.speciesBindingSource.DataSource = typeof(RSRD.Animal.Species);
-  
-             // 
-             // statusStrip1
-             // 
-
-             // 
-             // statusBindingSource1
-             // 
-            this.statusBindingSource1.DataSource = typeof(RSRD.Animal.Status);
-            // 
-            // speciesBindingSource1
-            // 
-            this.speciesBindingSource1.DataSource = typeof(RSRD.Animal.Species);
-            // 
-            // speciesBindingSource2
-            // 
-            this.speciesBindingSource2.DataSource = typeof(RSRD.Animal.Species);
-   
-             // 
-             // button2
-             // 
-
-             // 
-             // animalBindingSource
-             // 
-            this.animalBindingSource.DataSource = typeof(RSRD.Animal);
-
-             // 
-             // Form1
-             // 
-
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripProgressBar1,
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 705);
             this.statusStrip1.Name = "statusStrip1";
@@ -889,15 +829,10 @@
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
-            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(109, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // menuStrip1
@@ -915,33 +850,15 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newFormToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // newFormToolStripMenuItem
             // 
             this.newFormToolStripMenuItem.Name = "newFormToolStripMenuItem";
-            this.newFormToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.newFormToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.newFormToolStripMenuItem.Text = "New Form";
             this.newFormToolStripMenuItem.Click += new System.EventHandler(this.newFormToolStripMenuItem_Click);
-            // 
-            // statusBindingSource1
-            // 
-        
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(132, 99);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(116, 23);
-            this.button2.TabIndex = 34;
-            this.button2.Text = "Search (OR)";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // animalBindingSource
-            // 
-//            this.animalBindingSource.DataSource = typeof(RSRD.Animal);
             // 
             // Form1
             // 
@@ -970,18 +887,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.animalMainPictureBox)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.genderBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.statusBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sizeBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.speciesBindingSource)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.statusBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.speciesBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.speciesBindingSource2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.animalBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -993,7 +902,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ComboBox sizeComboBox;
@@ -1050,16 +958,8 @@
         private ZedGraph.ZedGraphControl zg1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.BindingSource speciesBindingSource;
-        private System.Windows.Forms.BindingSource sizeBindingSource;
         private System.Windows.Forms.ComboBox statusComboBox;
-        private System.Windows.Forms.BindingSource statusBindingSource;
         private System.Windows.Forms.ComboBox genderComboBox;
-        private System.Windows.Forms.BindingSource genderBindingSource;
-        private System.Windows.Forms.BindingSource animalBindingSource;
-        private System.Windows.Forms.BindingSource statusBindingSource1;
-        private System.Windows.Forms.BindingSource speciesBindingSource1;
-        private System.Windows.Forms.BindingSource speciesBindingSource2;
         private System.Windows.Forms.Button button2;
     }
 }

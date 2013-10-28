@@ -1,4 +1,4 @@
-﻿#define admindev
+﻿//#define admindev
 
 using System;
 using System.IO;
@@ -32,10 +32,7 @@ namespace RSRD
         /// admindev is empty when uploaded to github; contains admin access credentials to sql db
         /// </summary>
 #if admindev
-         public const string host = "saveus.myrpi.org";
-        public const string username = "zemskm_dev";
-        public const string password = "saveus123";
-        public const string database = "zemskm_saveus";
+        
 #else
         public const string host = "saveus.myrpi.org";
         public const string username = "zemskm_user";

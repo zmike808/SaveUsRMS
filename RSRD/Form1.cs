@@ -36,6 +36,7 @@ namespace RSRD
         {
             MySQLHandler dbh = new MySQLHandler();
             dataGridView1.DataSource = dbh.loadAnimals();
+           
         }
 
         #endregion 
@@ -111,11 +112,11 @@ namespace RSRD
         {
             InitializeComponent();
             initializeHardcode();
-            initializeRecords();
+           // initializeRecords(); //not even used for anything right now, why calls this? 10-30-2013
             this.Location = new Point(0, 0);
-            this.WindowState = FormWindowState.Maximized;
-            this.AutoSizeMode = AutoSizeMode.GrowOnly;
 
+            splitContainer1.SplitterDistance = splitContainer1.Panel1.Right;//splitContainer1.Panel1.Width + (dataGridView1.Width - splitContainer1.Panel1.Width); //properly size the form dynamically
+            splitContainer1.IsSplitterFixed = true;
         }
 
       /*  private string searchParameters()
@@ -562,6 +563,11 @@ namespace RSRD
         private void button2_Click(object sender, EventArgs e)
         {
             searchHandler("OR");
+        }
+
+        private void Form1_Load(object sender, EventArgs e){
+          
+
         }
 
     }

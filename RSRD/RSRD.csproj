@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -84,6 +84,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeLoginWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeeLoginWindow.designer.cs">
+      <DependentUpon>EmployeeLoginWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="FieldboxCreationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Database\SimpleHash.cs" />
+    <EmbeddedResource Include="EmployeeLoginWindow.resx">
+      <DependentUpon>EmployeeLoginWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FieldboxCreationForm.resx">
       <DependentUpon>FieldboxCreationForm.cs</DependentUpon>
     </EmbeddedResource>

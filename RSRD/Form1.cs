@@ -15,8 +15,6 @@ namespace RSRD
     public partial class Form1 : Form
     {
         
-       
-        
         //more hardcoded bullshit
         stringBox i = new stringBox(100, 100, 20, 10, "test");
         intBox j = new intBox(100, 200, 20, 10, 0);
@@ -24,7 +22,7 @@ namespace RSRD
         List<KeyValuePair<string, Point>> labels = new List<KeyValuePair<string, Point>>();
 
 
- 
+		public string currentUser;
 
         public List<Record> blankRecords = new List<Record>();
 
@@ -566,8 +564,15 @@ namespace RSRD
         }
 
         private void Form1_Load(object sender, EventArgs e){
-          
 
+			EmployeeLoginWindow login = new EmployeeLoginWindow();
+			if (login.getCurrentUser() != "" || login.ShowDialog() == DialogResult.OK)
+			{
+				this.currentUser = login.getCurrentUser();
+				login.Close();
+					
+			}			
+			
         }
 
     }

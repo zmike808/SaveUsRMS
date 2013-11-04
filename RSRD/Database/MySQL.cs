@@ -71,7 +71,7 @@ namespace RSRD
         /// </summary>
         public MySQLHandler()
         {
-            conn = new MySqlConnection("host=" + DBInfo.host + ";database=" + DBInfo.database + ";username=" + DBInfo.username + ";password=" + DBInfo.password + ";" + "Allow User Variables=true;");
+           // conn = new MySqlConnection("host=" + DBInfo.host + ";database=" + DBInfo.database + ";username=" + DBInfo.username + ";password=" + DBInfo.password + ";" + "Allow User Variables=true;");
         }
         #endregion
 
@@ -391,11 +391,16 @@ namespace RSRD
             var animals = from e in db.dbanimals
                           where e.ID > 0
                           select e;
-           foreach(var a in animals)
-           {
-                bindedanimals.Add(new Animal(a));
-           }
-           
+			try
+			{
+				foreach (var a in animals)
+				{
+					bindedanimals.Add(new Animal(a));
+				}
+			}
+			catch (Exception e)
+			{
+			}
             return bindedanimals;
             //try
             //{

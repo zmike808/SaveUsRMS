@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
-
 namespace RSRD
 {
     #region Contexts
@@ -96,8 +96,25 @@ namespace RSRD
             }
         }
         private ObjectSet<dbanimal> _dbanimals;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<EmployeeLogin> EmployeeLogins
+        {
+            get
+            {
+                if ((_EmployeeLogins == null))
+                {
+                    _EmployeeLogins = base.CreateObjectSet<EmployeeLogin>("EmployeeLogins");
+                }
+                return _EmployeeLogins;
+            }
+        }
+        private ObjectSet<EmployeeLogin> _EmployeeLogins;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -115,13 +132,21 @@ namespace RSRD
         {
             base.AddObject("dbanimals", dbanimal);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the EmployeeLogins EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToEmployeeLogins(EmployeeLogin employeeLogin)
+        {
+            base.AddObject("EmployeeLogins", employeeLogin);
+        }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -146,6 +171,7 @@ namespace RSRD
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -536,6 +562,162 @@ namespace RSRD
         partial void OnstatusChanged();
 
         #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="RSRD", Name="EmployeeLogin")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class EmployeeLogin : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new EmployeeLogin object.
+        /// </summary>
+        /// <param name="username">Initial value of the username property.</param>
+        /// <param name="password">Initial value of the password property.</param>
+        public static EmployeeLogin CreateEmployeeLogin(global::System.String username, global::System.String password)
+        {
+            EmployeeLogin employeeLogin = new EmployeeLogin();
+            employeeLogin.username = username;
+            employeeLogin.password = password;
+            return employeeLogin;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String username
+        {
+            get
+            {
+                return _username;
+            }
+            set
+            {
+                if (_username != value)
+                {
+                    OnusernameChanging(value);
+                    ReportPropertyChanging("username");
+                    _username = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("username");
+                    OnusernameChanged();
+                }
+            }
+        }
+        private global::System.String _username;
+        partial void OnusernameChanging(global::System.String value);
+        partial void OnusernameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String password
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                OnpasswordChanging(value);
+                ReportPropertyChanging("password");
+                _password = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("password");
+                OnpasswordChanged();
+            }
+        }
+        private global::System.String _password;
+        partial void OnpasswordChanging(global::System.String value);
+        partial void OnpasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FirstName
+        {
+            get
+            {
+                return _FirstName;
+            }
+            set
+            {
+                OnFirstNameChanging(value);
+                ReportPropertyChanging("FirstName");
+                _FirstName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FirstName");
+                OnFirstNameChanged();
+            }
+        }
+        private global::System.String _FirstName;
+        partial void OnFirstNameChanging(global::System.String value);
+        partial void OnFirstNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String LastName
+        {
+            get
+            {
+                return _LastName;
+            }
+            set
+            {
+                OnLastNameChanging(value);
+                ReportPropertyChanging("LastName");
+                _LastName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("LastName");
+                OnLastNameChanged();
+            }
+        }
+        private global::System.String _LastName;
+        partial void OnLastNameChanging(global::System.String value);
+        partial void OnLastNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String email
+        {
+            get
+            {
+                return _email;
+            }
+            set
+            {
+                OnemailChanging(value);
+                ReportPropertyChanging("email");
+                _email = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("email");
+                OnemailChanged();
+            }
+        }
+        private global::System.String _email;
+        partial void OnemailChanging(global::System.String value);
+        partial void OnemailChanged();
+
+        #endregion
+
     
     }
     
@@ -561,6 +743,7 @@ namespace RSRD
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -831,9 +1014,11 @@ namespace RSRD
         partial void OnlogoChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     
 }

@@ -7,6 +7,7 @@
     <Schema Namespace="dbModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="dbModelStoreContainer">
           <EntitySet Name="animal" EntityType="dbModel.Store.animal" store:Type="Tables" Schema="zemskm_saveus" />
+          <EntitySet Name="EmployeeLogins" EntityType="dbModel.Store.EmployeeLogins" store:Type="Tables" Schema="zemskm_saveus" />
           <EntitySet Name="Organizations" EntityType="dbModel.Store.Organizations" store:Type="Tables" Schema="zemskm_saveus" />
         </EntityContainer>
         <EntityType Name="animal">
@@ -29,6 +30,16 @@
           <Property Name="notes" Type="text" />
           <Property Name="species" Type="text" />
           <Property Name="status" Type="text" />
+        </EntityType>
+        <EntityType Name="EmployeeLogins">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="password" Type="longtext" Nullable="false" />
+          <Property Name="FirstName" Type="text" />
+          <Property Name="LastName" Type="text" />
+          <Property Name="email" Type="text" />
         </EntityType>
         <EntityType Name="Organizations">
           <Key>
@@ -53,6 +64,7 @@
         <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Organizations" EntityType="RSRD.Organization" />
           <EntitySet Name="dbanimals" EntityType="RSRD.dbanimal" />
+          <EntitySet Name="EmployeeLogins" EntityType="RSRD.EmployeeLogin" />
         </EntityContainer>
         <EntityType Name="Organization">
           <Key>
@@ -90,6 +102,16 @@
           <Property Type="String" Name="notes" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="species" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="status" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EmployeeLogin">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Type="String" Name="username" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FirstName" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="email" MaxLength="65535" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -136,6 +158,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeLogins">
+            <EntityTypeMapping TypeName="RSRD.EmployeeLogin">
+              <MappingFragment StoreEntitySet="EmployeeLogins">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -159,6 +192,7 @@
       <Diagram Name="dbModel" ZoomLevel="72">
         <EntityTypeShape EntityType="RSRD.Organization" Width="1.5" PointX="2.75" PointY="0.75" Height="3.1340950520833326" IsExpanded="true" />
         <EntityTypeShape EntityType="RSRD.dbanimal" Width="1.5" PointX="1" PointY="1.375" Height="4.0956022135416656" />
+        <EntityTypeShape EntityType="RSRD.EmployeeLogin" Width="1.5" PointX="3.375" PointY="4.75" Height="1.9802864583333335" />
       </Diagram>
     </Diagrams>
   </Designer>

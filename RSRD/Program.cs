@@ -8,22 +8,25 @@ using MySql.Data;
 using MySql.Data.Types;
 using MySql.Data.MySqlClient;
 using MySql.Data.Entity;
+using System.Text;
 
 namespace RSRD
 {
     static class Program
     {
+		
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-           
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
+
         #region db stuff
         
         /// <summary>
@@ -107,8 +110,52 @@ namespace RSRD
             
             
         }
-        #endregion
+
+		
+		#endregion
 
     }
+
+	//best coding practices NA
+	//public class loltemp
+	//{
+	//    private static Random random = new Random((int)DateTime.Now.Ticks);//thanks to McAden
+	//    private string RandomString(int size)
+	//    {
+	//        StringBuilder builder = new StringBuilder();
+	//        char ch;
+	//        for (int i = 0; i < size; i++)
+	//        {
+	//            ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+	//            builder.Append(ch);
+	//        }
+
+	//        return builder.ToString();
+	//    }
+
+	//    public void orggen()
+	//    {
+	//        dbEntities db = new dbEntities();
+
+	//        for (int x = 1; x <= 10; x++)
+	//        {
+	//            Organization o = Organization.CreateOrganization(x);
+
+	//            o.name = RandomString(10);
+	//            o.address = RandomString(10);
+	//            o.phone = RandomString(10);
+	//            o.email = RandomString(10);
+	//            o.fax = RandomString(10);
+	//            o.website = RandomString(10);
+	//            o.aboutus = RandomString(10);
+	//            o.hours = RandomString(10);
+	//            o.servicesprovided = RandomString(10);
+
+	//            db.Organizations.AddObject(o);
+	//            db.SaveChanges();
+
+	//        }
+	//    }
+	//}
 
 }

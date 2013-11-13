@@ -38,6 +38,7 @@ namespace RSRD
                 a.sterilized = true;
                 a.vaccinationDate = DateTime.Parse(this.vaccDateBox.Text);
                 a.notes = this.richTextBox1.Text;
+                a.species = this.speciesTextbox.Text;
 				dbEntities db = new dbEntities();
 				db.dbanimals.AddObject(a);
 				db.SaveChanges();
@@ -53,7 +54,6 @@ namespace RSRD
         {
             return true;
         }
-
 
       
       

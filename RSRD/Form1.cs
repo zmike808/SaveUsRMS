@@ -296,7 +296,12 @@ namespace RSRD
         /// <param name="e"></param>
         private void CreateAnimalButton_Click(object sender, EventArgs e)
         {
-
+            //dialog box to create animal
+            AnimalCreateDialog a = new AnimalCreateDialog();
+            a.ShowDialog(this);
+            a.Dispose();
+            Animal newAnim = a.a;
+            Console.WriteLine(newAnim.Name);
         }
 
 

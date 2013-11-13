@@ -191,6 +191,8 @@ namespace RSRD
             RecordViewer r = new RecordViewer();
             r.Show();
             r.f_ = this;
+            r.initializeRecordTypesList();
+
         }
 
         private void addRecordButton_Click(object sender, EventArgs e)

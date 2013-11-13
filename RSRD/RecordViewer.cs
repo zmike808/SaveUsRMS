@@ -38,7 +38,6 @@ namespace RSRD
             //needs to be re-anchored to allow autoscrolling
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)
                 ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
-            initialize_Record_Types_List();
         }
 
         //method to take Animal ID and populate the record list box with it's records
@@ -56,7 +55,6 @@ namespace RSRD
             //needs to be re-anchored to allow autoscrolling
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)
                 ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
-            initialize_Record_Types_List();
         }
 
         #endregion
@@ -94,14 +92,11 @@ namespace RSRD
 
         }
 
-        private void initialize_Record_Types_List()
+        public void initializeRecordTypesList()
         {
-            if (f_.blankRecords.Count != 0)
+            foreach (Record blank in f_.blankRecords)
             {
-                foreach (Record blank in f_.blankRecords)
-                {
-                    checkedListBox1.Items.Add(blank);
-                }
+                checkedListBox1.Items.Add(blank.formName);
             }
         }
 

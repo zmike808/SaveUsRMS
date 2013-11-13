@@ -39,6 +39,9 @@ namespace RSRD
                 a.vaccinationDate = DateTime.Parse(this.vaccDateBox.Text);
                 a.notes = this.richTextBox1.Text;
                 a.species = this.speciesTextbox.Text;
+                a.status = this.statusTextBox.Text;
+                a.location = this.locationTextBox.Text;
+                a.owner = this.ownerTextBox.Text;
 				dbEntities db = new dbEntities();
 				db.dbanimals.AddObject(a);
 				db.SaveChanges();

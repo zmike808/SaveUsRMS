@@ -41,6 +41,7 @@ namespace RSRD
 				dbEntities db = new dbEntities();
 				db.dbanimals.AddObject(a);
 				db.SaveChanges();
+				this.Dispose();
             }
             else 
             {

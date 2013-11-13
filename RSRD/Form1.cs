@@ -310,8 +310,9 @@ namespace RSRD
             searchHandler("AND");
         }
 
-        private void createPie(GraphPane myPane, List<Animal> animals, string dataType)
+        private void createPie(GraphPane myPane, List<string> selected, string dataType)
         {
+
             myPane.Legend.IsVisible = true;
             //myPane.IsFontsScaled = false;
             myPane.Fill = new Fill(Color.White, Color.LightGray, 45.0f);
@@ -322,10 +323,9 @@ namespace RSRD
             double o = 0; //offset
             int c = 0; //color index
 
-
             //creates and fills a dictionary of dataType and integer of occurences
             Dictionary<String, int> dataCount = new Dictionary<string, int>();
-            for (int i = 0; i < animals.Count; i++)
+            /*for (int i = 0; i < animals.Count; i++)
             {
                 string s = "";
                 if (dataType == "Species")
@@ -342,6 +342,12 @@ namespace RSRD
                     dataCount[s]++; //increment key
                 else
                     dataCount.Add(s, 1); //add new key
+            }*/
+            foreach (string line in selected)
+            {
+                char[] delim = { ':' };
+                string[] split = line.Split(delim);
+                dataCount.Add(split[0], Convert.ToInt32(split[1]));
             }
             Color[] colors = genColors(dataCount.Count); //generate colors
 
@@ -398,6 +404,66 @@ namespace RSRD
             myPane.AxisChange();
             zg1.Invalidate();
         }
+        private Dictionary<string, int> createDict(List<Animal> animals, string type)
+        {
+            Dictionary<String, int> dataCount = new Dictionary<string, int>();
+            for (int i = 0; i < animals.Count; i++)
+            {
+                string s = "";
+                if (type == "Species")
+                    s = animals[i].species.ToString();
+                else if (type == "Gender")
+                    s = animals[i].female == false ? "Male" : "Female"; //gets gender strings
+                else if (type == "Breed")
+                    s = animals[i].breed;
+                else if (type == "Month of Birth")
+                    s = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(animals[i].dob.Month); //gets month strings
+                else if (type == "Year of Birth")
+                    s = animals[i].dob.Year.ToString();
+                if (dataCount.ContainsKey(s))
+                    dataCount[s]++; //increment key
+                else
+                    dataCount.Add(s, 1); //add new key
+            }
+            return dataCount;
+        }
+
+        private void createStatisticsFile(List<Animal> animals, List<string> dataTypes)
+        {
+            string fpath = Environment.CurrentDirectory + "\\statistics.txt";
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fpath))
+            {
+                foreach (string type in dataTypes)
+                {
+                    file.WriteLine("&" + type);
+                    Dictionary<String, int> dataCount = createDict(animals, type);
+                    foreach (var entry in dataCount)
+                    {
+                        file.WriteLine(entry.Key + ":" + entry.Value);
+                    }
+                }
+            }
+        }
+
+        private List<string> parseBySelect(string s)
+        {
+            bool x = false;
+            string fpath = Environment.CurrentDirectory + "\\statistics.txt";
+            string[] lines = System.IO.File.ReadAllLines(fpath);
+
+            List<string> selected = new List<string>();
+            foreach (string line in lines)
+            {
+                if (line.Replace("&", string.Empty) == s)
+                    x = true;
+                else if (line[0] == '&')
+                    x = false;
+                if (line[0] != '&' && x)
+                    selected.Add(line);
+            }
+            return selected;
+        }
+
 
         private void TabControl1_Enter(object sender, EventArgs e)
         {
@@ -436,11 +502,12 @@ namespace RSRD
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            zg1.Visible = true;
-            //load animal list
+        {            //remove when bar chart file is implemented
             MySQLHandler dbh = new MySQLHandler();
             List<Animal> listanimals = dbh.loadAnimals().ToList();
+            //
+
+            zg1.Visible = true;
             //make new graph pane
             GraphPane myPane = zg1.GraphPane;
             myPane.CurveList.Clear();
@@ -448,12 +515,13 @@ namespace RSRD
             if (graphselect == "Pie Chart") //create pie chart
             {
                 string select = listBox2.SelectedItem.ToString();
-                createPie(myPane, listanimals, select);
+                List<string> selected = parseBySelect(select);
+                createPie(myPane, selected, select);
             }
             if (graphselect == "Bar Chart") //create bar chart
             {
                 string select = listBox2.SelectedItem.ToString();
-                if(select=="Date of Birth")
+                if (select == "Date of Birth")
                 {
                     myPane.Title.Text = "Date of Birth Breakdown";
                     myPane.XAxis.Title.Text = "Birthday";
@@ -461,13 +529,13 @@ namespace RSRD
                     myPane.YAxis.Scale.Format = "#";
                     createBar(myPane, listanimals, select);
                 }
-                if(select=="Age")
+                if (select == "Age")
                 {
                     myPane.Title.Text = "Age Breakdown";
-                    myPane.XAxis.Title.Text="Age";
-                    myPane.YAxis.Title.Text="Animals";
-                    myPane.YAxis.Scale.Format="#";
-                    createBar(myPane,listanimals,select);
+                    myPane.XAxis.Title.Text = "Age";
+                    myPane.YAxis.Title.Text = "Animals";
+                    myPane.YAxis.Scale.Format = "#";
+                    createBar(myPane, listanimals, select);
                 }
             }
         }
@@ -573,6 +641,20 @@ namespace RSRD
 					
 			}			
 			
+        }
+
+        private void stats_button_Click(object sender, EventArgs e)
+        {
+            MySQLHandler dbh = new MySQLHandler();
+            List<Animal> listanimals = dbh.loadAnimals().ToList();
+            List<string> dataType = new List<string>();
+            dataType.Add("Species");
+            dataType.Add("Gender");
+            dataType.Add("Breed");
+            dataType.Add("Month of Birth");
+            dataType.Add("Year of Birth");
+            createStatisticsFile(listanimals, dataType);
+        //private void createStatisticsFile(List<Animal> animals, List<string> dataTypes)
         }
 
     }

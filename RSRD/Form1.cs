@@ -347,6 +347,8 @@ namespace RSRD
                     s = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(animals[i].dob.Month); //gets month strings
                 else if (dataType == "Year of Birth")
                     s = animals[i].dob.Year.ToString();
+                else if (type == "Status")
+                    s = animals[i].Status;
                 if (dataCount.ContainsKey(s))
                     dataCount[s]++; //increment key
                 else
@@ -429,6 +431,8 @@ namespace RSRD
                     s = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(animals[i].dob.Month); //gets month strings
                 else if (type == "Year of Birth")
                     s = animals[i].dob.Year.ToString();
+                else if (type == "Status")
+                    s = animals[i].status.ToString();
                 if (dataCount.ContainsKey(s))
                     dataCount[s]++; //increment key
                 else
@@ -498,6 +502,7 @@ namespace RSRD
                 pieType.Add("Breed");
                 pieType.Add("Month of Birth");
                 pieType.Add("Year of Birth");
+                pieType.Add("Status");
                 listBox2.DataSource = pieType;
             }
             if (select == "Bar Chart")
@@ -662,6 +667,7 @@ namespace RSRD
             dataType.Add("Breed");
             dataType.Add("Month of Birth");
             dataType.Add("Year of Birth");
+            dataType.Add("Status");
             createStatisticsFile(listanimals, dataType);
         //private void createStatisticsFile(List<Animal> animals, List<string> dataTypes)
         }

@@ -17,6 +17,8 @@ namespace RSRD
         stringBox  i = new stringBox(100, 100, 20, 10, "test");
         intBox j = new intBox(100, 200, 20, 10, 22);
         List<FieldBox> list = new List<FieldBox>();
+        public Form1 f_;
+
 
         #endregion
 
@@ -29,12 +31,14 @@ namespace RSRD
             Graphics g = this.CreateGraphics();
             int width = (int)Math.Round(210 / 25.4 * g.DpiX);
             int height = (int)Math.Round(297 / 25.4 * g.DpiY);
+            
 
             this.tabControl1.Size = new Size(width, height);
 
             //needs to be re-anchored to allow autoscrolling
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)
                 ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
+            initialize_Record_Types_List();
         }
 
         //method to take Animal ID and populate the record list box with it's records
@@ -52,6 +56,7 @@ namespace RSRD
             //needs to be re-anchored to allow autoscrolling
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)
                 ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
+            initialize_Record_Types_List();
         }
 
         #endregion
@@ -89,6 +94,13 @@ namespace RSRD
 
         }
 
+        private void initialize_Record_Types_List()
+        {
+            foreach(Record blank in f_.blankRecords)
+            {
+                checkedListBox1.Items.Add(blank);
+            }
+        }
 
         #region GUI Events
 

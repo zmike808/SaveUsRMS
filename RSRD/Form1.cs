@@ -304,7 +304,7 @@ namespace RSRD
             AnimalCreateDialog a = new AnimalCreateDialog();
             a.ShowDialog(this);
             a.Dispose();
-            Animal newAnim = a.a;
+			Animal newAnim = new Animal(a.a);
             Console.WriteLine(newAnim.Name);
         }
 

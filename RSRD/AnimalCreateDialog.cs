@@ -11,26 +11,36 @@ namespace RSRD
 {
     public partial class AnimalCreateDialog : Form
     {
+		public dbanimal a;
         public AnimalCreateDialog()
         {
             InitializeComponent();
+			dbEntities db = new dbEntities();
+			var animals = from e in db.dbanimals
+						  where e.ID > 0
+						  select e;
+			int lastID = animals.Max(e => e.ID);
+			a = dbanimal.Createdbanimal(lastID + 1);
         }
-        public Animal a = new Animal();
+		
         private void AcceptButton_Click(object sender, EventArgs e)
         {
             //if valid fill up new animal
             if (checkValidity())
             {
                 a.breed = this.breedTextBox.Text;
-                a.Name = this.nameTextBox.Text;
+                a.name = this.nameTextBox.Text;
                 a.color = this.ColorTextBox.Text;
                 a.crossbreed = this.crossBreedTextBox.Text;
-                a.dob = DateTime.Parse(this.dobTextBox.Text);
+                a.DateofBirth = DateTime.Parse(this.dobTextBox.Text);
                 a.dobIsEstimated = this.dobEstimateCheckBox.Checked;
-                a.female = this.sexTestBox.Text == "female";
+                a.gender = this.sexTestBox.Text;
                 a.sterilized = true;
-                a.vacc = DateTime.Parse(this.vaccDateBox.Text);
+                a.vaccinationDate = DateTime.Parse(this.vaccDateBox.Text);
                 a.notes = this.richTextBox1.Text;
+				dbEntities db = new dbEntities();
+				db.dbanimals.AddObject(a);
+				db.SaveChanges();
             }
             else 
             {

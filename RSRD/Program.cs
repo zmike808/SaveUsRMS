@@ -40,7 +40,7 @@ namespace RSRD
             //lets flush the table each time we run this so we don't get a billion animals after running it 100 times...that wouldnt be fun.
             string[] animalTableColumns = { "name", "DateofBirth", "dobIsEstimated", "vaccinationDate", "sterilized", "gender", "color", "size", "breed", "crossbreed", "location", "owner", "notes", "species", "status" };
             List<string> columnnames = new List<string>(animalTableColumns);
-           
+          
             //add that variety for testing
             string[] aSpecies = { "Canine", "Feline", "Horse" };
             string[] aSize = { "Small", "Medium", "Large" };

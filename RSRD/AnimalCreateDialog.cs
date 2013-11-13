@@ -31,8 +31,6 @@ namespace RSRD
                 a.sterilized = true;
                 a.vacc = DateTime.Parse(this.vaccDateBox.Text);
                 a.notes = this.richTextBox1.Text;
-                
-
             }
             else 
             {

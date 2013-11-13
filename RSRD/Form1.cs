@@ -110,6 +110,7 @@ namespace RSRD
         {
             InitializeComponent();
             initializeHardcode();
+            initializeRecords();
            // initializeRecords(); //not even used for anything right now, why calls this? 10-30-2013
             this.Location = new Point(0, 0);
 
@@ -158,16 +159,15 @@ namespace RSRD
 
         private void adoptButton_Click(object sender, EventArgs e)
         {
+
             /*
             Record test = new Record("TestRecord");
             test.fileDirectory = "C:\\Users\\Sebastian\\Documents\\Visual Studio 2010\\Projects\\RSRD\\";
-            
             //should be replaced with a save/load dialog
             FieldboxCreationForm f = new FieldboxCreationForm();
             f.ShowDialog();
             f.Dispose();
             test.FormatFile = f.text +".recf";
-
             test.ParseFormatFile();
             System.Console.WriteLine("values size is: " + test.values.Count);
             for (int i = 0; i < test.values.Count; i++)
@@ -242,6 +242,7 @@ namespace RSRD
             {
                 genderState = "true";
             }
+
             comp = " " + comp + " ";
             //var ownerState = ownerSearchTextBox.Text;
             string query = "";

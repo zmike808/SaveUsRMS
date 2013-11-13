@@ -287,6 +287,16 @@ namespace RSRD
             Cursor = Cursors.Default;
         }
 
+        public void Key_Down(object sender, KeyEventArgs e) 
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                activeControl.Hide();
+                activeControl.Dispose();
+            }
+        }
+
+
         #endregion
 
 

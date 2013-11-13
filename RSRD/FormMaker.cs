@@ -162,6 +162,10 @@ namespace RSRD
                 l.MouseUp += new MouseEventHandler(textbox_MouseUp);
                 controltypes.Add(FieldBox.boxtypes.intBox);
                 pictureBox1.Controls.Add(l);
+                if (pictureBox1.Controls.Count == 0) 
+                {
+                    activeControl = l;
+                }
             }
             else 
             {
@@ -171,7 +175,12 @@ namespace RSRD
                 textbox.MouseDown += new MouseEventHandler(textbox_MouseDown);
                 textbox.MouseMove += new MouseEventHandler(textbox_MouseMove);
                 textbox.MouseUp += new MouseEventHandler(textbox_MouseUp);
-                pictureBox1.Controls.Add(textbox); 
+                textbox.KeyDown += new KeyEventHandler(Key_Down);
+                pictureBox1.Controls.Add(textbox);
+                if (pictureBox1.Controls.Count == 0)
+                {
+                    activeControl = textbox;
+                }
             }
            
         }
@@ -283,7 +292,7 @@ namespace RSRD
                     }
                 }
             }
-            activeControl = null;
+            //activeControl = null;
             Cursor = Cursors.Default;
         }
 

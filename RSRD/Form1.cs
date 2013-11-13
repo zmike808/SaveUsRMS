@@ -189,8 +189,8 @@ namespace RSRD
         private void viewRecordButton_Click(object sender, EventArgs e)
         {
             RecordViewer r = new RecordViewer();
-            r.f_ = this;
             r.Show();
+            r.f_ = this;
         }
 
         private void addRecordButton_Click(object sender, EventArgs e)

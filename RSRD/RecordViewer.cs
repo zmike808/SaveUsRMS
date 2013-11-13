@@ -96,9 +96,12 @@ namespace RSRD
 
         private void initialize_Record_Types_List()
         {
-            foreach(Record blank in f_.blankRecords)
+            if (f_.blankRecords.Count != 0)
             {
-                checkedListBox1.Items.Add(blank);
+                foreach (Record blank in f_.blankRecords)
+                {
+                    checkedListBox1.Items.Add(blank);
+                }
             }
         }
 

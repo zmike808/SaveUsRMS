@@ -504,6 +504,42 @@ namespace RSRD
             }
         }
 
+        private void createLogFile(List<Animal> animals, List<string> dataTypes, string yearMonth)
+        {
+            string fpath = Environment.CurrentDirectory + "\\log" + yearMonth + ".txt";
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fpath))
+            {
+                foreach (string type in dataTypes)
+                {
+                    file.WriteLine("&" + type);
+                    Dictionary<String, int> dataCount = createDict(animals, type);
+                    foreach (var entry in dataCount)
+                    {
+                        file.WriteLine(entry.Key + ":" + entry.Value);
+                    }
+                }
+            }
+        }
+
+        private void updateLogFile(List<Animal> animals, List<string> dataTypes, string fpath, string date)
+        {
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fpath))
+            {
+                string[] lines = System.IO.File.ReadAllLines(fpath);
+                file.WriteLine("#", date);
+                foreach (string type in dataTypes)
+                {
+                    file.WriteLine("&" + type);
+                    Dictionary<String, int> dataCount = createDict(animals, type);
+                    foreach (var entry in dataCount)
+                    {
+                        //if there is a change:
+                        file.WriteLine(entry.Key + ":" + entry.Value);
+                    }
+                }
+            }
+        }
+
         private List<string> parseBySelect(string s)
         {
             bool x = false;
@@ -696,7 +732,6 @@ namespace RSRD
         }
 
         private void Form1_Load(object sender, EventArgs e){
-
 			EmployeeLoginWindow login = new EmployeeLoginWindow();
 			if (login.getCurrentUser() != "" || login.ShowDialog() == DialogResult.OK)
 			{
@@ -718,7 +753,8 @@ namespace RSRD
             dataType.Add("Year of Birth");
             dataType.Add("Status");
             createStatisticsFile(listanimals, dataType);
-        //private void createStatisticsFile(List<Animal> animals, List<string> dataTypes)
+
+            createLogFile(listanimals, dataType, "2014_01");
         }
 
     }

@@ -63,7 +63,6 @@ namespace RSRD
         }
         #endregion
 
-
         /// <summary>
         /// allows for multiple records to be filled in at the same time by creating a new tab
         /// </summary>
@@ -183,7 +182,25 @@ namespace RSRD
 
         #endregion
 
+        private void tabControl1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right) 
+            {
+                ContextMenu c = new ContextMenu();
+                MenuItem close = new MenuItem();
+                close.Text = "&Close Tab";
+                close.Click +=new EventHandler(close_Click);
+                c.MenuItems.Add(close);
+                tabControl1.ContextMenu = c;
+                tabControl1.ContextMenu.Show(tabControl1, e.Location);
+            }
+        }
 
+        void close_Click(object sender, EventArgs e) 
+        {
+            MenuItem p = (MenuItem)sender;
+            tabControl1.TabPages.Remove(tabControl1.SelectedTab);
+        } 
         
 
 

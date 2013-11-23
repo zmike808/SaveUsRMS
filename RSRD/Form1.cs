@@ -357,27 +357,40 @@ namespace RSRD
             myPane.Title.Text = dataType + " Breakdown";
             myPane.XAxis.Title.Text = dataType;
             myPane.YAxis.Title.Text = "Number of Animals";
-
-
+            int parsed=0;
             //if else statement... if string, int, do the thing, else if int, int, do the other thing(point pair list)...
             Dictionary<string, int> dataCount = new Dictionary<string, int>();
             List<string> x = new List<string>();
+            List<int> x2 = new List<int>();
             List<double> y = new List<double>();
             foreach (string line in selected)
             {
                 char[] delim = { ':' };
                 string[] split = line.Split(delim);
-                x.Add(split[0]);
+                if (Int32.TryParse(split[0], out parsed))
+                    x2.Add(parsed);
+                else
+                    x.Add(split[0]);
                 y.Add(Convert.ToDouble(split[1]));
                 //y.Add(Convert.ToInt32(split[1]));
             }
+            
             myPane.XAxis.IsVisible = true;
             myPane.YAxis.IsVisible = true;
-            // Set the XAxis labels
-            myPane.XAxis.Scale.TextLabels = x.ToArray();
-            // Set the XAxis to Text type
-            myPane.XAxis.Type = AxisType.Text;
-            
+
+            if (x.Count == 0)
+            {
+                //do thing
+            }
+
+            if (x2.Count == 0)
+            {
+                // Set the XAxis labels
+                myPane.XAxis.Scale.TextLabels = x.ToArray();
+                // Set the XAxis to Text type
+                myPane.XAxis.Type = AxisType.Text;
+            }
+
             BarItem myCurve = myPane.AddBar("label",null, y.ToArray(), Color.Blue);
 
             myPane.XAxis.Type = AxisType.Text;
@@ -510,15 +523,16 @@ namespace RSRD
         {
             //fill listBox1 & corresponding listBox2
             string select = listBox1.SelectedItem.ToString();
+
+            List<string> pieType = new List<string>();
+            pieType.Add("Species");
+            pieType.Add("Gender");
+            pieType.Add("Breed");
+            pieType.Add("Month of Birth");
+            pieType.Add("Year of Birth");
+            pieType.Add("Status");
             if (select == "Pie Chart")
             {
-                List<string> pieType = new List<string>();
-                pieType.Add("Species");
-                pieType.Add("Gender");
-                pieType.Add("Breed");
-                pieType.Add("Month of Birth");
-                pieType.Add("Year of Birth");
-                pieType.Add("Status");
                 listBox2.DataSource = pieType;
             }
             if (select == "Bar Chart")
@@ -527,7 +541,7 @@ namespace RSRD
                 barType.Add("Date of Birth");
                 barType.Add("Age"); 
                 barType.Add("Species");
-                listBox2.DataSource = barType;
+                listBox2.DataSource = pieType;
 
             }
         }

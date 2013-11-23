@@ -333,27 +333,7 @@ namespace RSRD
             int c = 0; //color index
 
             //creates and fills a dictionary of dataType and integer of occurences
-            Dictionary<String, int> dataCount = new Dictionary<string, int>();
-            /*for (int i = 0; i < animals.Count; i++)
-            {
-                string s = "";
-                if (dataType == "Species")
-                    s = animals[i].species.ToString();
-                else if (dataType == "Gender")
-                    s = animals[i].female == false ? "Male" : "Female"; //gets gender strings
-                else if (dataType == "Breed")
-                    s = animals[i].breed;
-                else if (dataType == "Month of Birth")
-                    s = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(animals[i].dob.Month); //gets month strings
-                else if (dataType == "Year of Birth")
-                    s = animals[i].dob.Year.ToString();
-                else if (type == "Status")
-                    s = animals[i].Status;
-                if (dataCount.ContainsKey(s))
-                    dataCount[s]++; //increment key
-                else
-                    dataCount.Add(s, 1); //add new key
-            }*/
+            Dictionary<string, int> dataCount = new Dictionary<string, int>();
             foreach (string line in selected)
             {
                 char[] delim = { ':' };
@@ -372,9 +352,42 @@ namespace RSRD
             zg1.Invalidate();
         }
 
-        private void createBar(GraphPane myPane,List<Animal> animals, string dataType)
+        private void createBar(GraphPane myPane, string dataType, List<string> selected)
         {
+            myPane.Title.Text = dataType + " Breakdown";
+            myPane.XAxis.Title.Text = dataType;
+            myPane.YAxis.Title.Text = "Number of Animals";
+
+
+            //if else statement... if string, int, do the thing, else if int, int, do the other thing(point pair list)...
+            Dictionary<string, int> dataCount = new Dictionary<string, int>();
+            List<string> x = new List<string>();
+            List<double> y = new List<double>();
+            foreach (string line in selected)
+            {
+                char[] delim = { ':' };
+                string[] split = line.Split(delim);
+                x.Add(split[0]);
+                y.Add(Convert.ToDouble(split[1]));
+                //y.Add(Convert.ToInt32(split[1]));
+            }
             myPane.XAxis.IsVisible = true;
+            myPane.YAxis.IsVisible = true;
+            // Set the XAxis labels
+            myPane.XAxis.Scale.TextLabels = x.ToArray();
+            // Set the XAxis to Text type
+            myPane.XAxis.Type = AxisType.Text;
+            
+            BarItem myCurve = myPane.AddBar("label",null, y.ToArray(), Color.Blue);
+
+            myPane.XAxis.Type = AxisType.Text;
+
+
+            myPane.AxisChange();
+            zg1.Invalidate();
+            //BarItem myCurve = myPane.AddBar("Curve 1", null, x, Color.White);
+
+            /*myPane.XAxis.IsVisible = true;
             myPane.YAxis.IsVisible = true;
             PointPairList list = new PointPairList();
             Dictionary<int, int> dataCount = new Dictionary<int, int>();
@@ -413,8 +426,11 @@ namespace RSRD
             myPane.Legend.IsVisible = false;
 
             myPane.AxisChange();
-            zg1.Invalidate();
+            zg1.Invalidate();*/
         }
+
+
+
         private Dictionary<string, int> createDict(List<Animal> animals, string type)
         {
             Dictionary<String, int> dataCount = new Dictionary<string, int>();
@@ -509,18 +525,15 @@ namespace RSRD
             {
                 List<string> barType = new List<string>();
                 barType.Add("Date of Birth");
-                barType.Add("Age");
+                barType.Add("Age"); 
+                barType.Add("Species");
                 listBox2.DataSource = barType;
 
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {            //remove when bar chart file is implemented
-            MySQLHandler dbh = new MySQLHandler();
-            List<Animal> listanimals = dbh.loadAnimals().ToList();
-            //
-
+        {
             zg1.Visible = true;
             //make new graph pane
             GraphPane myPane = zg1.GraphPane;
@@ -532,7 +545,13 @@ namespace RSRD
                 List<string> selected = parseBySelect(select);
                 createPie(myPane, selected, select);
             }
-            if (graphselect == "Bar Chart") //create bar chart
+            if (graphselect == "Bar Chart") //create pie chart
+            {
+                string select = listBox2.SelectedItem.ToString();
+                List<string> selected = parseBySelect(select);
+                createBar(myPane, select, selected);
+            }
+            /*if (graphselect == "Bar Chart") //create bar chart
             {
                 string select = listBox2.SelectedItem.ToString();
                 if (select == "Date of Birth")
@@ -551,7 +570,7 @@ namespace RSRD
                     myPane.YAxis.Scale.Format = "#";
                     createBar(myPane, listanimals, select);
                 }
-            }
+            }*/
         }
 
 

@@ -71,11 +71,14 @@ namespace RSRD
     {
         public stringBox(int _x, int _y, int _length, int _height, string i) :base(_x, _y, _length, _height)
         {
-            value = i;
+			value = i;
             type = FieldBox.boxtypes.stringBox;
         }
         public override string typeToString() { return "string"; }
-        public override bool isDataValid(string s){return true;}
+		public override bool isDataValid(string s)
+		{
+			value = s;
+			return true;}
     }
 
     public class doubBox : FieldBox

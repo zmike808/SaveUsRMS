@@ -16,6 +16,7 @@ namespace RSRD
     {
         
         //more hardcoded bullshit
+		//Animal currentlySelectedAnimal;
         stringBox i = new stringBox(100, 100, 20, 10, "test");
         intBox j = new intBox(100, 200, 20, 10, 0);
         List<FieldBox> list = new List<FieldBox>();
@@ -221,11 +222,11 @@ namespace RSRD
         public void initializeRecords()
         {
             string path = "..\\..\\..\\";
-            string[] filePaths = Directory.GetFiles(@path, "*.recf");
+            string[] filePaths = Directory.GetFiles(".\\", "*.recf");
             foreach (string filePath in filePaths)
             {
-                Record rect = new Record(filePath.Substring(path.Count(), filePath.Count()-path.Count() - 5));
-                rect.fileDirectory = path;
+                Record rect = new Record(filePath.Substring(0, filePath.Count()- 5));
+                rect.fileDirectory = ".\\";
                 rect.ParseFormatFile();
                 blankRecords.Add(rect);
             }

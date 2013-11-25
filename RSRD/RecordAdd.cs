@@ -14,7 +14,9 @@ namespace RSRD
 
         List<Record> blanks;
         Form1 caller;
-
+		Animal currentAnimal;
+		Record currentRecord;
+		List<Record> displayedRecords;
         #region constructors
         /// <summary>
         /// basic constructor, loads no forms 
@@ -23,8 +25,10 @@ namespace RSRD
         public RecordAdd(Form1 f)
         {
             InitializeComponent();
+			displayedRecords = new List<Record>();
             blanks = f.blankRecords;
             caller = f;
+			currentAnimal = f.SelectedAnimal;
             foreach (Record r in f.blankRecords)
             {
                 toolStripComboBox1.Items.Add(r.formName);
@@ -69,7 +73,7 @@ namespace RSRD
         /// <param name="r"></param>
         public void newRecordTab(Record r)
         {
-            TabPage t = new TabPage(r.formName + " " + r.timeStamp.ToShortDateString());
+			TabPage t = new TabPage(r.formName);// + " " + r.timeStamp.ToShortDateString());
             t.AutoScroll = true;
             t.BackColor = Color.White;
 
@@ -90,7 +94,9 @@ namespace RSRD
                 l.Location = k.Value;
                 t.Controls.Add(l);
             }
+			t.Tag = tabControl1.TabPages.Count;
             tabControl1.TabPages.Add(t);
+			displayedRecords.Add(r);
             tabControl1.TabPages[0].Show();
         }
 
@@ -117,7 +123,10 @@ namespace RSRD
                         rf.BackColor = Color.Red;
                         b = false;
                     }
-                    else{rf.BackColor = Color.White;} 
+                    else
+					{
+						rf.BackColor = Color.White;
+					} 
                 }
             }
             return b;
@@ -151,8 +160,28 @@ namespace RSRD
         {
             if (checkDataValidity())
             {
-                MessageBox.Show("VALID DATA");
-                RecordTab save = tabControl1.SelectedTab as RecordTab;
+             //   MessageBox.Show("VALID DATA");
+				//so messy really the way we're handling this...I DONT EVEN...JUST INHERET TAB AND MAKE A RECORDTAB CLASS PROPERLY
+				Record currentRecord = displayedRecords[(int)tabControl1.SelectedTab.Tag];
+				MySQLHandler dbh = new MySQLHandler();
+				List<dynamic> colvals = new List<dynamic>();
+				colvals.Add(dbh.getIteration(currentRecord.formName,currentAnimal.ID));
+				colvals.Add(currentAnimal.ID);
+				colvals.Add(DateTime.Now);
+				foreach (Control c in tabControl1.SelectedTab.Controls)
+				{
+					if (c is RecordTextBox)
+					{
+						RecordTextBox temp = (RecordTextBox)c;
+						var fb = temp.attachedFieldBox;
+						colvals.Add(fb.value);
+					}
+				}
+
+				
+				dbh.insertAnimalToRecord(currentRecord.formName, colvals.Count, colvals);
+				 
+                //RecordTab save = tabControl1.SelectedTab as RecordTab;
               /*find the iteration of this record for the animal, put it after the + sign
                *save.rec.saveData(caller.SelectedAnimal.ID + );
                */
@@ -193,7 +222,7 @@ namespace RSRD
                 c.MenuItems.Add(close);
                 tabControl1.ContextMenu = c;
                 tabControl1.ContextMenu.Show(tabControl1, e.Location);
-            }
+            }			
         }
 
         void close_Click(object sender, EventArgs e) 

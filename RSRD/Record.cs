@@ -147,10 +147,7 @@ namespace RSRD
         /// search through the table associated with this record,
         /// count up all of the rows that have identifiers that start with the entityID
         /// </summary>
-        public void getIteration() 
-        {
-
-        }
+       
 
 
          //when a record is created, save the format file, and create the table
@@ -158,7 +155,7 @@ namespace RSRD
 
 
 		   var dbhandler = new MySQLHandler();
-		   dbhandler.addRecord(formName, values);
+		   dbhandler.createNewRecord(formName, values);
 
            string location = formName + ".recf";
            StreamWriter writer = new FileInfo(location).CreateText();

@@ -596,14 +596,59 @@ namespace RSRD
 
 		//    sendCommand(query);
 		//}
-		public void addRecord(string formName,List<FieldBox> values)
+		public void insertAnimalToRecord(string recordName, int totalColumns, List<dynamic> colValues)
+		{
+			conn.Open();
+			string q = "INSERT INTO " + recordName;
+			string columns = "(";
+			string values = "VALUES(";
+			var comm = conn.CreateCommand();
+			for(int x = 0;x<totalColumns;x++)
+			{
+				if(x+1 == totalColumns)
+				{
+					columns += "`" + x.ToString() + "`" + ") ";
+					values += "@"+x.ToString()+")";
+					comm.Parameters.AddWithValue("@"+x.ToString(),colValues[x]);
+				}
+				else
+				{
+					columns += "`"+x.ToString()+"`" + ",";
+					values += "@" + x.ToString() + ",";
+					comm.Parameters.AddWithValue("@" + x.ToString(), colValues[x]);
+				}
+			}
+			q += columns + values;
+			comm.CommandText = q;
+			comm.ExecuteNonQuery();
+			conn.Close();
+		
+		}
+		public string getIteration(string formName, int animalID)
+		{
+			conn.Open();
+			int itr = 0;
+			MySqlCommand cmd = new MySqlCommand("select * from `" + formName + "` where `1`=@aID;", conn);
+			cmd.Parameters.AddWithValue("@aID", animalID);
+			MySqlDataReader reader = cmd.ExecuteReader();
+			while (reader.Read())
+			{
+				itr++;
+			}
+								
+			conn.Close();
+			itr++;
+			string result = animalID.ToString() + "-" + itr.ToString();
+			return result;
+		}
+		public void createNewRecord(string formName,List<FieldBox> values)
 		{
 			DbBuilder dbBuilder = new DbBuilder();
 			dbBuilder.StartTable(formName);
-			dbBuilder.AddColumn(FieldBox.boxtypes.stringBox, "ID", false, true, 0, false);
-			dbBuilder.AddColumn(FieldBox.boxtypes.intBox, "animalID", true, false, 0, false);
-			dbBuilder.AddColumn(FieldBox.boxtypes.dateTimeBox, "DateCreated", true, false, 0, false);
-			int x = 0;
+			dbBuilder.AddColumn(FieldBox.boxtypes.stringBox, "0", false, true, 0, false);
+			dbBuilder.AddColumn(FieldBox.boxtypes.intBox, "1", true, false, 0, false);
+			dbBuilder.AddColumn(FieldBox.boxtypes.dateTimeBox, "2", true, false, 0, false);
+			int x = 3;
 			foreach (var v in values)
 			{
 				dbBuilder.AddColumn(v.type, x.ToString(), false, false, 0, true);

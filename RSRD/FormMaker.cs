@@ -292,7 +292,7 @@ namespace RSRD
                     }
                 }
             }
-            //activeControl = null;
+            activeControl = null;
             Cursor = Cursors.Default;
         }
 

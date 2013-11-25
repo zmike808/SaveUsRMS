@@ -38,6 +38,29 @@ namespace RSRD
 		//}
 		//List<val>
 		//List<dynamic> 
+		/// <summary>
+		/// use this constructor for creating a new tag
+		/// </summary>
+		/// <param name="tagName">name of tag</param>
+		/// <param name="tableName">form/record name</param>
+		/// <param name="colName">column name</param>
+		/// <param name="type">type of column</param>
+		public SQLTag(string tagName, string tableName, string colName, string type)
+		{
+			var db = new dbEntities();
+			var tags = from temp in db.Tags
+					   where temp.id > 0
+					   select temp;
+			int lastID = tags.Max(temp => temp.id);
+			tag = Tag.CreateTag(lastID+1,tagName, tableName, colName, type);
+			db.Tags.AddObject(tag);
+			db.SaveChanges();
+
+		}
+		/// <summary>
+		/// used for the tag manager
+		/// </summary>
+		/// <param name="t">entity framework Tag object</param>
 		public SQLTag(Tag t)
 		{
 			tag = t;
@@ -46,7 +69,9 @@ namespace RSRD
 			data = Activator.CreateInstance(listType);
 			loadData();
 		}
-
+		/// <summary>
+		/// gets all data from tag's column
+		/// </summary>
 		private void loadData()
 		{
 			MySQLHandler dbh = new MySQLHandler();

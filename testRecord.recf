@@ -1,7 +1,0 @@
-TestRecord
-image
-fieldBox,int,200,200,20,20
-fieldBox,string,200,250,20,20
-fieldBox,int,200,300,20,20
-fieldBox,bool,200,350,20,20
-fieldBox,DateTime,200,340,20,20

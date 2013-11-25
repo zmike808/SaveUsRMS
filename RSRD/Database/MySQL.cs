@@ -26,16 +26,7 @@ namespace RSRD
     /// <summary>
     /// Global variables for db connecting (readonly access)
     /// </summary>
-    public static class DBInfo
-    {
-        public static MySqlConnection connection()
-		{
-			dbEntities db = new dbEntities();
-			var x = new MySqlConnectionStringBuilder(((System.Data.EntityClient.EntityConnection)db.Connection).StoreConnection.ConnectionString);
-			return new MySqlConnection(x.ConnectionString);
-		}
-    }
-
+    
 	class DbBuilder
 	{
 		public string crlf = Environment.NewLine;
@@ -51,27 +42,29 @@ namespace RSRD
 		public void StartTable(string tableName)
 		{
 			columns = new List<DbColumn>();
-			tablename = tableName;
+			tablename = "`"+tableName+"`";
 		}
 
 		public string BuildSQL()
 		{
-			string primary = string.Empty;
+			string primary = "";
 			if (columns == null)
 				throw new Exception("Mising StartTable in class DbBuilder");
-			StringBuilder sql = new StringBuilder("create table if not exists ").Append(tablename).Append("(").Append(crlf);
-			for (int colIndex = 0; colIndex < columns.Count; colIndex++)
+			string sql = "CREATE TABLE IF NOT EXISTS " + tablename + " (";
+			foreach(DbColumn dbcol in columns)
 			{
-				DbColumn dbcol = columns[colIndex];
-				sql.Append(dbcol.colName).Append(' ');
-				sql.Append(dbcol.ColType).Append(',').Append(crlf);
+				sql += dbcol.toString();
 				if (primary == string.Empty && dbcol.isPrimary)
-					primary = string.Format("primary key ({0})", dbcol.colName);
+				{
+					primary = "PRIMARY KEY (" + dbcol.colName + ")";
+				}
 			}
-			if (primary != string.Empty)
-				sql.Append(primary).Append(crlf);
-			sql.Append(") ENGINE=MyISAM DEFAULT CHARSET=latin1;");
-			return sql.ToString();
+			if (primary != "")
+			{
+				sql += primary;//primary).Append(crlf);
+			}
+			sql += ");";
+			return sql;
 		}
 
 		public void AddColumn(FieldBox.boxtypes type, string columnName, bool isIndex = false, bool isPrimary = false, int charlen = 0, bool isnull = true)
@@ -94,7 +87,7 @@ namespace RSRD
 		{
 			get
 			{
-				return isnull ? " null " : " not null";
+				return isnull ? "NULL" : "NOT NULL";
 			}
 		}
 
@@ -104,19 +97,23 @@ namespace RSRD
 			{
 				switch (colType)
 				{
-					case FieldBox.boxtypes.intBox: return " INT " + (IsIndex ? "not null " : "null");
-					case FieldBox.boxtypes.stringBox: return string.Format(" TEXT {0}", isNull);
+					case FieldBox.boxtypes.intBox: return "INT " + isNull;
+					case FieldBox.boxtypes.stringBox: return "VARCHAR(255) " + isNull;
 					case FieldBox.boxtypes.dateTimeBox: return "DATETIME " + isNull;
-					case FieldBox.boxtypes.doubBox: return " DOUBLE " + (IsIndex ? "not null " : "null");
+					case FieldBox.boxtypes.doubBox: return "DOUBLE " + isNull;
 					default: return "";
 				}
 			}
 		}
 
+		public string toString()
+		{
+			return this.colName + " " + this.ColType + ",";
+		}
 		public DbColumn(FieldBox.boxtypes type, string columnName, bool isIndex = false, bool isPrimary = false, int charlen = 0, bool isnull = true)
 		{
 			colType = type;
-			colName = columnName;
+			colName = "`" + columnName + "`";
 			this.IsIndex = isIndex;
 			charLen = charlen;
 			this.isnull = isnull;
@@ -154,7 +151,11 @@ namespace RSRD
         /// </summary>
         public MySQLHandler()
         {
-			conn = DBInfo.connection();
+			dbEntities db = new dbEntities();
+			var cb = new MySqlConnectionStringBuilder(((System.Data.EntityClient.EntityConnection)db.Connection).StoreConnection.ConnectionString);
+			conn = new MySqlConnection(cb.GetConnectionString(true));
+			//MessageBox.Show(conn.Database);
+	
 			// conn = new MySqlConnection("host=" + DBInfo.host + ";database=" + DBInfo.database + ";username=" + DBInfo.username + ";password=" + DBInfo.password + ";" + "Allow User Variables=true;");
         }
         #endregion
@@ -608,7 +609,14 @@ namespace RSRD
 				dbBuilder.AddColumn(v.type, x.ToString(), false, false, 0, true);
 				x++;
 			}
-			sendCommand(dbBuilder.BuildSQL());
+			//MessageBox.Show(dbBuilder.BuildSQL());
+			this.conn.Open();
+			var cmd = new MySqlCommand(dbBuilder.BuildSQL(), this.conn);
+			cmd.ExecuteNonQuery();
+			this.conn.Close();
+			//	sendCommand(dbBuilder.BuildSQL());
+			
+			
 		}
 
         #region helperFunctions
@@ -624,13 +632,15 @@ namespace RSRD
                 try
                 {
                     //Opens a connection, if succefull; run the query and then close the connection.
-
+					//Debug.WriteLine("OPEN");
+				//	Debug.WriteLine(query);
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.ExecuteNonQuery();
                     this.Close();
                     return true;
                 }
-                catch { 
+                catch {
+					//Debug.WriteLine("FAILURE");
                     this.Close();
                     return false;
                 }

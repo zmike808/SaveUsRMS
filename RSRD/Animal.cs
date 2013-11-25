@@ -78,35 +78,38 @@ namespace RSRD
             get { return local.species; }
             set { local.species = value; }
         }
-        
-        public DateTime vacc;
-        //{
-        //    get { return new MySqlDateTime(local.vaccinationDate.Value).GetDateTime(); }
-        //    set { local.vaccinationDate = (DateTime?)value; }
-        //}
 
-        public bool sterilized;
-        //{
-        //    get { return local.sterilized.Value; }
-        //    set { local.sterilized = value; }
-        //}
-    
-        public string gender;
-        //{
-        //    get { return local.gender; }
-        //    set { local.gender = value; }
-        //}
-        public string color;
-        //{
-        //    get { return local.color; }
-        //    set { local.color = value; }
-        //}
+        [System.ComponentModel.Browsable(false)]
+        public DateTime vacc
+        {
+           get { return new MySqlDateTime(local.vaccinationDate.Value).GetDateTime(); }
+           set { local.vaccinationDate = (DateTime?)value; }
+        }
 
-        public string size;
-        //{
-        //    get { return local.size; }
-        //    set { local.size = value; }
-        //}
+        [System.ComponentModel.Browsable(false)]
+        public bool sterilized
+        {
+            get { return local.sterilized.Value; }
+            set { local.sterilized = value; }
+        }
+        [System.ComponentModel.Browsable(false)]
+        public string gender
+        {
+            get { return local.gender; }
+            set { local.gender = value; }
+        }
+        [System.ComponentModel.Browsable(false)]
+        public string color
+        {
+            get { return local.color; }
+            set { local.color = value; }
+        }
+        [System.ComponentModel.Browsable(false)]
+        public string size
+        {
+            get { return local.size; }
+            set { local.size = value; }
+        }
         
         [System.ComponentModel.DisplayName("DOB")]
         public DateTime dob
@@ -114,42 +117,42 @@ namespace RSRD
             get { return new MySqlDateTime(local.DateofBirth.Value).GetDateTime(); }
             set { local.DateofBirth = (DateTime?)value; }
         }
-
-        public bool dobIsEstimated;
-        //{
-        //    get { return local.dobIsEstimated.Value; }
-        //    set { local.dobIsEstimated = value; }
-        //}
-
-        public string breed;
-        //{
-        //    get { return local.breed; }
-        //    set { local.breed = value; }
-        //}
-
-        public string crossbreed;
-        //{
-        //    get { return local.crossbreed; }
-        //    set { local.crossbreed = value; }
-        //}
-      
-        public string location;
-        //{
-        //    get { return local.location; }
-        //    set { local.location = value; }
-        //}
-
-        public string owner;
-        //{
-        //    get { return local.owner; }
-        //    set { local.owner = value; }
-        //}
-
-        public string notes;
-        //{
-        //    get { return local.notes; }
-        //    set { local.notes = value; }
-        //}
+        [System.ComponentModel.Browsable(false)]
+        public bool dobIsEstimated
+        {
+            get { return local.dobIsEstimated.Value; }
+            set { local.dobIsEstimated = value; }
+        }
+        [System.ComponentModel.Browsable(false)]
+        public string breed
+        {
+            get { return local.breed; }
+            set { local.breed = value; }
+        }
+        [System.ComponentModel.Browsable(false)]
+        public string crossbreed
+        {
+            get { return local.crossbreed; }
+            set { local.crossbreed = value; }
+        }
+        [System.ComponentModel.Browsable(false)]
+        public string location
+        {
+            get { return local.location; }
+            set { local.location = value; }
+        }
+        [System.ComponentModel.Browsable(false)]
+        public string owner
+        {
+            get { return local.owner; }
+            set { local.owner = value; }
+        }
+        [System.ComponentModel.Browsable(false)]
+        public string notes
+        {
+            get { return local.notes; }
+            set { local.notes = value; }
+        }
 #endregion
         
         /// <summary>

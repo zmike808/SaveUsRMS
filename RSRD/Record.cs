@@ -117,6 +117,7 @@ namespace RSRD
                     labels.Add(new KeyValuePair<string, Point>(words[1], new Point(Convert.ToInt32(words[2]), Convert.ToInt32(words[3]))));
                 }
             }
+			reader.Close();
         }
 
         /// <summary>
@@ -158,8 +159,10 @@ namespace RSRD
 		   dbhandler.createNewRecord(formName, values);
 
            string location = formName + ".recf";
-           StreamWriter writer = new FileInfo(location).CreateText();
-
+		   StringWriter writer = new StringWriter();
+		   dbEntities db = new dbEntities();
+		   var r = dbRecord.CreatedbRecord(formName);
+		   
            // Top of the record
            writer.WriteLine(formName);
            writer.WriteLine("Image");
@@ -174,6 +177,9 @@ namespace RSRD
                writer.WriteLine("label," + x.Key + ',' + x.Value.X + ',' + x.Value.Y);
            }
            writer.Close();
+		   r.recordData = writer.ToString();
+		   db.dbRecords.AddObject(r);
+		   db.SaveChanges();
         }
  
         /// <summary>

@@ -221,15 +221,28 @@ namespace RSRD
 
         public void initializeRecords()
         {
-            string path = "..\\..\\..\\";
-            string[] filePaths = Directory.GetFiles(".\\", "*.recf");
-            foreach (string filePath in filePaths)
-            {
-                Record rect = new Record(filePath.Substring(0, filePath.Count()- 5));
-                rect.fileDirectory = ".\\";
-                rect.ParseFormatFile();
-                blankRecords.Add(rect);
-            }
+			dbEntities db = new dbEntities();
+			var savedRecords = from savedRecord in db.dbRecords where savedRecord.recordName != null select savedRecord;
+			foreach (var r in savedRecords)
+			{
+				string location = r.recordName + ".recf";
+				var finfo = new FileInfo(location);
+				if (!(finfo.Exists))
+				{
+					StreamWriter writer = finfo.CreateText();
+					writer.Write(r.recordData);
+					writer.Close();
+				}
+			}
+			//string path = "..\\..\\..\\";
+			string[] filePaths = Directory.GetFiles(".\\", "*.recf");
+			foreach (string filePath in filePaths)
+			{
+				Record rect = new Record(filePath.Substring(0, filePath.Count() - 5));
+				rect.fileDirectory = ".\\";
+				rect.ParseFormatFile();
+				blankRecords.Add(rect);
+			}
 
         }
         public void searchHandler(string comp)
@@ -686,7 +699,6 @@ namespace RSRD
 			{
 				this.currentUser = login.getCurrentUser();
 				login.Close();
-					
 			}			
 			
         }

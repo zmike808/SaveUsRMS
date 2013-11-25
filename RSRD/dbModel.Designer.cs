@@ -116,22 +116,6 @@ namespace RSRD
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<testa> testas
-        {
-            get
-            {
-                if ((_testas == null))
-                {
-                    _testas = base.CreateObjectSet<testa>("testas");
-                }
-                return _testas;
-            }
-        }
-        private ObjectSet<testa> _testas;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<dbRecord> dbRecords
         {
             get
@@ -144,6 +128,22 @@ namespace RSRD
             }
         }
         private ObjectSet<dbRecord> _dbRecords;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Tag> Tags
+        {
+            get
+            {
+                if ((_Tags == null))
+                {
+                    _Tags = base.CreateObjectSet<Tag>("Tags");
+                }
+                return _Tags;
+            }
+        }
+        private ObjectSet<Tag> _Tags;
 
         #endregion
 
@@ -174,19 +174,19 @@ namespace RSRD
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the testas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTotestas(testa testa)
-        {
-            base.AddObject("testas", testa);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the dbRecords EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTodbRecords(dbRecord dbRecord)
         {
             base.AddObject("dbRecords", dbRecord);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Tags EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTags(Tag tag)
+        {
+            base.AddObject("Tags", tag);
         }
 
         #endregion
@@ -1150,26 +1150,30 @@ namespace RSRD
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="RSRD", Name="testa")]
+    [EdmEntityTypeAttribute(NamespaceName="RSRD", Name="Tag")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class testa : EntityObject
+    public partial class Tag : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new testa object.
+        /// Create a new Tag object.
         /// </summary>
-        /// <param name="c0">Initial value of the C0 property.</param>
-        /// <param name="c1">Initial value of the C1 property.</param>
-        /// <param name="c2">Initial value of the C2 property.</param>
-        public static testa Createtesta(global::System.String c0, global::System.Int32 c1, global::System.DateTime c2)
+        /// <param name="id">Initial value of the id property.</param>
+        /// <param name="name">Initial value of the name property.</param>
+        /// <param name="tableName">Initial value of the tableName property.</param>
+        /// <param name="colName">Initial value of the colName property.</param>
+        /// <param name="type">Initial value of the type property.</param>
+        public static Tag CreateTag(global::System.Int32 id, global::System.String name, global::System.String tableName, global::System.String colName, global::System.String type)
         {
-            testa testa = new testa();
-            testa.C0 = c0;
-            testa.C1 = c1;
-            testa.C2 = c2;
-            return testa;
+            Tag tag = new Tag();
+            tag.id = id;
+            tag.name = name;
+            tag.tableName = tableName;
+            tag.colName = colName;
+            tag.type = type;
+            return tag;
         }
 
         #endregion
@@ -1181,147 +1185,123 @@ namespace RSRD
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String C0
+        public global::System.Int32 id
         {
             get
             {
-                return _C0;
+                return _id;
             }
             set
             {
-                if (_C0 != value)
+                if (_id != value)
                 {
-                    OnC0Changing(value);
-                    ReportPropertyChanging("C0");
-                    _C0 = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("C0");
-                    OnC0Changed();
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("id");
+                    OnidChanged();
                 }
             }
         }
-        private global::System.String _C0;
-        partial void OnC0Changing(global::System.String value);
-        partial void OnC0Changed();
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 C1
+        public global::System.String name
         {
             get
             {
-                return _C1;
+                return _name;
             }
             set
             {
-                OnC1Changing(value);
-                ReportPropertyChanging("C1");
-                _C1 = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("C1");
-                OnC1Changed();
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
             }
         }
-        private global::System.Int32 _C1;
-        partial void OnC1Changing(global::System.Int32 value);
-        partial void OnC1Changed();
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime C2
+        public global::System.String tableName
         {
             get
             {
-                return _C2;
+                return _tableName;
             }
             set
             {
-                OnC2Changing(value);
-                ReportPropertyChanging("C2");
-                _C2 = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("C2");
-                OnC2Changed();
+                OntableNameChanging(value);
+                ReportPropertyChanging("tableName");
+                _tableName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("tableName");
+                OntableNameChanged();
             }
         }
-        private global::System.DateTime _C2;
-        partial void OnC2Changing(global::System.DateTime value);
-        partial void OnC2Changed();
+        private global::System.String _tableName;
+        partial void OntableNameChanging(global::System.String value);
+        partial void OntableNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String C3
+        public global::System.String colName
         {
             get
             {
-                return _C3;
+                return _colName;
             }
             set
             {
-                OnC3Changing(value);
-                ReportPropertyChanging("C3");
-                _C3 = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("C3");
-                OnC3Changed();
+                OncolNameChanging(value);
+                ReportPropertyChanging("colName");
+                _colName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("colName");
+                OncolNameChanged();
             }
         }
-        private global::System.String _C3;
-        partial void OnC3Changing(global::System.String value);
-        partial void OnC3Changed();
+        private global::System.String _colName;
+        partial void OncolNameChanging(global::System.String value);
+        partial void OncolNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> C4
+        public global::System.String type
         {
             get
             {
-                return _C4;
+                return _type;
             }
             set
             {
-                OnC4Changing(value);
-                ReportPropertyChanging("C4");
-                _C4 = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("C4");
-                OnC4Changed();
+                OntypeChanging(value);
+                ReportPropertyChanging("type");
+                _type = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("type");
+                OntypeChanged();
             }
         }
-        private Nullable<global::System.DateTime> _C4;
-        partial void OnC4Changing(Nullable<global::System.DateTime> value);
-        partial void OnC4Changed();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String C5
-        {
-            get
-            {
-                return _C5;
-            }
-            set
-            {
-                OnC5Changing(value);
-                ReportPropertyChanging("C5");
-                _C5 = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("C5");
-                OnC5Changed();
-            }
-        }
-        private global::System.String _C5;
-        partial void OnC5Changing(global::System.String value);
-        partial void OnC5Changed();
+        private global::System.String _type;
+        partial void OntypeChanging(global::System.String value);
+        partial void OntypeChanged();
 
         #endregion
 

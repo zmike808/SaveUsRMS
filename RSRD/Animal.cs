@@ -47,7 +47,7 @@ namespace RSRD
 
         #region Class Variables
         
-        private dbanimal local; //store the db copy of this animal
+        public dbanimal local; //store the db copy of this animal
 
         public bool female; 
         

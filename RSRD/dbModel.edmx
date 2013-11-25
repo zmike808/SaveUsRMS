@@ -10,7 +10,7 @@
           <EntitySet Name="EmployeeLogins" EntityType="dbModel.Store.EmployeeLogins" store:Type="Tables" Schema="zemskm_saveus" />
           <EntitySet Name="Organizations" EntityType="dbModel.Store.Organizations" store:Type="Tables" Schema="zemskm_saveus" />
           <EntitySet Name="records" EntityType="dbModel.Store.records" store:Type="Tables" Schema="zemskm_saveus" />
-          <EntitySet Name="testa" EntityType="dbModel.Store.testa" store:Type="Tables" Schema="zemskm_saveus" />
+          <EntitySet Name="Tags" EntityType="dbModel.Store.Tags" store:Type="Tables" Schema="zemskm_saveus" />
         </EntityContainer>
         <EntityType Name="animal">
           <Key>
@@ -66,16 +66,15 @@
           <Property Name="recordName" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="recordData" Type="longtext" />
         </EntityType>
-        <EntityType Name="testa">
+        <EntityType Name="Tags">
           <Key>
-            <PropertyRef Name="0" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="0" Type="varchar" Nullable="false" MaxLength="255" />
-          <Property Name="1" Type="int" Nullable="false" />
-          <Property Name="2" Type="datetime" Nullable="false" />
-          <Property Name="3" Type="varchar" MaxLength="255" />
-          <Property Name="4" Type="datetime" />
-          <Property Name="5" Type="varchar" MaxLength="255" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="tableName" Type="text" Nullable="false" />
+          <Property Name="colName" Type="text" Nullable="false" />
+          <Property Name="type" Type="text" Nullable="false" />
         </EntityType>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -85,8 +84,8 @@
           <EntitySet Name="Organizations" EntityType="RSRD.Organization" />
           <EntitySet Name="dbanimals" EntityType="RSRD.dbanimal" />
           <EntitySet Name="EmployeeLogins" EntityType="RSRD.EmployeeLogin" />
-          <EntitySet Name="testas" EntityType="RSRD.testa" />
           <EntitySet Name="dbRecords" EntityType="RSRD.dbRecord" />
+          <EntitySet Name="Tags" EntityType="RSRD.Tag" />
         </EntityContainer>
         <EntityType Name="Organization">
           <Key>
@@ -135,23 +134,22 @@
           <Property Type="String" Name="LastName" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="email" MaxLength="65535" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="testa">
-          <Key>
-            <PropertyRef Name="C0" />
-          </Key>
-          <Property Type="String" Name="C0" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="C1" Nullable="false" />
-          <Property Type="DateTime" Name="C2" Nullable="false" />
-          <Property Type="String" Name="C3" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="C4" />
-          <Property Type="String" Name="C5" MaxLength="255" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="dbRecord">
           <Key>
             <PropertyRef Name="recordName" />
           </Key>
           <Property Type="String" Name="recordName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="recordData" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="tableName" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="colName" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="type" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -209,23 +207,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="testas">
-            <EntityTypeMapping TypeName="RSRD.testa">
-              <MappingFragment StoreEntitySet="testa">
-                <ScalarProperty Name="C5" ColumnName="5" />
-                <ScalarProperty Name="C4" ColumnName="4" />
-                <ScalarProperty Name="C3" ColumnName="3" />
-                <ScalarProperty Name="C2" ColumnName="2" />
-                <ScalarProperty Name="C1" ColumnName="1" />
-                <ScalarProperty Name="C0" ColumnName="0" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dbRecords">
             <EntityTypeMapping TypeName="RSRD.dbRecord">
               <MappingFragment StoreEntitySet="records">
                 <ScalarProperty Name="recordData" ColumnName="recordData" />
                 <ScalarProperty Name="recordName" ColumnName="recordName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="RSRD.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="colName" ColumnName="colName" />
+                <ScalarProperty Name="tableName" ColumnName="tableName" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -253,8 +250,8 @@
         <EntityTypeShape EntityType="RSRD.Organization" Width="1.5" PointX="2.75" PointY="0.75" Height="3.1340950520833326" IsExpanded="true" />
         <EntityTypeShape EntityType="RSRD.dbanimal" Width="1.5" PointX="1" PointY="1.375" Height="4.0956022135416656" />
         <EntityTypeShape EntityType="RSRD.EmployeeLogin" Width="1.5" PointX="3.375" PointY="4.75" Height="1.9802864583333335" />
-        <EntityTypeShape EntityType="RSRD.testa" Width="1.5" PointX="5.375" PointY="0.75" Height="1.9210009765624996" />
         <EntityTypeShape EntityType="RSRD.dbRecord" Width="1.5" PointX="0.75" PointY="5.75" Height="1.2636116536458317" />
+        <EntityTypeShape EntityType="RSRD.Tag" Width="1.5" PointX="5.375" PointY="3.75" Height="1.7566536458333322" />
       </Diagram>
     </Diagrams>
   </Designer>

@@ -138,6 +138,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Database\SimpleHash.cs" />
+    <Compile Include="SQLTag.cs" />
     <EmbeddedResource Include="AnimalCreateDialog.resx">
       <DependentUpon>AnimalCreateDialog.cs</DependentUpon>
     </EmbeddedResource>

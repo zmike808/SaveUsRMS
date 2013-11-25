@@ -9,6 +9,8 @@ using MySql.Data.Types;
 using MySql.Data.MySqlClient;
 using MySql.Data.Entity;
 using System.Text;
+using System.Collections;
+using System.ComponentModel;
 
 namespace RSRD
 {
@@ -22,13 +24,38 @@ namespace RSRD
         static void Main()
         {
 			//AnimalFilling();
+			//addtags();
+			testtags();
 			Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
 
+		static void testtags()
+		{
+			TagManager tm = new TagManager("Animal status");
+			var test = tm.compoundData;
+			foreach (var t in test)
+			{
+				Console.WriteLine(t);
+			}
+		}
         #region db stuff
-        
+		static void addtags()
+		{
+			MySQLHandler dbh = new MySQLHandler();
+			List<Animal> li = dbh.loadAnimals().ToList<Animal>();
+			int x = 1;
+			var db = new dbEntities();
+			object a = li[0].local;
+			foreach (var prop in a.GetType().GetProperties())
+			{
+				Tag t = Tag.CreateTag(x, "Animal " + prop.Name, "animal", prop.Name, prop.PropertyType.ToString());
+				db.Tags.AddObject(t);
+				db.SaveChanges();
+				x++;
+			}
+		}
         /// <summary>
         /// provides that nice animal filling...
         /// but no really, it just populates the animal table with random strings of numbers for the name and breed

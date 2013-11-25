@@ -142,7 +142,7 @@ namespace RSRD
                     controltypes.Add(FieldBox.boxtypes.dateTimeBox);
                     break;
                 default:
-                    controltypes.Add(FieldBox.boxtypes.intBox);
+                    //controltypes.Add(FieldBox.boxtypes.intBox);
                     choseLabel = true;
                     break;
             }

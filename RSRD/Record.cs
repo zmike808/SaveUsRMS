@@ -160,7 +160,7 @@ namespace RSRD
 		   var dbhandler = new MySQLHandler();
 		   dbhandler.addRecord(formName, values);
 
-           string location = "C:\\Users\\Sebastian\\Documents\\Visual Studio 2010\\Projects\\RSRD\\" + formName + ".recf";
+           string location = formName + ".recf";
            StreamWriter writer = new FileInfo(location).CreateText();
 
            // Top of the record

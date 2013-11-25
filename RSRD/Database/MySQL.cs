@@ -40,7 +40,7 @@ namespace RSRD
 	{
 		public string crlf = Environment.NewLine;
 		List<DbColumn> columns;
-		public enum ColTypes { ctint, ctvarchar, ctdatetime };
+	//	public enum ColTypes { ctint, ctvarchar, ctdatetime };
 		string tablename;
 
 		public DbBuilder()

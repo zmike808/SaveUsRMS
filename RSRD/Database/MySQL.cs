@@ -28,18 +28,101 @@ namespace RSRD
     /// </summary>
     public static class DBInfo
     {
-        /// <summary>
-        /// admindev is empty when uploaded to github; contains admin access credentials to sql db
-        /// </summary>
-#if admindev
-        
-#else
-        public const string host = "saveus.myrpi.org";
-        public const string username = "zemskm_user";
-        public const string password = "saveus123";
-        public const string database = "zemskm_saveus";
-#endif
+        public static MySqlConnection connection()
+		{
+			dbEntities db = new dbEntities();
+			var x = new MySqlConnectionStringBuilder(((System.Data.EntityClient.EntityConnection)db.Connection).StoreConnection.ConnectionString);
+			return new MySqlConnection(x.ConnectionString);
+		}
     }
+
+	class DbBuilder
+	{
+		public string crlf = Environment.NewLine;
+		List<DbColumn> columns;
+		public enum ColTypes { ctint, ctvarchar, ctdatetime };
+		string tablename;
+
+		public DbBuilder()
+		{
+			columns = null;
+		}
+
+		public void StartTable(string tableName)
+		{
+			columns = new List<DbColumn>();
+			tablename = tableName;
+		}
+
+		public string BuildSQL()
+		{
+			string primary = string.Empty;
+			if (columns == null)
+				throw new Exception("Mising StartTable in class DbBuilder");
+			StringBuilder sql = new StringBuilder("create table if not exists ").Append(tablename).Append("(").Append(crlf);
+			for (int colIndex = 0; colIndex < columns.Count; colIndex++)
+			{
+				DbColumn dbcol = columns[colIndex];
+				sql.Append(dbcol.colName).Append(' ');
+				sql.Append(dbcol.ColType).Append(',').Append(crlf);
+				if (primary == string.Empty && dbcol.isPrimary)
+					primary = string.Format("primary key ({0})", dbcol.colName);
+			}
+			if (primary != string.Empty)
+				sql.Append(primary).Append(crlf);
+			sql.Append(") ENGINE=MyISAM DEFAULT CHARSET=latin1;");
+			return sql.ToString();
+		}
+
+		public void AddColumn(FieldBox.boxtypes type, string columnName, bool isIndex = false, bool isPrimary = false, int charlen = 0, bool isnull = true)
+		{
+			DbColumn dbc = new DbColumn(type, columnName, isIndex, isPrimary, charlen, isnull);
+			columns.Add(dbc);
+		}
+	}
+
+	// ****************************************************** DBColumn *********************************************
+	class DbColumn
+	{
+		FieldBox.boxtypes colType;
+		private bool isnull;
+		public string colName { get; set; }
+		public bool IsIndex { get; set; }
+		public bool isPrimary { get; set; }
+		public int charLen;
+		public string isNull
+		{
+			get
+			{
+				return isnull ? " null " : " not null";
+			}
+		}
+
+		public string ColType
+		{
+			get
+			{
+				switch (colType)
+				{
+					case FieldBox.boxtypes.intBox: return " INT " + (IsIndex ? "not null " : "null");
+					case FieldBox.boxtypes.stringBox: return string.Format(" TEXT {0}", isNull);
+					case FieldBox.boxtypes.dateTimeBox: return "DATETIME " + isNull;
+					case FieldBox.boxtypes.doubBox: return " DOUBLE " + (IsIndex ? "not null " : "null");
+					default: return "";
+				}
+			}
+		}
+
+		public DbColumn(FieldBox.boxtypes type, string columnName, bool isIndex = false, bool isPrimary = false, int charlen = 0, bool isnull = true)
+		{
+			colType = type;
+			colName = columnName;
+			this.IsIndex = isIndex;
+			charLen = charlen;
+			this.isnull = isnull;
+			this.isPrimary = isPrimary;
+		}
+	}
 
     public class MySQLHandler
     {
@@ -71,7 +154,8 @@ namespace RSRD
         /// </summary>
         public MySQLHandler()
         {
-           // conn = new MySqlConnection("host=" + DBInfo.host + ";database=" + DBInfo.database + ";username=" + DBInfo.username + ";password=" + DBInfo.password + ";" + "Allow User Variables=true;");
+			conn = DBInfo.connection();
+			// conn = new MySqlConnection("host=" + DBInfo.host + ";database=" + DBInfo.database + ";username=" + DBInfo.username + ";password=" + DBInfo.password + ";" + "Allow User Variables=true;");
         }
         #endregion
 
@@ -475,41 +559,57 @@ namespace RSRD
         /// </summary>
         /// <param name="tableName">name of form that the table will be created for</param>
         /// <param name="fieldTypes">list of fields that are in the form (which will act as the columns for the table) currently limited to string, int, and double</param>
-        public void createTable(string tableName, List<string> fieldTypes)
-         {
-          /*
-           *this will be the same for every table, it's how we link what animal is what between all tables
-           *each animal will have it's own uniqueID 
-           */
-             string query = "CREATE TABLE IF NOT EXISTS " + tableName + " ( `ID` INT NOT NULL AUTO_INCREMENT, ";
+		
+		//public void createTable(string tableName, List<string> fieldTypes)
+		// {
+		//  /*
+		//   *this will be the same for every table, it's how we link what animal is what between all tables
+		//   *each animal will have it's own uniqueID 
+		//   */
+		//     string query = "CREATE TABLE IF NOT EXISTS " + tableName + " ( `ID` INT NOT NULL AUTO_INCREMENT, ";
  
-            int count = 1;
-            foreach (string field in fieldTypes)
-             {
-                query = query + "`" + count.ToString() + "` "; //each column name will be a number from 1..n, n being the last column and equal to the # of columns in that table
+		//    int count = 1;
+		//    foreach (string field in fieldTypes)
+		//     {
+		//        query = query + "`" + count.ToString() + "` "; //each column name will be a number from 1..n, n being the last column and equal to the # of columns in that table
 
-                if (field == "string")
-                {
-                    query = query + "TEXT NULL DEFAULT NULL, ";
-                }
-                if (field == "int")
-                {
-                    query = query + "INT NULL DEFAULT NULL, ";
-                }
-                if (field == "double")
-                {
-                    query = query + "DOUBLE NULL DEFAULT NULL, ";
-                }
-                count++;
-             }
+		//        if (field == "string")
+		//        {
+		//            query = query + "TEXT NULL DEFAULT NULL, ";
+		//        }
+		//        if (field == "int")
+		//        {
+		//            query = query + "INT NULL DEFAULT NULL, ";
+		//        }
+		//        if (field == "double")
+		//        {
+		//            query = query + "DOUBLE NULL DEFAULT NULL, ";
+		//        }
+		//        count++;
+		//     }
  
 
-            query = query + "PRIMARY KEY (`ID`) );";
+		//    query = query + "PRIMARY KEY (`ID`) );";
 
-            Debug.Write(query);
+		//    Debug.Write(query);
 
-            sendCommand(query);
-        }
+		//    sendCommand(query);
+		//}
+		public void addRecord(string formName,List<FieldBox> values)
+		{
+			DbBuilder dbBuilder = new DbBuilder();
+			dbBuilder.StartTable(formName);
+			dbBuilder.AddColumn(FieldBox.boxtypes.stringBox, "ID", false, true, 0, false);
+			dbBuilder.AddColumn(FieldBox.boxtypes.intBox, "animalID", true, false, 0, false);
+			dbBuilder.AddColumn(FieldBox.boxtypes.dateTimeBox, "DateCreated", true, false, 0, false);
+			int x = 0;
+			foreach (var v in values)
+			{
+				dbBuilder.AddColumn(v.type, x.ToString(), false, false, 0, true);
+				x++;
+			}
+			sendCommand(dbBuilder.BuildSQL());
+		}
 
         #region helperFunctions
         /* 

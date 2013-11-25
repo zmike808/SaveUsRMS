@@ -4,7 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.IO;
-
+using MySql.Data.Common;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+using MySql.Data.Entity;
+using MySql.Data.Types;
 
 namespace RSRD
 {
@@ -152,18 +156,10 @@ namespace RSRD
          //when a record is created, save the format file, and create the table
        public void FinalizeNewRecord() {
 
-           /*
-            MySQLHandler msql = new MySQLHandler("localhost", "ASRD", "root", "root"); //needs to be changed later to be dynamic settings, 
-                                                                                       //or at least have a standardized setting for when the software is installed
-            List<string> fieldTypes = new List<string>();
 
-            foreach (FieldBox x in values)
-            {
-                fieldTypes.Add(x.typeToString());
-            }
-            msql.createTable(formName, fieldTypes);
-           */
-           // Creating the .recf
+		   var dbhandler = new MySQLHandler();
+		   dbhandler.addRecord(formName, values);
+
            string location = "C:\\Users\\Sebastian\\Documents\\Visual Studio 2010\\Projects\\RSRD\\" + formName + ".recf";
            StreamWriter writer = new FileInfo(location).CreateText();
 
@@ -191,8 +187,6 @@ namespace RSRD
         /// </param>
         void loadData(int id) 
         {
-
-
             //definitely not blank after this
             empty = false;
         }

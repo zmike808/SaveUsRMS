@@ -21,8 +21,8 @@ namespace RSRD
         [STAThread]
         static void Main()
         {
-
-            Application.EnableVisualStyles();
+			//AnimalFilling();
+			Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
@@ -48,7 +48,11 @@ namespace RSRD
             string[] gNames = { "doge", "meowmeow", "unicorn" };
             string[] gColors = { "white", "black", "rainbow", "magic" };
             //FILL IT UP
-            for (int y = 1; y < 200; y++)
+			var animals = from e in db.dbanimals
+						  where e.ID > 0
+						  select e;
+			int lastID = animals.Max(e => e.ID);
+            for (int y = lastID+1; y < lastID+21; y++)
             {
                 dbanimal a = dbanimal.Createdbanimal(y);
                
@@ -87,10 +91,10 @@ namespace RSRD
                 
                 a.sterilized = (true);
 
-                if(r.Next(y) > y)
-                    a.gender = ("Male");
-                else
-                    a.gender = ("Female");
+               // if(r.Next(y) > y)
+                    a.gender = "Male";
+              //  else
+                   // a.gender = ("Female");
 
                 a.color = (gColors[x%4]);
                 a.size = (aSize[x%3]);

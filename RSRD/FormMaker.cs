@@ -309,6 +309,22 @@ namespace RSRD
         #endregion
 
 
+
+        void addImage() 
+        {
+            OpenFileDialog f = new OpenFileDialog();
+            
+            string tempPath = "";
+
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                tempPath = f.FileName; // prints path
+                Console.WriteLine(tempPath);
+            }
+
+        }
+
+
         /// <summary>
         /// collects all of the created data and saves the form
         /// </summary>
@@ -371,6 +387,11 @@ namespace RSRD
             }
             rec.FinalizeNewRecord();
             caller.initializeRecords();
+        }
+
+        private void loadImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            addImage();
         }
 
     }

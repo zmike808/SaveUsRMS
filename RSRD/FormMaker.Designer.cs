@@ -62,19 +62,20 @@
             this.loadImageToolStripMenuItem,
             this.createFormToolStripMenuItem});
             this.fileMenuItem.Name = "fileMenuItem";
-            this.fileMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileMenuItem.Text = "File";
             // 
             // loadImageToolStripMenuItem
             // 
             this.loadImageToolStripMenuItem.Name = "loadImageToolStripMenuItem";
-            this.loadImageToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.loadImageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadImageToolStripMenuItem.Text = "Load Image";
+            this.loadImageToolStripMenuItem.Click += new System.EventHandler(this.loadImageToolStripMenuItem_Click);
             // 
             // createFormToolStripMenuItem
             // 
             this.createFormToolStripMenuItem.Name = "createFormToolStripMenuItem";
-            this.createFormToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.createFormToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.createFormToolStripMenuItem.Text = "Create Form";
             this.createFormToolStripMenuItem.Click += new System.EventHandler(this.createFormToolStripMenuItem_Click);
             // 
@@ -178,8 +179,8 @@
         private System.Windows.Forms.ListBox templateListBox;
         private System.Windows.Forms.ListBox fieldboxListBox;
         private System.Windows.Forms.ToolStripMenuItem loadImageToolStripMenuItem;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem createFormToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBox1;
 
     }
 }

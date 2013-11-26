@@ -113,6 +113,27 @@ namespace RSRD
 				}
 			}
 		}
+		/// <summary>
+		/// creates instances of tagmanager for all tags in the tag table in the database
+		/// </summary>
+		/// <returns>List of type tagmanager containing all possible tags that were listed in sql tag table</returns>
+		public static List<TagManager> getAllTagManagers()
+		{
+			List<TagManager> allTMs = new List<TagManager>();
+			List<string> usedNames = new List<string>();
+			var db = new dbEntities();
+			var query = from t in db.Tags where t.name != null select t;
+			foreach (var t in query)
+			{
+				if(!(usedNames.Exists(element => element == t.name)))
+				{
+					allTMs.Add(new TagManager(t.name));
+					usedNames.Add(t.name);
+				}
+			}
+			return allTMs;
+			
+		}
 
 	}
 }

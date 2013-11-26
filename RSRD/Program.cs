@@ -33,11 +33,11 @@ namespace RSRD
 
 		static void testtags()
 		{
-			TagManager tm = new TagManager("Animal status");
-			var test = tm.compoundData;
-			foreach (var t in test)
+			List<TagManager> allTMs = TagManager.getAllTagManagers();
+			
+			foreach (var t in allTMs)
 			{
-				Console.WriteLine(t);
+				Console.WriteLine(t.tagName);
 			}
 		}
         #region db stuff

@@ -22,13 +22,27 @@ namespace RSRD
         public dynamic value { get; set; }
         public boxtypes type;
 
+        public TagManager tag;
+
         public int x_pos { get; set; }    //x position on the record  
         public int y_pos { get; set; }      //y position on the record
 
         public int length { get; set; }
         public int height { get; set; }
 
+
+        protected FieldBox() { }
+
         protected FieldBox(int _x, int _y, int _length, int _height) 
+        {
+            x_pos = _x;
+            y_pos = _y;
+
+            length = _length;
+            height = _height;
+        }
+
+        protected FieldBox(int _x, int _y, int _length, int _height, TagManager tag)
         {
             x_pos = _x;
             y_pos = _y;
@@ -40,8 +54,16 @@ namespace RSRD
         public abstract string typeToString();
 
         //try to parse the value to the value type, return false if it cant
-        public abstract bool isDataValid(string s);
 
+        public string recfString() 
+        {
+            string comma = ", ";
+            string s = string.Concat("fieldbox", comma, typeToString(), comma, x_pos, comma, y_pos, comma, length, comma, height, comma, tag.tagName);
+            return s;
+            
+        }
+
+        public abstract bool isDataValid(string s);
 
     }
 
@@ -53,6 +75,9 @@ namespace RSRD
             value = i;
             type = FieldBox.boxtypes.intBox;
         }
+
+        public intBox() { }
+
         public override string typeToString() { return "int"; }
         public override bool isDataValid(string s)
         {
@@ -69,6 +94,8 @@ namespace RSRD
 
     public class stringBox : FieldBox
     {
+        public stringBox() { }
+
         public stringBox(int _x, int _y, int _length, int _height, string i) :base(_x, _y, _length, _height)
         {
 			value = i;
@@ -83,6 +110,8 @@ namespace RSRD
 
     public class doubBox : FieldBox
     {
+        public doubBox() { }
+
         public doubBox(int _x, int _y, int _length, int _height, double i) :base(_x, _y, _length, _height)
         {
             value = new double();
@@ -106,6 +135,8 @@ namespace RSRD
 
     public class dateTimeBox : FieldBox
     {
+
+        public dateTimeBox() { }
         public dateTimeBox(int _x, int _y, int _length, int _height, DateTime i): base(_x, _y, _length, _height)
         {
             value = new DateTime();
@@ -113,6 +144,7 @@ namespace RSRD
             type = boxtypes.dateTimeBox;
         }
         public override string typeToString() { return "DateTime"; }
+
         public override bool isDataValid(string s)
         {
             DateTime place;

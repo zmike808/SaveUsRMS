@@ -11,7 +11,7 @@ using MySql.Data.Types;
 
 namespace RSRD
 {
-	class SQLTag
+	public class SQLTag
 	{
 		private Tag tag;
 		public string Name
@@ -86,12 +86,14 @@ namespace RSRD
 			conn.Clone();
 		}
 	}
-	class TagManager
+
+	public class TagManager
 	{
 		public List<SQLTag> tags;
 		public dynamic compoundData;
 		Type listType;
-		public string tagName;
+        
+        public string tagName { get; set; }
 		public TagManager(string tagname)
 		{
 			tags = new List<SQLTag>();

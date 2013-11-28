@@ -11,11 +11,9 @@ namespace RSRD
 {
     public partial class RecordAdd : Form
     {
-
         List<Record> blanks;
         Form1 caller;
-		Animal currentAnimal;
-		Record currentRecord;
+        Animal currentAnimal;
 		List<Record> displayedRecords;
         #region constructors
         /// <summary>
@@ -49,6 +47,38 @@ namespace RSRD
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             #endregion
         }
+
+        public RecordAdd(Form1 f, Animal a)
+        {
+            InitializeComponent();
+            displayedRecords = new List<Record>();
+            blanks = f.blankRecords;
+            caller = f;
+            currentAnimal = f.SelectedAnimal;
+            foreach (Record r in f.blankRecords)
+            {
+                toolStripComboBox1.Items.Add(r.formName);
+            }
+            currentAnimal = a;
+            this.Text = "Add record to ID: " + currentAnimal.ID + ", Name: " + currentAnimal.Name;
+
+            #region RecordSizing
+
+            //sets it relatively sized to A4 iso standard, should be customizable later
+            Graphics g = this.CreateGraphics();
+            int width = (int)Math.Round(210 / 25.4 * g.DpiX);
+            int height = (int)Math.Round(297 / 25.4 * g.DpiY);
+
+            this.tabControl1.Size = new Size(width, height);
+
+            adjustRecordPlacement();
+
+            //needs to be re-anchored to allow autoscrolling
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
+            #endregion
+        }
+
+
         /// <summary>
         /// used to start the form with a few  record tabs already open
         /// usefull for creating a new animal or an event that needs more than one form to be recorded
@@ -65,6 +95,21 @@ namespace RSRD
             }
 
         }
+
+
+        public RecordAdd(Form1 f, Record[] defaults, Animal a)
+        {
+            InitializeComponent();
+            caller = f;
+            foreach (Record r in defaults)
+            {
+                newRecordTab(r);
+            }
+            currentAnimal = a;
+            this.Text = "Add record to ID: " + currentAnimal.ID + ", Name: " + currentAnimal.Name;
+
+        }
+
         #endregion
 
         /// <summary>
@@ -73,7 +118,7 @@ namespace RSRD
         /// <param name="r"></param>
         public void newRecordTab(Record r)
         {
-			TabPage t = new TabPage(r.formName);// + " " + r.timeStamp.ToShortDateString());
+			TabPage t = new TabPage(r.formName);
             t.AutoScroll = true;
             t.BackColor = Color.White;
 
@@ -172,19 +217,13 @@ namespace RSRD
 				{
 					if (c is RecordTextBox)
 					{
-						RecordTextBox temp = (RecordTextBox)c;
+                        RecordTextBox temp = (RecordTextBox)c;
 						var fb = temp.attachedFieldBox;
 						colvals.Add(fb.value);
 					}
 				}
+                dbh.insertAnimalToRecord(currentRecord.formName, colvals.Count, colvals);
 
-				
-				dbh.insertAnimalToRecord(currentRecord.formName, colvals.Count, colvals);
-				 
-                //RecordTab save = tabControl1.SelectedTab as RecordTab;
-              /*find the iteration of this record for the animal, put it after the + sign
-               *save.rec.saveData(caller.SelectedAnimal.ID + );
-               */
             }
             else 
             {

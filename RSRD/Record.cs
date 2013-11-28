@@ -33,10 +33,6 @@ namespace RSRD
 
         public DateTime timeStamp { get; set; }
 
-        //the associated fieldboxes
-        //should be created like this
-        // values[0] = new intBox("alabama", 124, 124, 20, 20, int);
-        //get value by using var and getValue();
         public List<FieldBox> values = new List<FieldBox>();
 
 
@@ -45,7 +41,7 @@ namespace RSRD
         //the point is it's location
         public List<KeyValuePair<string, Point>> labels = new List<KeyValuePair<string,Point>>();
 
-        //the directory of the formatting file to pRSE
+        //the directory of the formatting file to parse
         public string fileDirectory;
 
         //the actual file name of the format file
@@ -143,14 +139,6 @@ namespace RSRD
             }
        }
 
-        /// <summary>
-        /// mike should fill this out
-        /// search through the table associated with this record,
-        /// count up all of the rows that have identifiers that start with the entityID
-        /// </summary>
-       
-
-
          //when a record is created, save the format file, and create the table
        public void FinalizeNewRecord() {
 
@@ -170,11 +158,13 @@ namespace RSRD
            foreach (FieldBox x in values)
            {
                writer.WriteLine("fieldBox," + x.typeToString() + ',' + x.x_pos + ',' + x.y_pos + ',' + x.length + ',' + x.height);
+               Console.WriteLine(x.recfString());
            }
            // Records the labels
            foreach (KeyValuePair<string, Point> x in labels)
            {
                writer.WriteLine("label," + x.Key + ',' + x.Value.X + ',' + x.Value.Y);
+               Console.WriteLine("label," + x.Key + ',' + x.Value.X + ',' + x.Value.Y);
            }
            writer.Close();
 		   r.recordData = writer.ToString();

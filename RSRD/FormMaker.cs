@@ -19,13 +19,12 @@ namespace RSRD
         //the point that the control was at previously
         private Point previousLocation;
 
+        public List<TagManager> taglist;
 
         Form1 caller;
         bool templateLoaded = false;
 
-        //types of the fieldboxes.
-        //if the control isn't a fieldbox, i will just say its an intbox
-        List<FieldBox.boxtypes> controltypes = new List<FieldBox.boxtypes>();
+        //need to do an overhaul to make fieldboxes directly used, and have thier respective tages accessible
 
         Record rec;
 
@@ -73,18 +72,18 @@ namespace RSRD
             rec = new Record(r.formName);
             foreach (FieldBox f in r.values)
             {
-
-                TextBox textbox = new TextBox();
+                RecordTextBox textbox = new RecordTextBox();
                 textbox.Top = f.y_pos;
                 textbox.Left = f.x_pos;
-
+                textbox.Text = f.tag.tagName;
                 textbox.MouseDown += new MouseEventHandler(textbox_MouseDown);
                 textbox.MouseMove += new MouseEventHandler(textbox_MouseMove);
                 textbox.MouseUp += new MouseEventHandler(textbox_MouseUp);
                 textbox.ReadOnly = true;
-                controltypes.Add(f.type);
+                textbox.attachedFieldBox = f;
                 pictureBox1.Controls.Add(textbox);
             }
+
             foreach (KeyValuePair<string, Point> k in r.labels)
             {
                 Label l = new Label();
@@ -93,7 +92,6 @@ namespace RSRD
                 l.MouseDown += new MouseEventHandler(textbox_MouseDown);
                 l.MouseMove += new MouseEventHandler(textbox_MouseMove);
                 l.MouseUp += new MouseEventHandler(textbox_MouseUp);
-                controltypes.Add(FieldBox.boxtypes.intBox);
                 pictureBox1.Controls.Add(l);
             }
             templateLoaded = true;
@@ -126,24 +124,24 @@ namespace RSRD
         private void fieldboxListBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             bool choseLabel = false;
-    
+            FieldBox newbox;
             switch(fieldboxListBox.SelectedIndex)
             {
                 case 0:
-                    controltypes.Add(FieldBox.boxtypes.intBox);
+                    newbox = new intBox();
                     break;
                 case 1:
-                    controltypes.Add(FieldBox.boxtypes.stringBox);
+                    newbox = new stringBox();
                     break;
                 case 2:
-                    controltypes.Add(FieldBox.boxtypes.doubBox);
+                    newbox = new doubBox();
                     break;
                 case 3:
-                    controltypes.Add(FieldBox.boxtypes.dateTimeBox);
+                    newbox = new dateTimeBox();
                     break;
                 default:
-                    //controltypes.Add(FieldBox.boxtypes.intBox);
                     choseLabel = true;
+                    newbox = new intBox();
                     break;
             }
             if (choseLabel)
@@ -160,16 +158,16 @@ namespace RSRD
                 l.MouseDown += new MouseEventHandler(textbox_MouseDown);
                 l.MouseMove += new MouseEventHandler(textbox_MouseMove);
                 l.MouseUp += new MouseEventHandler(textbox_MouseUp);
-                controltypes.Add(FieldBox.boxtypes.intBox);
                 pictureBox1.Controls.Add(l);
-                if (pictureBox1.Controls.Count == 0) 
-                {
-                    activeControl = l;
-                }
             }
             else 
             {
-                TextBox textbox = new TextBox();
+                tagselect t = new tagselect(taglist);
+                t.ShowDialog();
+                newbox.tag = t.selected;
+                RecordTextBox textbox = new RecordTextBox();
+                textbox.attachedFieldBox = newbox;
+                textbox.Text = newbox.tag.tagName;
                 textbox.Location = new Point(100, 100);
                 textbox.ReadOnly = true;
                 textbox.MouseDown += new MouseEventHandler(textbox_MouseDown);
@@ -177,10 +175,6 @@ namespace RSRD
                 textbox.MouseUp += new MouseEventHandler(textbox_MouseUp);
                 textbox.KeyDown += new KeyEventHandler(Key_Down);
                 pictureBox1.Controls.Add(textbox);
-                if (pictureBox1.Controls.Count == 0)
-                {
-                    activeControl = textbox;
-                }
             }
            
         }
@@ -300,8 +294,11 @@ namespace RSRD
         {
             if (e.KeyCode == Keys.Delete)
             {
-                activeControl.Hide();
-                activeControl.Dispose();
+                if (activeControl != null)
+                { 
+                    activeControl.Hide();
+                    activeControl.Dispose();
+                }
             }
         }
 
@@ -347,8 +344,7 @@ namespace RSRD
                 f.Dispose();
                 rec.formName = f.text;
             }
-            int count = 0;
-            foreach (Control l in pictureBox1.Controls)
+            foreach (dynamic l in pictureBox1.Controls)
             {
                 if (l is Label) 
                 {
@@ -356,31 +352,19 @@ namespace RSRD
                     rec.labels.Add(k);
                     
                 }
-                else if (l is TextBox) 
+                else if (l is RecordTextBox) 
                 {
-                    switch(controltypes[count])
-                    {
-                        case FieldBox.boxtypes.intBox:
-                            intBox i = new intBox(l.Location.X, l.Location.Y, l.Width, l.Height, 0);
-                            rec.values.Add(i);
-                            break;
-                        case FieldBox.boxtypes.doubBox:
-                            doubBox d = new doubBox(l.Location.X, l.Location.Y, l.Width, l.Height, 0);
-                            rec.values.Add(d);
-                            break;
-                        case FieldBox.boxtypes.stringBox:
-                            stringBox s = new stringBox(l.Location.X, l.Location.Y, l.Width, l.Height, "null");
-                            rec.values.Add(s);
-                            break;
-                        case FieldBox.boxtypes.dateTimeBox:
-                            dateTimeBox dt = new dateTimeBox(l.Location.X, l.Location.Y, l.Width, l.Height, DateTime.Now);
-                            rec.values.Add(dt);
-                            break;
-                    }     
+
+                    l.attachedFieldBox.x_pos = l.Location.X;
+                    l.attachedFieldBox.x_pos = l.Location.X;
+                    l.attachedFieldBox.length = l.Width;
+                    l.attachedFieldBox.height = l.Height;
+                    rec.values.Add(l.attachedFieldBox);
                 }
-                count++;
+                
                 
             }
+
             foreach (FieldBox f in rec.values) 
             {
                 Console.WriteLine(f.typeToString());

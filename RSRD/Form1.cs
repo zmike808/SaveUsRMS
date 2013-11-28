@@ -14,14 +14,7 @@ namespace RSRD
 {
     public partial class Form1 : Form
     {
-        
-        //more hardcoded bullshit
-		//Animal currentlySelectedAnimal;
-        stringBox i = new stringBox(100, 100, 20, 10, "test");
-        intBox j = new intBox(100, 200, 20, 10, 0);
-        List<FieldBox> list = new List<FieldBox>();
-        List<KeyValuePair<string, Point>> labels = new List<KeyValuePair<string, Point>>();
-
+        List<TagManager> tags;
 
 		public string currentUser;
 
@@ -113,6 +106,7 @@ namespace RSRD
             initializeHardcode();
             initializeRecords();
             this.Location = new Point(0, 0);
+            tags = TagManager.getAllTagManagers();
 
             splitContainer1.SplitterDistance = splitContainer1.Panel1.Right;//splitContainer1.Panel1.Width + (dataGridView1.Width - splitContainer1.Panel1.Width); //properly size the form dynamically
             splitContainer1.IsSplitterFixed = true;
@@ -197,7 +191,7 @@ namespace RSRD
 
         private void addRecordButton_Click(object sender, EventArgs e)
         {
-            RecordAdd r = new RecordAdd(this);
+            RecordAdd r = new RecordAdd(this, SelectedAnimal);
             r.Show();
         }
 
@@ -215,6 +209,7 @@ namespace RSRD
         private void newFormToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormMaker f = new FormMaker(this);
+            f.taglist = tags;
             f.Show();
         }
 

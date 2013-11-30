@@ -4,7 +4,9 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Reflection;
+using System.IO;
 using MySql.Data;
+using System.Drawing;
 using MySql.Data.Types;
 using MySql.Data.MySqlClient;
 using MySql.Data.Entity;
@@ -25,12 +27,24 @@ namespace RSRD
         {
 			//AnimalFilling();
 			//addtags();
-			testtags();
+			//testtags();
+			//imgtest();
+			ImageUtility setup = new ImageUtility();
+			setup.preload();
 			Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
 
+		/// <summary>
+		/// before program starts, we should make sure all the images in the image folder are up to date.
+		/// </summary>
+		static void imgtest()
+		{
+			Image i = Image.FromFile("C:\\test.jpg");
+			ImageUtility iu = new ImageUtility();
+			iu.saveRemoteImage(i);
+		}
 		static void testtags()
 		{
 			List<TagManager> allTMs = TagManager.getAllTagManagers();

@@ -159,7 +159,7 @@ namespace RSRD
 			// conn = new MySqlConnection("host=" + DBInfo.host + ";database=" + DBInfo.database + ";username=" + DBInfo.username + ";password=" + DBInfo.password + ";" + "Allow User Variables=true;");
         }
         #endregion
-
+		
         #region Open/Close Connection
         private bool Open()
         {

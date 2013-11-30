@@ -144,6 +144,22 @@ namespace RSRD
             }
         }
         private ObjectSet<Tag> _Tags;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<recordImage> recordImages
+        {
+            get
+            {
+                if ((_recordImages == null))
+                {
+                    _recordImages = base.CreateObjectSet<recordImage>("recordImages");
+                }
+                return _recordImages;
+            }
+        }
+        private ObjectSet<recordImage> _recordImages;
 
         #endregion
 
@@ -187,6 +203,14 @@ namespace RSRD
         public void AddToTags(Tag tag)
         {
             base.AddObject("Tags", tag);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the recordImages EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTorecordImages(recordImage recordImage)
+        {
+            base.AddObject("recordImages", recordImage);
         }
 
         #endregion
@@ -1141,6 +1165,115 @@ namespace RSRD
         private global::System.Byte[] _logo;
         partial void OnlogoChanging(global::System.Byte[] value);
         partial void OnlogoChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="RSRD", Name="recordImage")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class recordImage : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new recordImage object.
+        /// </summary>
+        /// <param name="id">Initial value of the id property.</param>
+        /// <param name="image">Initial value of the image property.</param>
+        /// <param name="type">Initial value of the type property.</param>
+        public static recordImage CreaterecordImage(global::System.Int32 id, global::System.Byte[] image, global::System.String type)
+        {
+            recordImage recordImage = new recordImage();
+            recordImage.id = id;
+            recordImage.image = image;
+            recordImage.type = type;
+            return recordImage;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] image
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_image);
+            }
+            set
+            {
+                OnimageChanging(value);
+                ReportPropertyChanging("image");
+                _image = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("image");
+                OnimageChanged();
+            }
+        }
+        private global::System.Byte[] _image;
+        partial void OnimageChanging(global::System.Byte[] value);
+        partial void OnimageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String type
+        {
+            get
+            {
+                return _type;
+            }
+            set
+            {
+                OntypeChanging(value);
+                ReportPropertyChanging("type");
+                _type = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("type");
+                OntypeChanged();
+            }
+        }
+        private global::System.String _type;
+        partial void OntypeChanging(global::System.String value);
+        partial void OntypeChanged();
 
         #endregion
 

@@ -9,6 +9,7 @@
           <EntitySet Name="animal" EntityType="dbModel.Store.animal" store:Type="Tables" Schema="zemskm_saveus" />
           <EntitySet Name="EmployeeLogins" EntityType="dbModel.Store.EmployeeLogins" store:Type="Tables" Schema="zemskm_saveus" />
           <EntitySet Name="Organizations" EntityType="dbModel.Store.Organizations" store:Type="Tables" Schema="zemskm_saveus" />
+          <EntitySet Name="recordImages" EntityType="dbModel.Store.recordImages" store:Type="Tables" Schema="zemskm_saveus" />
           <EntitySet Name="records" EntityType="dbModel.Store.records" store:Type="Tables" Schema="zemskm_saveus" />
           <EntitySet Name="Tags" EntityType="dbModel.Store.Tags" store:Type="Tables" Schema="zemskm_saveus" />
         </EntityContainer>
@@ -59,6 +60,14 @@
           <Property Name="servicesprovided" Type="text" />
           <Property Name="logo" Type="blob" />
         </EntityType>
+        <EntityType Name="recordImages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="image" Type="longblob" Nullable="false" />
+          <Property Name="type" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
         <EntityType Name="records">
           <Key>
             <PropertyRef Name="recordName" />
@@ -86,6 +95,7 @@
           <EntitySet Name="EmployeeLogins" EntityType="RSRD.EmployeeLogin" />
           <EntitySet Name="dbRecords" EntityType="RSRD.dbRecord" />
           <EntitySet Name="Tags" EntityType="RSRD.Tag" />
+          <EntitySet Name="recordImages" EntityType="RSRD.recordImage" />
         </EntityContainer>
         <EntityType Name="Organization">
           <Key>
@@ -150,6 +160,14 @@
           <Property Type="String" Name="tableName" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="colName" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="type" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="recordImage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Binary" Name="image" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="type" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -226,6 +244,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="recordImages">
+            <EntityTypeMapping TypeName="RSRD.recordImage">
+              <MappingFragment StoreEntitySet="recordImages">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -252,6 +279,7 @@
         <EntityTypeShape EntityType="RSRD.EmployeeLogin" Width="1.5" PointX="3.375" PointY="4.75" Height="1.9802864583333335" />
         <EntityTypeShape EntityType="RSRD.dbRecord" Width="1.5" PointX="0.75" PointY="5.75" Height="1.2636116536458317" />
         <EntityTypeShape EntityType="RSRD.Tag" Width="1.5" PointX="5.375" PointY="3.75" Height="1.7566536458333322" />
+        <EntityTypeShape EntityType="RSRD.recordImage" Width="1.5" PointX="5.375" PointY="0.75" Height="1.4279589843749996" />
       </Diagram>
     </Diagrams>
   </Designer>

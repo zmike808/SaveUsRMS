@@ -112,7 +112,6 @@ namespace RSRD
             InitializeComponent();
             initializeHardcode();
             initializeRecords();
-           // initializeRecords(); //not even used for anything right now, why calls this? 10-30-2013
             this.Location = new Point(0, 0);
 
             splitContainer1.SplitterDistance = splitContainer1.Panel1.Right;//splitContainer1.Panel1.Width + (dataGridView1.Width - splitContainer1.Panel1.Width); //properly size the form dynamically
@@ -221,11 +220,15 @@ namespace RSRD
 
         public void initializeRecords()
         {
+			if (!(Directory.Exists("./records")))
+			{
+				Directory.CreateDirectory("./records");
+			}
 			dbEntities db = new dbEntities();
 			var savedRecords = from savedRecord in db.dbRecords where savedRecord.recordName != null select savedRecord;
 			foreach (var r in savedRecords)
 			{
-				string location = r.recordName + ".recf";
+				string location = "./records/" + r.recordName + ".recf";
 				var finfo = new FileInfo(location);
 				if (!(finfo.Exists))
 				{
@@ -235,16 +238,20 @@ namespace RSRD
 				}
 			}
 			//string path = "..\\..\\..\\";
-			string[] filePaths = Directory.GetFiles(".\\", "*.recf");
+			string[] filePaths = Directory.GetFiles("./records/", "*.recf");
 			foreach (string filePath in filePaths)
 			{
-				Record rect = new Record(filePath.Substring(0, filePath.Count() - 5));
-				rect.fileDirectory = ".\\";
+				FileInfo f = new FileInfo(filePath);
+				MessageBox.Show(f.Name.Substring(0, f.Name.Count() - 5));
+				Record rect = new Record(f.Name.Substring(0,f.Name.Count()-5));//filePath.,(0, filePath.Count() - 5));
+				rect.fileDirectory = "./records/";
 				rect.ParseFormatFile();
 				blankRecords.Add(rect);
 			}
-
+			ImageUtility setup = new ImageUtility();
+			setup.preload();
         }
+
         public void searchHandler(string comp)
         {
             string speciesState = (speciesComboBox.SelectedItem == null) ? "" : speciesComboBox.SelectedItem.ToString();

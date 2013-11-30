@@ -29,8 +29,6 @@ namespace RSRD
 			//addtags();
 			//testtags();
 			//imgtest();
-			ImageUtility setup = new ImageUtility();
-			setup.preload();
 			Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

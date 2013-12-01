@@ -42,11 +42,11 @@ namespace RSRD
             height = _height;
         }
 
-        protected FieldBox(int _x, int _y, int _length, int _height, TagManager tag)
+        protected FieldBox(int _x, int _y, int _length, int _height, TagManager t)
         {
             x_pos = _x;
             y_pos = _y;
-
+            tag = t;
             length = _length;
             height = _height;
         }
@@ -75,6 +75,11 @@ namespace RSRD
             value = i;
             type = FieldBox.boxtypes.intBox;
         }
+        public intBox(int _x, int _y, int _length, int _height, TagManager t)
+            : base(_x, _y, _length, _height, t)
+        {
+            type = FieldBox.boxtypes.intBox;
+        }
 
         public intBox() { }
 
@@ -101,6 +106,14 @@ namespace RSRD
 			value = i;
             type = FieldBox.boxtypes.stringBox;
         }
+
+
+        public stringBox(int _x, int _y, int _length, int _height, TagManager t)
+            : base(_x, _y, _length, _height, t)
+        {
+            type = FieldBox.boxtypes.stringBox;
+        }
+
         public override string typeToString() { return "string"; }
 		public override bool isDataValid(string s)
 		{
@@ -116,6 +129,11 @@ namespace RSRD
         {
             value = new double();
             value = i;
+            type = boxtypes.doubBox;
+        }
+        public doubBox(int _x, int _y, int _length, int _height, TagManager t)
+            : base(_x, _y, _length, _height, t)
+        {
             type = boxtypes.doubBox;
         }
         public override string typeToString() { return "double"; }
@@ -136,13 +154,20 @@ namespace RSRD
     public class dateTimeBox : FieldBox
     {
 
-        public dateTimeBox() { }
+        public dateTimeBox(){}
         public dateTimeBox(int _x, int _y, int _length, int _height, DateTime i): base(_x, _y, _length, _height)
         {
             value = new DateTime();
             value = i;
             type = boxtypes.dateTimeBox;
         }
+
+        public dateTimeBox(int _x, int _y, int _length, int _height, TagManager t)
+            : base(_x, _y, _length, _height, t)
+        {
+            type = boxtypes.dateTimeBox;
+        }
+
         public override string typeToString() { return "DateTime"; }
 
         public override bool isDataValid(string s)

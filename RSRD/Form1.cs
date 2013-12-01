@@ -107,6 +107,7 @@ namespace RSRD
             initializeRecords();
             this.Location = new Point(0, 0);
             tags = TagManager.getAllTagManagers();
+            Record.tags = tags;
 
             splitContainer1.SplitterDistance = splitContainer1.Panel1.Right;//splitContainer1.Panel1.Width + (dataGridView1.Width - splitContainer1.Panel1.Width); //properly size the form dynamically
             splitContainer1.IsSplitterFixed = true;

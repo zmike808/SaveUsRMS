@@ -35,6 +35,8 @@ namespace RSRD
 
         public List<FieldBox> values = new List<FieldBox>();
 
+        public static List<TagManager> tags;
+
 
         //the labels that are on the form
         //the string is the text it shows, 
@@ -90,19 +92,25 @@ namespace RSRD
                 string[] words = line.Split(',');
                 if (words[0] == "fieldBox")
                 {
+                    TagManager t;
+                    //TODO put in tagmanager parsing/search through list
+                    if (words.Length == 7)
+                    {
+                        t = tags.Single(s => s.tagName == words[6]);
+                    }
                     switch (words[1])
                     {
                         case "int":
-                            values.Add(new intBox(Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[4]), Convert.ToInt32(words[5]), 0));
+                            values.Add(new intBox(Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[4]), Convert.ToInt32(words[5]), t));
                             break;
                         case "string":
-                            values.Add(new stringBox(Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[4]), Convert.ToInt32(words[5]), null));
+                            values.Add(new stringBox(Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[4]), Convert.ToInt32(words[5]), t));
                             break;
                         case "double":
-                            values.Add(new doubBox(Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[4]), Convert.ToInt32(words[5]), 0.0));
+                            values.Add(new doubBox(Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[4]), Convert.ToInt32(words[5]), t));
                             break;
                         case "DateTime":
-                            values.Add(new dateTimeBox(Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[4]), Convert.ToInt32(words[5]), DateTime.Now));
+                            values.Add(new dateTimeBox(Convert.ToInt32(words[2]), Convert.ToInt32(words[3]), Convert.ToInt32(words[4]), Convert.ToInt32(words[5]), t));
                             break;
                         default:
                             break;
@@ -157,7 +165,7 @@ namespace RSRD
            // Records the fieldboxes
            foreach (FieldBox x in values)
            {
-               writer.WriteLine("fieldBox," + x.typeToString() + ',' + x.x_pos + ',' + x.y_pos + ',' + x.length + ',' + x.height);
+               writer.WriteLine(x.recfString());
                Console.WriteLine(x.recfString());
            }
            // Records the labels

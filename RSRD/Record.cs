@@ -92,7 +92,7 @@ namespace RSRD
                 string[] words = line.Split(',');
                 if (words[0] == "fieldBox")
                 {
-                    TagManager t;
+                    TagManager t = null;
                     //TODO put in tagmanager parsing/search through list
                     if (words.Length == 7)
                     {

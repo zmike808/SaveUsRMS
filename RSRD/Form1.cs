@@ -504,11 +504,14 @@ namespace RSRD
             }
         }
 
-        private void createLogFile(List<Animal> animals, List<string> dataTypes, string yearMonth)
+        private void createLogFile(List<Animal> animals, List<string> dataTypes)
         {
-            string fpath = Environment.CurrentDirectory + "\\log" + yearMonth + ".txt";
+            DateTime currentDate = DateTime.Today;
+            DateTime timeStamp = DateTime.Now;
+            string fpath = Environment.CurrentDirectory + "\\log" + currentDate.ToString("yyyy_MM") + ".txt";
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(fpath))
             {
+                file.WriteLine("#" + timeStamp.ToString());
                 foreach (string type in dataTypes)
                 {
                     file.WriteLine("&" + type);
@@ -521,22 +524,49 @@ namespace RSRD
             }
         }
 
-        private void updateLogFile(List<Animal> animals, List<string> dataTypes, string fpath, string date)
+        private void updateLog(List<Animal> animals, List<string> dataTypes)
         {
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fpath))
+            DateTime currentDate = DateTime.Today;
+            DateTime timeStamp = DateTime.Now;
+            string fpath = Environment.CurrentDirectory + "\\log" + currentDate.ToString("yyyy_MM") + ".txt";
+            string[] fileLines = System.IO.File.ReadAllLines(fpath);
+            List<string[]> dataList = new List<string[]>();
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fpath, true))
             {
-                string[] lines = System.IO.File.ReadAllLines(fpath);
-                file.WriteLine("#", date);
+                foreach (string line in fileLines)
+                {
+                    char[] delim = { ':' };
+                    string[] addLine = line.Split(delim);
+                    dataList.Add(addLine);
+                }
+                file.WriteLine("#" + timeStamp.ToString() );
                 foreach (string type in dataTypes)
                 {
                     file.WriteLine("&" + type);
                     Dictionary<String, int> dataCount = createDict(animals, type);
                     foreach (var entry in dataCount)
                     {
-                        //if there is a change:
-                        file.WriteLine(entry.Key + ":" + entry.Value);
+                        bool foundRecent = false;
+                        int i = dataList.Count - 1;
+                        while (foundRecent == false & i > 0)
+                        {
+                            if (entry.Key == dataList[i][0])
+                            {
+                                foundRecent = true;
+                                if (entry.Value != Convert.ToInt32(dataList[i][1]))
+                                {
+                                    file.WriteLine(entry.Key + ":" + entry.Value);
+                                }
+                            }
+                            i--;
+                        }
+                        if (i <= 0)
+                        {
+                            file.WriteLine(entry.Key + ":" + entry.Value);
+                        }
                     }
                 }
+                file.Close();
             }
         }
 
@@ -754,7 +784,17 @@ namespace RSRD
             dataType.Add("Status");
             createStatisticsFile(listanimals, dataType);
 
-            createLogFile(listanimals, dataType, "2014_01");
+            DateTime currentDate = DateTime.Today;
+            string fpath = Environment.CurrentDirectory + "\\log" + currentDate.ToString("yyyy_MM") + ".txt";
+
+            if (!File.Exists(fpath))
+            {
+                createLogFile(listanimals, dataType);
+            }
+            else
+            {
+                updateLog(listanimals, dataType);
+            }
         }
 
     }

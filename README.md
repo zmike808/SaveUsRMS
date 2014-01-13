@@ -26,7 +26,7 @@ Getting Started
 ====
 Our Development tools are as follows:
 
-Visual Studio 2010/2012
+Visual Studio 2010/2012/2013
 Visual Studio MySQL connector plugin
 TortoiseGit
 
@@ -34,4 +34,7 @@ We use a rebase type workflow for git as described here
 http://mettadore.com/analysis/a-simple-git-rebase-workflow-explained/
 
 
+MUST DOWNLOAD AND INSTALL THESE TWO FILES OR YOU WILL NOT BE ABLE TO COMPILE THIS PROJECT:
+- http://cdn.mysql.com/Downloads/Connector-Net/mysql-connector-net-6.8.3.msi
+- https://cdn.mysql.com/Downloads/MySQLInstaller/mysql-visualstudio-plugin-1.1.1.msi
 

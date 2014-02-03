@@ -12,7 +12,7 @@ namespace RSRD
     /// <summary>
     /// as of 10-28-2013 the Animal Class is basically just a wrapper for the animal db table 
     /// this way all the code done thusfar is still usable #legacySupport #backWardsCompatible
-    /// 
+    ///  
     /// </summary>
     public class Animal
     {

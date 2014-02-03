@@ -108,3 +108,4 @@ Backup*/
 UpgradeLog*.XML
 /*.suo
 /RSRD.suo
+/RSRD/App.Config
